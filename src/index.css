@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Jersey+25&family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #121212;
+  --color-muted: #414141;
+  --color-secondary-background: #1E1E1E;
+  --color-golden: #CBA135;
+
+
+  --font-jersey: "Jersey 25", sans-serif;
+  --font-figtree: "Figtree", sans-serif;
+}
+
+
+body {
+  @apply font-figtree selection:bg-golden selection:text-black
+}
+
+@utility social-button {
+    @apply text-muted hover:text-white transition-all text-xl cursor-pointer
+}
+
