@@ -40,6 +40,9 @@ import {
 } from "react-icons/tb";
 
 import { AnimatePresence } from "framer-motion";
+import type { EasingFunction } from "framer-motion";
+
+import { cubicBezier } from "framer-motion";
 
 import { useEffect, useRef, useState } from "react";
 import useScrollDirection from "./useScrollDirection";
@@ -360,7 +363,7 @@ function OverlayTransition({ show, direction, fill, text }: OverlayTransitionPro
 						initial={{ y: isUp ? "100%" : "-100%" }}
 						animate={{ y: 0 }}
 						exit={{ y: isUp ? "-100%" : "100%" }}
-						transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+						transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
 						preserveAspectRatio="none"
 					>
 						<motion.path
@@ -368,8 +371,8 @@ function OverlayTransition({ show, direction, fill, text }: OverlayTransitionPro
 							variants={{
 								initial: {
 									d: isUp
-										? "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z"
-										: "M0,0 L0,0 Q720,800 1440,0 L1440,0 Z",
+										? "M0,0 L0,800 Q720,800 1440,100 L1440,0 Z"
+										: "M0,0 L0,0 Q720,800 1440,100 L1440,0 Z",
 								},
 								animate: {
 									d: "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
@@ -381,7 +384,7 @@ function OverlayTransition({ show, direction, fill, text }: OverlayTransitionPro
 							initial="initial"
 							animate="animate"
 							exit="exit"
-							transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+							transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
 						/>
 					</motion.svg>
 
@@ -390,7 +393,7 @@ function OverlayTransition({ show, direction, fill, text }: OverlayTransitionPro
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: isUp ? -40 : 40 }}
 						transition={{ duration: 0.1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-						className="text-white text-9xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-151"
+						className="text-white text-7xl md:text-9xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-151"
 					>
 						{text}
 					</motion.h1>
@@ -418,6 +421,17 @@ function App() {
 
 	const project = projects[projectIndex]
 
+	const TIME_TO_CHANGE = 400
+	const TIME_TO_REVEAL = 350
+
+
+	const CUBIC_BEIZER_HIM = cubicBezier(0.36, 0, 0.66, 0)
+	const CUBIC_BEIZER_MINE = cubicBezier(0.6, 0.05, 0, 0.9)
+	const CUBIC_BEIZER_NEW = cubicBezier(.71, -0.1, 0, .9)
+
+
+	const CUBIC_BEIZER = CUBIC_BEIZER_MINE
+
 	const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
 		if (isProject) {
 			setShowReturnOverlay(true);
@@ -429,8 +443,8 @@ function App() {
 				});
 				setTimeout(() => {
 					setShowReturnOverlay(false);
-				}, 1000)
-			}, 800)
+				}, TIME_TO_CHANGE)
+			}, TIME_TO_REVEAL)
 		} else {
 			ref.current?.scrollIntoView({
 				behavior: "smooth", // smooth scroll
@@ -453,9 +467,11 @@ function App() {
 			window.scrollTo(0, 0);
 			setTimeout(() => {
 				setShowOverlay(false);
-			}, 200)
-		}, 1200); // must be >= exit animation duration
+			}, TIME_TO_CHANGE)
+		}, TIME_TO_REVEAL); // must be >= exit animation duration
 	};
+
+	console.log(isMounted)
 
 
 	return (
@@ -463,20 +479,21 @@ function App() {
 
 			<InvertedCursor />
 
-			<div className="absolute top-10 right-10 z-1000 w-10 h-10 bg-red-500 sm:bg-orange-400 md:bg-yellow-400 lg:bg-green-500 xl:bg-white"></div>
+			{/* <div className="absolute top-10 right-10 z-1000 w-10 h-10 bg-red-500 sm:bg-orange-400 md:bg-yellow-400 lg:bg-green-500 xl:bg-white"></div> */}
 
 			{/* Intro */}
+			{/* Responsive ✅ */}
 			<motion.div className="fixed top-0 w-screen bg-black origin-top overflow-hidden z-50"
 				initial={{ height: "50vh" }}
 				animate={{ height: "0vh" }}
-				transition={{ delay: 2, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+				transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
 			>
 				<motion.h1
 					className="text-[50px] sm:text-[70px] md:text-[110px] lg:text-[150px] xl:text-[200px] font-bold text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-nowrap"
 					initial={{ x: "-100vw" }} // starts outside the right edge
 					animate={{ x: "0" }}  // moves to center (adjust if needed)
-					transition={{ delay: 0.8, duration: 0.4, ease: [0.6, 0.05, -0.01, 0.9] }}
-				// transition={{ delay: 0.3, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+					transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
+				// transition={{ delay: 0.3, duration: 0.8, ease: CUBIC_BEIZER }}
 				>
 					OMAR EMAD
 				</motion.h1>
@@ -485,139 +502,33 @@ function App() {
 				className="fixed bottom-0 w-screen bg-black origin-top overflow-hidden z-50"
 				initial={{ height: "50vh" }}
 				animate={{ height: "0vh" }}
-				transition={{ delay: 2, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+				transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
 			>
 				<motion.h1
 					className="text-[70px] sm:text-[90px] md:text-[180px] lg:text-[230px] xl:text-[300px] font-bold text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
 					initial={{ x: "100vw" }} // starts outside the right edge
 					animate={{ x: "0" }}  // moves to center (adjust if needed)
-					transition={{ delay: 0.8, duration: 0.4, ease: [0.6, 0.05, -0.01, 0.9] }}
-				// transition={{ delay: 0.3, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+					transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
 				>
 					OM3X4
 				</motion.h1>
 			</motion.div>
 
-
-			{/* <AnimatePresence>
-				{showOverlay && (
-					<motion.svg
-						key="overlay"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 1440 800"
-						className="absolute inset-0 z-150 w-full h-full"
-						initial={{ y: "100%" }}
-						animate={{ y: 0 }}
-						exit={{ y: "-100%" }}
-						transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
-						preserveAspectRatio="none"
-					>
-						<motion.path
-							fill={project.backgroundColor}
-							variants={{
-								initial: {
-									d: "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
-								},
-								animate: {
-									d: "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
-								},
-								// convex bulge upwards when exiting
-								exit: {
-									d: "M0,0 L0,0 Q720,800 1440,0 L1440,0 Z",
-								},
-							}}
-							initial="initial"
-							animate="animate"
-							exit="exit"
-							transition={{
-								duration: 1.2,
-								ease: [0.76, 0, 0.24, 1],
-							}}
-						/>
-					</motion.svg>
-				)}
-
-				{
-					showOverlay && (
-						<motion.h1
-							initial={{ opacity: 0, y: 40 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: -40 }}
-							transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.6 }}
-							className="text-white text-9xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-151">
-							{project.name}
-						</motion.h1>
-					)
-				}
-			</AnimatePresence>
-
-
-			<AnimatePresence>
-				{showReturnOverlay && (
-					<motion.svg
-						key="overlay"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 1440 800"
-						className="absolute inset-0 z-150 w-full h-full"
-						initial={{ y: "-100%" }}
-						animate={{ y: 0 }}
-						exit={{ y: "100%" }}
-						transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
-						preserveAspectRatio="none"
-					>"M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
-						<motion.path
-							fill="#1e1e1e"
-							variants={{
-								initial: {
-									d: "M0,0 L0,0 Q720,800 1440,0 L1440,0 Z",
-								},
-								animate: {
-									d: "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
-								},
-								// convex bulge upwards when exiting
-								exit: {
-									d: "M0,0 L0,800 Q720,800 1440,800 L1440,0 Z",
-								},
-							}}
-							initial="initial"
-							animate="animate"
-							exit="exit"
-							transition={{
-								duration: 1.2,
-								ease: [0.76, 0, 0.24, 1],
-							}}
-						/>
-					</motion.svg>
-				)}
-
-				{
-					showReturnOverlay && (
-						<motion.h1
-							initial={{ opacity: 0, y: -40 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: 40 }}
-							transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.6 }}
-							className="text-white text-9xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-151">
-							Home
-						</motion.h1>
-					)
-				}
-			</AnimatePresence> */}
-
 			<OverlayTransition show={showOverlay} direction="up" fill={project.backgroundColor} text={project.name} />
 			<OverlayTransition show={showReturnOverlay} direction="down" fill={"#1e1e1e"} text={"Home"} />
 
-
-			<nav className="fixed z-50 top-0 w-full pl-5 pr-15 py-4 flex items-end justify-between">
+			<nav className="fixed z-50 top-0 w-full pl-5 pr-15 py-4 flex md:items-end justify-between">
 				<motion.a
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: [0.6, 0.05, 0.00, 0.9] }}
+					transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: CUBIC_BEIZER }}
 					href="/"
-					className="text-white text-4xl font-bold">OM3X4</motion.a>
+					className="text-white text-4xl font-bold">
+					<img src="/Logos/WHITE_SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all"/>
+				</motion.a>
 
 
-				<div className="text-white flex items-center justify-center gap-3">
+				<div className="text-white flex-col md:flex-row flex items-center justify-center gap-3">
 					<motion.button
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
@@ -664,434 +575,450 @@ function App() {
 					</motion.button>
 				</div>
 			</nav>
-			{
-				isProject ?
-					<div className="w-screen h-screen bg-background overflow-y-scroll">
-						<section className="p-20 h-screen box-border snap-start">
-							<div className="flex items-end gap-5">
-								<h1 className="text-7xl font-bold text-white">{project.name}</h1>
-								<h3 className="text-muted text-3xl">{parseDate(project.date).toDateString()}</h3>
-							</div>
-							<img
-								src={project.images[0]}
-								alt=""
-								className="object-cover object-center w-full h-[calc(100vh-160px)] mx-auto rounded-2xl mt-5"
-							/>
-						</section>
 
-						<section className="p-20 h-screen box-border">
-							<h1 className="text-5xl text-white">Details</h1>
-							<div className="grid grid-cols-4 w-[90%] mx-auto gap-5 mt-5">
-								<div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
-									<h3 className="text-muted text-xl">Overview</h3>
-									<h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
-								</div>
-								<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
-									{project.secondParagraph}
-								</div>
-								<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
-									<h1 className="text-xl font-medium text-muted">Stack</h1>
-									<div className="flex items-center justify-center gap-5 flex-wrap">
+			{/* Project */}
+			<div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
+				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border snap-start">
+					<motion.div
+						initial={{ opacity: 0, y: 160 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
+						className="flex items-end gap-5">
+						<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">{project.name}</h1>
+						<h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
+					</motion.div>
+					<motion.img
+						initial={{ opacity: 0, y: 160 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.45, duration: 0.8, ease: CUBIC_BEIZER }}
+						src={project.images[0]}
+						alt=""
+						className="object-cover object-center w-full h-[calc(100vh-160px)] mx-auto rounded-2xl mt-5"
+					/>
+				</section>
 
-										{
-											project.stack.map((technology) => (
-												<span className="text-3xl text-white">
-													{technology.icon}
-												</span>
-											))
-										}
-									</div>
-								</div>
+				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border">
+					<h1 className="text-5xl text-white">Details</h1>
+					<div className="grid grid-cols-4 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
+						<div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
+							<h3 className="text-muted text-xl">Overview</h3>
+							<h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
+						</div>
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
+							{project.secondParagraph}
+						</div>
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
+							<h1 className="text-xl font-medium text-muted">Stack</h1>
+							<div className="flex items-center justify-center gap-5 flex-wrap">
+
 								{
-									project.codeLink ?
-										<a
-											href={project.codeLink}
-											target="_blank"
-											className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
-											<AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
-										</a>
-										:
-										<div
-											className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
-											<AiFillGithub className="text-muted text-5xl" />
-										</div>
+									project.stack.map((technology) => (
+										<span className="text-3xl text-white">
+											{technology.icon}
+										</span>
+									))
 								}
-								{
-									project.websiteLink ?
-										<a
-											href={project.websiteLink}
-											target="_blank"
-											className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
-											<BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
-										</a>
-										:
-										<div
-											className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
-											<BiGlobe className="text-muted text-5xl " />
-										</div>
-
-								}
-								<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
-									<h1 className="text-xl font-medium text-muted">Full description</h1>
-									<h3 className="text-white font-medium text-2xl">
-										{project.mainParagraph}
-									</h3>
-								</div>
-								<div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
-									<h1 className="text-xl font-medium text-muted">Quote</h1>
-									<h3 className="text-white font-medium text-2xl italic">
-										{project.quote}
-									</h3>
-								</div>
 							</div>
-						</section>
+						</div>
+						{
+							project.codeLink ?
+								<a
+									href={project.codeLink}
+									target="_blank"
+									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+									<AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
+								</a>
+								:
+								<div
+									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+									<AiFillGithub className="text-muted text-5xl" />
+								</div>
+						}
+						{
+							project.websiteLink ?
+								<a
+									href={project.websiteLink}
+									target="_blank"
+									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+									<BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
+								</a>
+								:
+								<div
+									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+									<BiGlobe className="text-muted text-5xl " />
+								</div>
+
+						}
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
+							<h1 className="text-xl font-medium text-muted">Full description</h1>
+							<h3 className="text-white font-medium text-2xl">
+								{project.mainParagraph}
+							</h3>
+						</div>
+						<div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
+							<h1 className="text-xl font-medium text-muted">Quote</h1>
+							<h3 className="text-white font-medium text-2xl italic">
+								{project.quote}
+							</h3>
+						</div>
 					</div>
-					:
-					<main className="w-screen h-screen bg-background overflow-y-scroll snap-y snap-mandatory">
-						<section className="h-screen overflow-hidden relative snap-start" ref={homeRef}>
+				</section>
+			</div>
 
-							{/* Based In Egypt */}
+			{/* Main */}
+			<main className="w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll md:snap-y md:snap-mandatory" style={{ display: isProject ? "none" : "block" }}>
+
+				{/* Hero Desktop */}
+				<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat" ref={homeRef}>
+
+					{/* Based In Egypt */}
+					<motion.div
+						initial={{ x: "-100%" }}
+						animate={{ x: "0%" }}
+						transition={{ delay: isMounted ? 2 : 4.4, duration: 0.5, ease: CUBIC_BEIZER }}
+						viewport={{ once: false, amount: 1 }}
+						className="absolute hidden md:flex z-5 top-1/4 left-0 w-50 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3">
+						<h3 className="text-muted text-wrap text-lg font-medium w-fit ">Based In Egypt</h3>
+						<div
+							className="h-[80%] aspect-square bg-white rounded-full flex items-center justify-center p-3">
+							<GiEgyptianSphinx className="w-full h-full text-golden" />
+						</div>
+					</motion.div>
+
+					<div className="h-full flex items-center justify-start md:justify-center z-5">
+						<motion.div
+							initial={{ scale: 0.9 }}
+							animate={{ scale: 1 }}
+							transition={{ delay: isMounted ? 1.8 : 3.2, duration: 1, ease: "easeInOut" }}
+							className="w-fit flex flex-col items-start md:items-center justify-center gap-5">
+							<h1 className="text-white text-5xl sm:text-8xl md:text-[130px] md:leading-[100px] lg:text-[180px] lg:leading-[130px] xl:text-[200px] xl:leading-[150px] font-medium tracking-widest overflow-hidden space-x-8">
+								<motion.span
+									initial={{ y: "100%" }}
+									animate={{ y: "0%" }}
+									transition={{ delay: isMounted ? 2 : 3.4, duration: 0.6, ease: CUBIC_BEIZER }}
+									className="inline-block"
+								>
+									HI</motion.span>
+								<motion.span
+									initial={{ y: "100%" }}
+									animate={{ y: "0%" }}
+									transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+									className="md:inline-block hidden"
+								>
+									THERE</motion.span>
+							</h1>
 							<motion.div
-								initial={{ x: "-100%" }}
-								animate={{ x: "0%" }}
-								transition={{ delay: isMounted ? 2 : 4.4, duration: 0.5, ease: [0.6, 0.05, 0.00, 0.9] }}
-								viewport={{ once: false, amount: 1 }}
-								className="absolute top-1/4 left-0 w-50 h-20 bg-secondary-background rounded-r-full flex items-center justify-end px-3">
-								<h3 className="text-muted text-wrap text-lg font-medium w-fit ">Based In Egypt</h3>
-								<motion.div
-									initial={{ x: -300 }}
-									animate={{ x: 0 }}
-									transition={{ delay: isMounted ? 2.5 : 4.9, duration: 0.5, ease: [0.6, 0.05, 0.00, 0.9] }}
-									className="h-[80%] aspect-square bg-white rounded-full flex items-center justify-center p-3">
-									<GiEgyptianSphinx className="w-full h-full text-golden" />
-								</motion.div>
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+								className="w-full flex items-center justify-between px-5">
+								<h4 className="text-muted font-jersey text-sm sm:text-2xl">Omar Emad</h4>
+								<h4 className="text-muted font-jersey text-sm sm:text-2xl">Software Engineer</h4>
+							</motion.div>
+							<h1 className="text-white text-5xl sm:text-8xl md:text-[130px] md:leading-[100px] lg:text-[180px] lg:leading-[130px] xl:text-[200px] xl:leading-[150px] font-medium tracking-tighter overflow-hidden space-x-8">
+								<motion.span
+									initial={{ y: "100%" }}
+									animate={{ y: "0%" }}
+									transition={{ delay: isMounted ? 2.4 : 3.8, duration: 0.6, ease: CUBIC_BEIZER }}
+									className="inline-block"
+								>
+									I</motion.span>
+								<motion.span
+									initial={{ y: "100%" }}
+									animate={{ y: "0%" }}
+									transition={{ delay: isMounted ? 2.6 : 4, duration: 0.6, ease: CUBIC_BEIZER }}
+									className="inline-block"
+								>
+									AM</motion.span>
+								<motion.span
+									initial={{ y: "100%" }}
+									animate={{ y: "0%" }}
+									transition={{ delay: isMounted ? 2.8 : 4.2, duration: 0.6, ease: CUBIC_BEIZER }}
+									className="inline-block"
+								>
+									OM3X4
+								</motion.span>
+							</h1>
+						</motion.div>
+						<div
+
+							className="text-white text-2xl absolute bottom-10 flex flex-col items-center justify-center"
+						>
+							<h1 className="text-xs font-thin">Scroll</h1>
+							<BiChevronsDown className="animate-pulse " />
+						</div>
+					</div>
+
+				</section>
+
+				{/* Hero Mobile */}
+				<section className="h-screen overflow-hidden relative md:hidden flex items-center justify-start px-5">
+					<div className="py-20">
+						<h1 className="text-7xl text-white">HI</h1>
+						<h1 className="text-7xl text-white">IAM</h1>
+						<h1 className="text-2xl text-muted">or Omar Emad</h1>
+						<h1 className="text-7xl text-white">OM3X4</h1>
+					</div>
+				</section>
+
+
+
+				<section className="h-screen space-y-5 overflow-hidden relative py-15 px-8 snap-start">
+					<div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15">
+						<div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl">
+							<motion.h1
+								initial={{ opacity: 0, y: 40, rotate: 12 }}
+								whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+								transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="text-muted origin-left overflow-hidden"
+							>
+								I’m <span className="text-white">Omar Emad</span>, <span className="text-white">17 (2008)</span>.
+							</motion.h1>
+							<motion.h1
+								initial={{ opacity: 0, y: 40, rotate: 12 }}
+								whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+								transition={{ delay: 0.1, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="text-muted origin-left overflow-hidden"
+							>
+								A high schooler into <span className="text-white">chess</span>, Rubik’s cubes,
+								and building things.
+								<span className="text-white">Self-taught</span>, performance-driven,
+								and <span className="text-white">fast</span> on the keyboard.
+							</motion.h1>
+						</div>
+						<div className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit">
+							{/* Egypt */}
+							<motion.div
+								initial={{ opacity: 0, x: -40 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl hidden lg:flex items-center justify-center p-3">
+								<GiEgyptianWalk className="text-5xl text-golden" />
 							</motion.div>
 
-							<div className="h-full flex items-center justify-center">
-								<motion.div
-									initial={{ scale: 0.9 }}
-									animate={{ scale: 1 }}
-									transition={{ delay: isMounted ? 1.8 : 3.2, duration: 1, ease: "easeInOut" }}
-									className="w-fit flex flex-col items-center justify-center gap-5">
-									<h1 className="text-white text-[200px] leading-[150px] font-medium tracking-widest overflow-hidden space-x-8">
-										<motion.span
-											initial={{ y: "100%" }}
-											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2 : 3.4, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											className="inline-block"
-										>
-											HI</motion.span>
-										<motion.span
-											initial={{ y: "100%" }}
-											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											className="inline-block"
-										>
-											THERE</motion.span>
-									</h1>
-									<motion.div
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										className="w-full flex items-center justify-between px-5">
-										<h4 className="text-muted font-jersey text-2xl">Omar Emad</h4>
-										<h4 className="text-muted font-jersey text-2xl">Software Engineer</h4>
-									</motion.div>
-									<h1 className="text-white text-[200px] leading-[150px] font-medium tracking-tighter overflow-hidden space-x-8">
-										<motion.span
-											initial={{ y: "100%" }}
-											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.4 : 3.8, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											className="inline-block"
-										>
-											I</motion.span>
-										<motion.span
-											initial={{ y: "100%" }}
-											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.6 : 4, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											className="inline-block"
-										>
-											AM</motion.span>
-										<motion.span
-											initial={{ y: "100%" }}
-											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.8 : 4.2, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											className="inline-block"
-										>
-											OM3X4
-										</motion.span>
-									</h1>
-								</motion.div>
-								<div
+							{/* Leetcode */}
+							<motion.div
+								initial={{ opacity: 0, y: -40 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.5, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
+								<span className="text-white text-4xl font-semibold">238+</span>
+								<a href={links.leetcode} target="_blank"><SiLeetcode className="text-2xl text-golden" /></a>
+							</motion.div>
 
-									className="text-white text-2xl absolute bottom-10 flex flex-col items-center justify-center"
+							{/* Monkeytype */}
+							<motion.div
+								initial={{ opacity: 0, x: 40 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.7, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
+								<span className="text-white text-4xl font-semibold">216+ <span className="text-muted text-base font-normal">WPM</span></span>
+								<a href={links.monkeytype} target="_blank" rel="noopener noreferrer"><SiMonkeytype className="text-2xl text-golden" /></a>
+							</motion.div>
+
+							{/* Starting Date */}
+							<motion.div
+								initial={{ opacity: 0, x: -40 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3">
+								<span className="text-muted text-3xl font-medium">Dev Since</span>
+								<h1 className="text-white text-3xl font-semibold">2024</h1>
+							</motion.div>
+
+							{/* Availabilty */}
+							<motion.div
+								initial={{ opacity: 0, x: 40 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.9, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 lg:col-span-2">
+								<h1 className="text-white text-3xl font-semibold">Open To Work</h1>
+							</motion.div>
+
+							{/* Scroll to see the work */}
+							<motion.div
+								initial={{ opacity: 0, y: 40 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl hidden lg:flex flex-col items-center justify-center p-3">
+								<h1 className="text-white text-xl text-center">Scroll To See My Projects</h1>
+								<div
+									className="text-white text-2xl flex flex-col items-center justify-center"
 								>
-									<h1 className="text-xs font-thin">Scroll</h1>
 									<BiChevronsDown className="animate-pulse " />
 								</div>
-							</div>
+							</motion.div>
 
-						</section>
-
-
-
-						<section className="h-screen space-y-5 overflow-hidden relative py-15 px-8 snap-start">
-							<div className="grid grid-cols-2 w-full overflow-hidden gap-15">
-								<div className="text-muted text-5xl">
-									<motion.h1
-										initial={{ opacity: 0, y: 40, rotate: 12 }}
-										whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-										transition={{ duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="text-muted origin-left overflow-hidden"
-									>
-										I’m <span className="text-white">Omar Emad</span>, <span className="text-white">17 (2008)</span>.
-									</motion.h1>
-									<motion.h1
-										initial={{ opacity: 0, y: 40, rotate: 12 }}
-										whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-										transition={{ delay: 0.1, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="text-muted origin-left overflow-hidden"
-									>
-										A high schooler into <span className="text-white">chess</span>, Rubik’s cubes,
-										and building things.
-										<span className="text-white">Self-taught</span>, performance-driven,
-										and <span className="text-white">fast</span> on the keyboard.
-									</motion.h1>
-								</div>
-								<div className="grid grid-cols-3 grid-rows-3 gap-5">
-									{/* Egypt */}
-									<motion.div
-										initial={{ opacity: 0, x: -40 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center p-3">
-										<GiEgyptianWalk className="text-5xl text-golden" />
-									</motion.div>
-
-									{/* Leetcode */}
-									<motion.div
-										initial={{ opacity: 0, y: -40 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ delay: 0.5, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
-										<span className="text-white text-4xl font-semibold">238+</span>
-										<a href={links.leetcode} target="_blank"><SiLeetcode className="text-2xl text-golden" /></a>
-									</motion.div>
-
-									{/* Monkeytype */}
-									<motion.div
-										initial={{ opacity: 0, x: 40 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.7, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
-										<span className="text-white text-4xl font-semibold">216+ <span className="text-muted text-base font-normal">WPM</span></span>
-										<a href={links.monkeytype} target="_blank" rel="noopener noreferrer"><SiMonkeytype className="text-2xl text-golden" /></a>
-									</motion.div>
-
-									{/* Starting Date */}
-									<motion.div
-										initial={{ opacity: 0, x: -40 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.3, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3">
-										<span className="text-muted text-3xl font-medium">Dev Since</span>
-										<h1 className="text-white text-3xl font-semibold">2024</h1>
-									</motion.div>
-
-									{/* Availabilty */}
-									<motion.div
-										initial={{ opacity: 0, x: 40 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.9, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 col-span-2">
-										<h1 className="text-white text-3xl font-semibold">Open To Work</h1>
-									</motion.div>
-
-									{/* Scroll to see the work */}
-									<motion.div
-										initial={{ opacity: 0, y: 40 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ delay: 0.8, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3">
-										<h1 className="text-white text-xl text-center">Scroll To See My Projects</h1>
-										<div
-											className="text-white text-2xl flex flex-col items-center justify-center"
-										>
-											<BiChevronsDown className="animate-pulse " />
-										</div>
-									</motion.div>
-
-									{/* Full Stack */}
-									<motion.div
-										initial={{ opacity: 0, y: 40 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 col-span-2">
-										<h1 className="text-white text-3xl font-semibold">Full Stack Developer <span className="text-muted text-base">Temporarily</span></h1>
-									</motion.div>
+							{/* Full Stack */}
+							<motion.div
+								initial={{ opacity: 0, y: 40 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 col-span-2">
+								<h1 className="text-white text-3xl font-semibold">Full Stack Developer <span className="text-muted text-base">Temporarily</span></h1>
+							</motion.div>
 
 
-								</div>
-							</div>
-							<div className="w-fit mx-auto">
-								<div
-									className="w-fit flex items-center justify-center"
-								>
-									<h1 className="text-[200px] leading-[200px] text-white">MY</h1>
-									<motion.div
-										initial={{ marginLeft: 100, marginRight: 100 }}
-										whileInView={{ marginLeft: 5, marginRight: 5 }}
-										transition={{ duration: 0.8, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-7 h-7 bg-white rounded-full"></motion.div>
-									<h1 className="text-[200px] leading-[200px] text-white">WORK</h1>
-								</div>
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ delay: 3.6, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-									className="w-full flex items-center justify-between px-5">
-									<h4 className="text-muted font-jersey text-2xl">REAL WORLD PROVE</h4>
-									<div
-										className="text-white text-2xl flex flex-col items-center justify-center"
-									>
-										<BiChevronsDown className="animate-pulse " />
-									</div>
-									<h4 className="text-muted font-jersey text-2xl">DEVELOPED BY ME</h4>
-								</motion.div>
-							</div>
-						</section>
-
-						<div className="relative" ref={projectsRef}>
-							{
-								projects.map((project, index) => (
-									<section className="h-screen w-screen snap-start flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: project.backgroundColor }}>
-										<motion.button
-											initial={{ y: 60, opacity: 0, rotate: 2 }}
-											whileInView={{ y: 0, opacity: 1, rotate: 4 }}
-											whileTap={{ scale: 0.5 }}
-											transition={{ duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											viewport={{ once: false, amount: 0.5 }}
-											onClick={() => { handleProjectChoosing(index) }}
-											className="absolute cursor-pointer brightness-40 rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%]"
-										>
-											<img
-												src={project.images[0]}
-												alt=""
-												className="w-full shadow-2xl shadow-black rounded-2xl cursor-pointer"
-											/>
-										</motion.button>
-										<h6 className="font-jersey font-bold absolute right-10 bottom-10 text-white text-3xl">{index + 1} / {projects.length}</h6>
-										<motion.h1
-											initial={{ opacity: 0, y: scrollDirection === "down" ? -60 : 60 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.4, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-											viewport={{ once: false, amount: 1 }}
-											className="text-9xl font-bold text-white z-10 overflow-hidden pointer-events-none">
-											{project.name}
-										</motion.h1>
-									</section>
-								))
-							}
 						</div>
+					</div>
+					<div className="w-fit mx-auto">
+						<div
+							className="w-fit flex items-center justify-center"
+						>
+							<h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">MY</h1>
+							<motion.div
+								initial={{ marginLeft: 100, marginRight: 100 }}
+								whileInView={{ marginLeft: 5, marginRight: 5 }}
+								transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-4 h-4 sm:w-7 sm:h-7 bg-white rounded-full"></motion.div>
+							<h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">WORK</h1>
+						</div>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+							className="w-full flex items-center justify-between px-5">
+							<h4 className="text-muted font-jersey sm:text-2xl">REAL WORLD PROVE</h4>
+							<div
+								className="text-white text-2xl flex flex-col items-center justify-center"
+							>
+								<BiChevronsDown className="animate-pulse " />
+							</div>
+							<h4 className="text-muted font-jersey sm:text-2xl">DEVELOPED BY ME</h4>
+						</motion.div>
+					</div>
+				</section>
 
-						<section className="h-screen w-screen text-9xl text-amber-50 snap-start" ref={aboutRef}>
-							<div className="w-fit mx-auto">
-								<div
-									className="w-fit flex items-center justify-center"
+				<div className="relative" ref={projectsRef}>
+					{
+						projects.map((project, index) => (
+							<section className="h-screen w-screen snap-start flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: project.backgroundColor }}>
+								<motion.button
+									initial={{ y: 60, opacity: 0, rotate: 2 }}
+									whileInView={{ y: 0, opacity: 1, rotate: 4 }}
+									whileTap={{ scale: 0.5 }}
+									transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+									viewport={{ once: false, amount: 0.5 }}
+									onClick={() => { handleProjectChoosing(index) }}
+									className="absolute cursor-pointer brightness-40 rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] lg:w-[60%] lg:h-auto"
 								>
-									<h1 className="text-[200px] leading-[200px] text-white">ABOUT</h1>
-									<motion.div
-										initial={{ marginLeft: 100, marginRight: 100 }}
-										whileInView={{ marginLeft: 5, marginRight: 5 }}
-										transition={{ duration: 0.8, ease: [0.6, 0.05, 0.00, 0.9] }}
-										viewport={{ once: false, amount: 0.5 }}
-										className="w-7 h-7 bg-white rounded-full"></motion.div>
-									<h1 className="text-[200px] leading-[200px] text-white">ME</h1>
-								</div>
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ delay: 3.6, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-									className="w-full flex items-center justify-between px-5">
-									<h4 className="text-muted font-jersey text-2xl">Omar Emad</h4>
-									<div
-										className="text-white text-2xl flex flex-col items-center justify-center"
-									>
-										<BiChevronsDown className="animate-pulse " />
-									</div>
-									<h4 className="text-muted font-jersey text-2xl">The Real One</h4>
-								</motion.div>
-							</div>
-							<div className="w-[80%] mx-auto grid grid-cols-3 gap-5 mt-10">
-								<motion.div
-									initial={{ opacity: 0, x: -40 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									transition={{ delay: 0.6, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-									viewport={{ once: false, amount: 0.5 }}
-									className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 col-span-2 text-xl">
-									Self-taught software engineer with strong experience in building full-stack digital products, passionate about clean code, performance, and creating tools that are both functional and impactful.
-								</motion.div>
-								<motion.div
-									initial={{ opacity: 0, x: 40 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									transition={{ delay: 0.8, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-									viewport={{ once: false, amount: 0.5 }}
-									className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap">
-									Always Learning, {"\n"}
-									Always Optimizing
-								</motion.div>
-								<motion.div
-									initial={{ opacity: 0, y: 80 }}
+									<img
+										src={project.images[0]}
+										alt=""
+										className="w-full shadow-2xl shadow-black rounded-2xl cursor-pointer"
+									/>
+								</motion.button>
+								<h6 className="font-jersey font-bold absolute right-10 bottom-10 text-white text-3xl">{index + 1} / {projects.length}</h6>
+								<motion.h1
+									initial={{ opacity: 0, y: scrollDirection === "down" ? -60 : 60 }}
 									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ delay: 1, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-									viewport={{ once: false, amount: 0.5 }}
-									className="w-full h-full bg-secondary-background rounded-2xl flex items-start justify-center px-10 py-8 text-3xl font-bold whitespace-pre-wrap col-span-3 flex-col gap-5">
-									<h1>Stack</h1>
-									<div className="flex items-center justify-start gap-5 flex-wrap">
-										{
-											skills.map((skill) => (
-												<div style={{ color: skill.color }}>
-													{skill.icon}
-												</div>
-											))
-										}
-									</div>
-								</motion.div>
-							</div>
-						</section>
+									transition={{ delay: 0.4, duration: 0.6, ease: CUBIC_BEIZER }}
+									viewport={{ once: false, amount: 1 }}
+									className="text-6xl lg:text-7xl xl:text-9xl font-bold text-white z-10 overflow-hidden pointer-events-none">
+									{project.name}
+								</motion.h1>
+							</section>
+						))
+					}
+				</div>
 
-						<motion.footer
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 3, duration: 0.6, ease: [0.6, 0.05, 0.00, 0.9] }}
-							className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
-							<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
-							<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
-							<button
-								onClick={e => {
-									e.preventDefault()
-									navigator.clipboard.writeText(links.email)
-									toast.success("Copied to clipboard", { duration: 2000 })
-								}}
-								className="social-button">
-								<CgMail />
-							</button>
-							<a href={links.x} className="social-button"><FaXTwitter /></a>
-							<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
-							<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
-						</motion.footer>
-					</main>
-			}
+				<section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0" ref={aboutRef}>
+					<div className="w-fit mx-auto">
+						<div
+							className="w-fit flex items-center justify-center"
+						>
+							<h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ABOUT</h1>
+							<motion.div
+								initial={{ marginLeft: 100, marginRight: 100 }}
+								whileInView={{ marginLeft: 5, marginRight: 5 }}
+								transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
+								viewport={{ once: false, amount: 0.5 }}
+								className="w-4 h-4 lg:w-7 lg:h-7 bg-white rounded-full"></motion.div>
+							<h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ME</h1>
+						</div>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+							className="w-full flex items-center justify-between px-5">
+							<h4 className="text-muted font-jersey text-2xl">Omar Emad</h4>
+							<div
+								className="text-white text-2xl flex flex-col items-center justify-center"
+							>
+								<BiChevronsDown className="animate-pulse " />
+							</div>
+							<h4 className="text-muted font-jersey text-2xl">The Real One</h4>
+						</motion.div>
+					</div>
+					<div className="w-[90%] lg:w-[80%] mx-auto grid grid-cols-3 gap-5 mt-10">
+						<motion.div
+							initial={{ opacity: 0, x: -40 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
+							viewport={{ once: false, amount: 0.5 }}
+							className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 col-span-3 md:col-span-2 text-xl">
+							Self-taught software engineer with strong experience in building full-stack digital products, passionate about clean code, performance, and creating tools that are both functional and impactful.
+						</motion.div>
+						<motion.div
+							initial={{ opacity: 0, x: 40 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
+							viewport={{ once: false, amount: 0.5 }}
+							className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap col-span-3 md:col-span-1">
+							Always Learning, {"\n"}
+							Always Optimizing
+						</motion.div>
+						<motion.div
+							initial={{ opacity: 0, y: 80 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
+							viewport={{ once: false, amount: 0.5 }}
+							className="w-full h-full bg-secondary-background rounded-2xl flex items-start justify-center px-10 py-8 text-3xl font-bold whitespace-pre-wrap col-span-3 flex-col gap-5">
+							<h1>Stack</h1>
+							<div className="flex items-center justify-start gap-5 flex-wrap">
+								{
+									skills.map((skill) => (
+										<div style={{ color: skill.color }}>
+											{skill.icon}
+										</div>
+									))
+								}
+							</div>
+						</motion.div>
+					</div>
+				</section>
+
+				<motion.footer
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 3, duration: 0.6, ease: CUBIC_BEIZER }}
+					className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
+					<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
+					<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
+					<button
+						onClick={e => {
+							e.preventDefault()
+							navigator.clipboard.writeText(links.email)
+							toast.success("Copied to clipboard", { duration: 2000 })
+						}}
+						className="social-button">
+						<CgMail />
+					</button>
+					<a href={links.x} className="social-button"><FaXTwitter /></a>
+					<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
+					<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
+				</motion.footer>
+			</main>
 		</div>
 	)
 
@@ -1100,15 +1027,15 @@ function App() {
 	// 		<motion.div className="absolute top-0 w-screen bg-black origin-top overflow-hidden z-50"
 	// 			initial={{ height: "50vh" }}
 	// 			animate={{ height: "0vh" }}
-	// 			transition={{ delay: 2, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+	// 			transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
 
 	// 		>
 	// 			<motion.h1
 	// 				className="text-[200px] font-black text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-nowrap"
 	// 				initial={{ x: "-100vw" }} // starts outside the right edge
 	// 				animate={{ x: "0" }}  // moves to center (adjust if needed)
-	// 				transition={{ delay: 0.8, duration: 0.4, ease: [0.6, 0.05, -0.01, 0.9] }}
-	// 			// transition={{ delay: 0.3, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+	// 				transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
+	// 			// transition={{ delay: 0.3, duration: 0.8, ease: CUBIC_BEIZER }}
 	// 			>
 	// 				OMAR EMAD
 	// 			</motion.h1>
@@ -1117,14 +1044,14 @@ function App() {
 	// 			className="absolute bottom-0 w-screen bg-black origin-top overflow-hidden z-50"
 	// 			initial={{ height: "50vh" }}
 	// 			animate={{ height: "0vh" }}
-	// 			transition={{ delay: 2, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+	// 			transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
 	// 		>
 	// 			<motion.h1
 	// 				className="text-[300px] font-black text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
 	// 				initial={{ x: "100vw" }} // starts outside the right edge
 	// 				animate={{ x: "0" }}  // moves to center (adjust if needed)
-	// 				transition={{ delay: 0.8, duration: 0.4, ease: [0.6, 0.05, -0.01, 0.9] }}
-	// 			// transition={{ delay: 0.3, duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+	// 				transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
+	// 			// transition={{ delay: 0.3, duration: 0.8, ease: CUBIC_BEIZER }}
 	// 			>
 	// 				OM3X4
 	// 			</motion.h1>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.77 130.84">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 24px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        font-family: Figtree-Black, Figtree;
+        font-variation-settings: 'wght' 900;
+        font-weight: 800;
+      }
+
+      .cls-1, .cls-4 {
+        fill: #c49d2d;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #231f20;
+      }
+
+      .cls-3, .cls-4 {
+        font-size: 120px;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(4.47 104.44)"><tspan x="0" y="0">O3</tspan></text>
+  <text class="cls-3" transform="translate(0 102)"><tspan x="0" y="0">O3</tspan></text>
+  <text class="cls-1" transform="translate(82.86 22.96)"><tspan x="0" y="0">m</tspan></text>
+  <text class="cls-2" transform="translate(81.39 21.96)"><tspan x="0" y="0">m</tspan></text>
+  <text class="cls-1" transform="translate(157.08 22.96)"><tspan x="0" y="0">x4</tspan></text>
+  <text class="cls-2" transform="translate(156.65 21.96)"><tspan x="0" y="0">x4</tspan></text>
+</svg>

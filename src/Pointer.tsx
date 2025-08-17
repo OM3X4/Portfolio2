@@ -27,7 +27,7 @@ export default function InvertedCursor() {
 
     return (
         <div
-            className="pointer-events-none fixed top-0 left-0 z-[100] rounded-full bg-white mix-blend-difference transition-all duration-200 ease-out"
+            className="hidden lg:block pointer-events-none fixed top-0 left-0 z-[100] rounded-full bg-white mix-blend-difference transition-all duration-200 ease-out"
             style={{
                 width: hovering ? "60px" : "40px",
                 height: hovering ? "60px" : "40px",
