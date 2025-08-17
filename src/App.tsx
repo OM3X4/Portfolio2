@@ -40,7 +40,6 @@ import {
 } from "react-icons/tb";
 
 import { AnimatePresence } from "framer-motion";
-import type { EasingFunction } from "framer-motion";
 
 import { cubicBezier } from "framer-motion";
 
@@ -90,7 +89,7 @@ type Project = {
 	mainParagraph: string;
 	thirdParagraph: string;
 	quote: string;
-	websiteLink: string;
+	websiteLink: string | null;
 	codeLink: string | null;
 	engineer: string | null;
 	stack: {
@@ -100,6 +99,57 @@ type Project = {
 };
 
 const projects: Project[] = [
+	{
+		name: "TEMDB",
+		images: [
+			"/temdb1.png",
+			"/temdb2.png",
+		],
+		backgroundColor: "#7c101a",
+		date: "23-6-2025",
+		mainHeadline: "TEMDB is the Definitive Egyptian Movies & TV Database",
+		secondParagraph: "Built as a modern cultural archive, TEMDB brings the richness of Egyptian cinema and television into a sleek, fast, and community-driven platform — finally giving Egyptian media the modern experience it deserves.",
+		mainParagraph: "TEMDB is a public resource designed for film lovers, researchers, and fans of Egyptian culture. With complete catalogs of movies and series, cast and crew details, reviews, trailers, streaming providers, and smart search with vector embeddings, TEMDB is the most comprehensive and modern platform dedicated solely to Egyptian content. Powered by Next.js, Prisma, PostgreSQL, and AWS, it delivers the speed and polish of a global-scale product while staying deeply rooted in Egypt’s cultural identity.",
+		thirdParagraph: "Unlike fragmented legacy sites, TEMDB isn’t just a database — it’s a cultural project and a startup in the making, designed to preserve, celebrate, and connect generations through Egyptian film and television.",
+		quote: '"I built TEMDB because Egyptian cinema deserves better than outdated archives. My vision is to give it a modern home — one that rivals IMDb in quality, but stays true to our culture. This is more than code; it’s a step toward preserving and celebrating Egypt’s storytelling legacy." — Omar Emad',
+		websiteLink: "https://temdb.com/",
+		codeLink: null,
+		engineer: "Omar Emad (Me)",
+		stack: [
+			{
+				name: "Next JS",
+				icon: <RiNextjsFill />
+			},
+			{
+				name: "Prisma",
+				icon: <SiPrisma />
+			},
+			{
+				name: "OpenAI API",
+				icon: <SiOpenai />
+			},
+			{
+				name: "Tailwind CSS",
+				icon: <SiTailwindcss />
+			},
+			{
+				name: "Postgres",
+				icon: <DiPostgresql />
+			},
+			{
+				name: "TypeScript",
+				icon: <SiTypescript />
+			},
+			{
+				name: "AWS",
+				icon: <FaAws />
+			},
+			{
+				name: "ShadCN UI",
+				icon: <SiShadcnui />
+			},
+		]
+	},
 	{
 		name: "oAI",
 		images: [
@@ -160,7 +210,7 @@ const projects: Project[] = [
 		]
 	},
 	{
-		name: "BRAINS-\nMATH2.0",
+		name: "BRAINSMATH 2.0",
 		images: [
 			"/brainsmath2.01.png",
 			"/brainsmath2.02.png",
@@ -208,7 +258,7 @@ const projects: Project[] = [
 		]
 	},
 	{
-		name: "QUEEN-\nFISH",
+		name: "QUEENFISH",
 		images: [
 			"/chezzy1.png",
 			"/chezzy2.png",
@@ -231,7 +281,7 @@ const projects: Project[] = [
 		]
 	},
 	{
-		name: "EGYPT-\nPROJECTS",
+		name: "EGYPT PROJECTS",
 		images: [
 			"/egyptprojects1.png",
 			"/egyptprojects2.png",
@@ -300,7 +350,7 @@ const projects: Project[] = [
 		]
 	},
 	{
-		name: "BRAINS-\nMATH1.0",
+		name: "BRAINSMATH 1.0",
 		images: [
 			"/brainsmath1.01.png",
 			"/brainsmath1.02.png",
@@ -425,33 +475,66 @@ function App() {
 	const TIME_TO_REVEAL = 350
 
 
-	const CUBIC_BEIZER_HIM = cubicBezier(0.36, 0, 0.66, 0)
 	const CUBIC_BEIZER_MINE = cubicBezier(0.6, 0.05, 0, 0.9)
-	const CUBIC_BEIZER_NEW = cubicBezier(.71, -0.1, 0, .9)
 
 
 	const CUBIC_BEIZER = CUBIC_BEIZER_MINE
 
+	// const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
+	// 	if (isProject) {
+	// 		setShowReturnOverlay(true);
+	// 		setTimeout(() => {
+	// 			setIsProject(false)
+	// 			ref.current?.scrollIntoView({
+	// 				behavior: "smooth", // smooth scroll
+	// 				block: "start",     // scroll so the top of the element aligns
+	// 			});
+	// 			setTimeout(() => {
+	// 				setShowReturnOverlay(false);
+	// 			}, TIME_TO_CHANGE)
+	// 		}, TIME_TO_REVEAL)
+	// 	} else {
+	// 		ref.current?.scrollIntoView({
+	// 			behavior: "smooth", // smooth scroll
+	// 			block: "start",     // scroll so the top of the element aligns
+	// 		})
+	// 	}
+	// };
+
+
 	const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
 		if (isProject) {
+			// Show overlay first
 			setShowReturnOverlay(true);
+
+			// Hide project view
 			setTimeout(() => {
-				setIsProject(false)
-				ref.current?.scrollIntoView({
-					behavior: "smooth", // smooth scroll
-					block: "start",     // scroll so the top of the element aligns
+				setIsProject(false);
+
+				// Wait for DOM to render the new section
+				requestAnimationFrame(() => {
+					if (ref.current) {
+						ref.current.scrollIntoView({
+							behavior: "smooth",
+							block: "start",
+						});
+					}
+
+					// Hide overlay after scroll transition
+					setTimeout(() => {
+						setShowReturnOverlay(false);
+					}, TIME_TO_CHANGE);
 				});
-				setTimeout(() => {
-					setShowReturnOverlay(false);
-				}, TIME_TO_CHANGE)
-			}, TIME_TO_REVEAL)
+			}, TIME_TO_REVEAL);
 		} else {
+			// Normal scroll if not in project view
 			ref.current?.scrollIntoView({
-				behavior: "smooth", // smooth scroll
-				block: "start",     // scroll so the top of the element aligns
-			})
+				behavior: "smooth",
+				block: "start",
+			});
 		}
 	};
+
 
 	useEffect(() => {
 		isMountedRef.current = true
@@ -524,7 +607,7 @@ function App() {
 					transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: CUBIC_BEIZER }}
 					href="/"
 					className="text-white text-4xl font-bold">
-					<img src="/Logos/WHITE_SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all"/>
+					<img src="/Logos/2/SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
 				</motion.a>
 
 
@@ -579,14 +662,17 @@ function App() {
 			{/* Project */}
 			<div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
 				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border snap-start">
+
 					<motion.div
 						initial={{ opacity: 0, y: 160 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
 						className="flex items-end gap-5">
-						<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">{project.name}</h1>
+						<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+							style={{ textShadow: `6px 6px 0 ${project.backgroundColor}` }}>{project.name}</h1>
 						<h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
 					</motion.div>
+
 					<motion.img
 						initial={{ opacity: 0, y: 160 }}
 						animate={{ opacity: 1, y: 0 }}
