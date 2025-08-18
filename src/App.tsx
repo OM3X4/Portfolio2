@@ -1240,8 +1240,8 @@ function App() {
 									<div className="flex items-center justify-start gap-5 flex-wrap">
 										{
 											skills.map((skill) => (
-												<div style={{ color: skill.color }}>
-													{skill.icon}
+												<div style={{ color: skill.color }} className="text-base">
+													{skill.name}
 												</div>
 											))
 										}
