@@ -660,7 +660,7 @@ function App() {
 			</nav>
 
 			{/* Project */}
-			<div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
+			{/* <div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
 				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border snap-start">
 
 					<motion.div
@@ -749,13 +749,103 @@ function App() {
 						</div>
 					</div>
 				</section>
-			</div>
+			</div> */}
 
 			{/* Main */}
-			<main className="w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll md:snap-y md:snap-mandatory" style={{ display: isProject ? "none" : "block" }}>
+			<main className="w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll md:snap-y md:snap-mandatory" >
+
+				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border" style={{ display: !isProject ? "none" : "block" }}>
+
+					<motion.div
+						initial={{ opacity: 0, y: 160 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
+						className="flex items-end gap-5">
+						<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+							style={{ textShadow: `6px 6px 0 ${project.backgroundColor}` }}>{project.name}</h1>
+						<h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
+					</motion.div>
+
+					<motion.img
+						initial={{ opacity: 0, y: 160 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.45, duration: 0.8, ease: CUBIC_BEIZER }}
+						src={project.images[0]}
+						alt=""
+						className="object-cover object-center w-full h-[calc(100vh-160px)] mx-auto rounded-2xl mt-5"
+					/>
+				</section>
+
+				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border" style={{ display: !isProject ? "none" : "block" }}>
+					<h1 className="text-5xl text-white">Details</h1>
+					<div className="grid grid-cols-4 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
+						<div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
+							<h3 className="text-muted text-xl">Overview</h3>
+							<h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
+						</div>
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
+							{project.secondParagraph}
+						</div>
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
+							<h1 className="text-xl font-medium text-muted">Stack</h1>
+							<div className="flex items-center justify-center gap-5 flex-wrap">
+
+								{
+									project.stack.map((technology) => (
+										<span className="text-3xl text-white">
+											{technology.icon}
+										</span>
+									))
+								}
+							</div>
+						</div>
+						{
+							project.codeLink ?
+								<a
+									href={project.codeLink}
+									target="_blank"
+									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+									<AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
+								</a>
+								:
+								<div
+									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+									<AiFillGithub className="text-muted text-5xl" />
+								</div>
+						}
+						{
+							project.websiteLink ?
+								<a
+									href={project.websiteLink}
+									target="_blank"
+									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+									<BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
+								</a>
+								:
+								<div
+									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+									<BiGlobe className="text-muted text-5xl " />
+								</div>
+
+						}
+						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
+							<h1 className="text-xl font-medium text-muted">Full description</h1>
+							<h3 className="text-white font-medium text-2xl">
+								{project.mainParagraph}
+							</h3>
+						</div>
+						<div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
+							<h1 className="text-xl font-medium text-muted">Quote</h1>
+							<h3 className="text-white font-medium text-2xl italic">
+								{project.quote}
+							</h3>
+						</div>
+					</div>
+				</section>
+
 
 				{/* Hero Desktop */}
-				<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat" ref={homeRef}>
+				<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat" ref={homeRef} style={{ display: isProject ? "none" : "" }}>
 
 					{/* Based In Egypt */}
 					<motion.div
@@ -838,7 +928,7 @@ function App() {
 				</section>
 
 				{/* Hero Mobile */}
-				<section className="h-screen overflow-hidden relative md:hidden flex items-center justify-start px-5">
+				<section className="h-screen overflow-hidden relative md:hidden flex items-center justify-start px-5" style={{ display: isProject ? "none" : "" }}>
 					<div className="py-20">
 						<h1 className="text-7xl text-white">HI</h1>
 						<h1 className="text-7xl text-white">IAM</h1>
@@ -849,7 +939,7 @@ function App() {
 
 
 
-				<section className="h-screen space-y-5 overflow-hidden relative py-15 px-8 snap-start">
+				<section className="h-screen space-y-5 overflow-hidden relative py-15 px-8 snap-start" style={{ display: isProject ? "none" : "block" }}>
 					<div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15">
 						<div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl">
 							<motion.h1
@@ -985,7 +1075,7 @@ function App() {
 					</div>
 				</section>
 
-				<div className="relative" ref={projectsRef}>
+				<div className="relative" ref={projectsRef} style={{ display: isProject ? "none" : "block" }}>
 					{
 						projects.map((project, index) => (
 							<section className="h-screen w-screen snap-start flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: project.backgroundColor }}>
@@ -1018,7 +1108,7 @@ function App() {
 					}
 				</div>
 
-				<section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0" ref={aboutRef}>
+				<section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0" ref={aboutRef} style={{ display: isProject ? "none" : "block" }}>
 					<div className="w-fit mx-auto">
 						<div
 							className="w-fit flex items-center justify-center"
@@ -1104,20 +1194,30 @@ function App() {
 					<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
 					<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
 				</motion.footer>
+
+				<footer className="h-10 text-white snap-start">
+					<h6>© {new Date().getFullYear()} Omar Emad</h6>
+				</footer>
 			</main>
 		</div>
 	)
 
 	// return (
-	// 	<div className="w-screen h-screen">
-	// 		<motion.div className="absolute top-0 w-screen bg-black origin-top overflow-hidden z-50"
+	// 	<div className="w-screen min-h-screen">
+
+	// 		<InvertedCursor />
+
+	// 		{/* <div className="absolute top-10 right-10 z-1000 w-10 h-10 bg-red-500 sm:bg-orange-400 md:bg-yellow-400 lg:bg-green-500 xl:bg-white"></div> */}
+
+	// 		{/* Intro */}
+	// 		{/* Responsive ✅ */}
+	// 		<motion.div className="fixed top-0 w-screen bg-black origin-top overflow-hidden z-50"
 	// 			initial={{ height: "50vh" }}
 	// 			animate={{ height: "0vh" }}
 	// 			transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
-
 	// 		>
 	// 			<motion.h1
-	// 				className="text-[200px] font-black text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-nowrap"
+	// 				className="text-[50px] sm:text-[70px] md:text-[110px] lg:text-[150px] xl:text-[200px] font-bold text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-nowrap"
 	// 				initial={{ x: "-100vw" }} // starts outside the right edge
 	// 				animate={{ x: "0" }}  // moves to center (adjust if needed)
 	// 				transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
@@ -1127,108 +1227,529 @@ function App() {
 	// 			</motion.h1>
 	// 		</motion.div>
 	// 		<motion.div
-	// 			className="absolute bottom-0 w-screen bg-black origin-top overflow-hidden z-50"
+	// 			className="fixed bottom-0 w-screen bg-black origin-top overflow-hidden z-50"
 	// 			initial={{ height: "50vh" }}
 	// 			animate={{ height: "0vh" }}
 	// 			transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
 	// 		>
 	// 			<motion.h1
-	// 				className="text-[300px] font-black text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+	// 				className="text-[70px] sm:text-[90px] md:text-[180px] lg:text-[230px] xl:text-[300px] font-bold text-white text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
 	// 				initial={{ x: "100vw" }} // starts outside the right edge
 	// 				animate={{ x: "0" }}  // moves to center (adjust if needed)
 	// 				transition={{ delay: 0.8, duration: 0.4, ease: CUBIC_BEIZER }}
-	// 			// transition={{ delay: 0.3, duration: 0.8, ease: CUBIC_BEIZER }}
 	// 			>
 	// 				OM3X4
 	// 			</motion.h1>
 	// 		</motion.div>
-	// 		<div className="w-screen min-h-screen bg-dark">
-	// 			<nav className="absolute z-50 top-0 w-full flex items-center justify-end p-4 mb-10">
-	// 				<div className="">
-	// 					<motion.h1
-	// 						className="text-primary text-4xl font-extrabold cursor-pointer">OM3X4 <span className="text-sm text-muted font-normal">aka Omar Emad</span></motion.h1>
-	// 					<h3 className="text-muted">Builder, Engineer, Creator</h3>
+
+	// 		<OverlayTransition show={showOverlay} direction="up" fill={project.backgroundColor} text={project.name} />
+	// 		<OverlayTransition show={showReturnOverlay} direction="down" fill={"#1e1e1e"} text={"Home"} />
+
+	// 		<nav className="fixed z-50 top-0 w-full pl-5 pr-15 py-4 flex md:items-end justify-between">
+	// 			<motion.a
+	// 				initial={{ opacity: 0, y: -20 }}
+	// 				animate={{ opacity: 1, y: 0 }}
+	// 				transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: CUBIC_BEIZER }}
+	// 				href="/"
+	// 				className="text-white text-4xl font-bold">
+	// 				<img src="/Logos/2/SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
+	// 			</motion.a>
+
+
+	// 			<div className="text-white flex-col md:flex-row flex items-center justify-center gap-3">
+	// 				<motion.button
+	// 					initial={{ opacity: 0, translateY: 20 }}
+	// 					animate={{ opacity: 1, translateY: 0 }}
+	// 					transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: "easeInOut" }}
+
+	// 					onClick={() => scrollToSection(homeRef)}
+	// 					className="flex items-center justify-center flex-col relative cursor-pointer group">
+	// 					<h3 className="text-xl">Home</h3>
+	// 					<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+	// 				</motion.button>
+	// 				{/* Splitter */}
+	// 				<motion.div
+	// 					initial={{ opacity: 0, translateY: 20 }}
+	// 					animate={{ opacity: 1, translateY: 0 }}
+	// 					transition={{ delay: isMounted ? 0.5 : 2.9, duration: 0.5, ease: "easeInOut" }}
+
+
+	// 					className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
+	// 				<motion.button
+	// 					initial={{ opacity: 0, translateY: 20 }}
+	// 					animate={{ opacity: 1, translateY: 0 }}
+	// 					transition={{ delay: isMounted ? 0.6 : 3, duration: 0.5, ease: "easeInOut" }}
+
+	// 					onClick={() => scrollToSection(projectsRef)}
+	// 					className="flex items-center justify-center flex-col relative cursor-pointer group">
+	// 					<h3 className="text-xl">Work</h3>
+	// 					<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+	// 				</motion.button>
+	// 				{/* Splitter */}
+	// 				<motion.div
+	// 					initial={{ opacity: 0, translateY: 20 }}
+	// 					animate={{ opacity: 1, translateY: 0 }}
+	// 					transition={{ delay: isMounted ? 0.7 : 3.1, duration: 0.5, ease: "easeInOut" }}
+	// 					className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
+	// 				<motion.button
+	// 					initial={{ opacity: 0, translateY: 20 }}
+	// 					animate={{ opacity: 1, translateY: 0 }}
+	// 					transition={{ delay: isMounted ? 0.8 : 3.2, duration: 0.5, ease: "easeInOut" }}
+
+	// 					onClick={() => scrollToSection(aboutRef)}
+	// 					className="flex items-center justify-center flex-col relative cursor-pointer group">
+	// 					<h3 className="text-xl">About</h3>
+	// 					<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+	// 				</motion.button>
+	// 			</div>
+	// 		</nav>
+
+	// 		{/* Project */}
+	// 		<div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
+	// 			<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border snap-start">
+
+	// 				<motion.div
+	// 					initial={{ opacity: 0, y: 160 }}
+	// 					animate={{ opacity: 1, y: 0 }}
+	// 					transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
+	// 					className="flex items-end gap-5">
+	// 					<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+	// 						style={{ textShadow: `6px 6px 0 ${project.backgroundColor}` }}>{project.name}</h1>
+	// 					<h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
+	// 				</motion.div>
+
+	// 				<motion.img
+	// 					initial={{ opacity: 0, y: 160 }}
+	// 					animate={{ opacity: 1, y: 0 }}
+	// 					transition={{ delay: 0.45, duration: 0.8, ease: CUBIC_BEIZER }}
+	// 					src={project.images[0]}
+	// 					alt=""
+	// 					className="object-cover object-center w-full h-[calc(100vh-160px)] mx-auto rounded-2xl mt-5"
+	// 				/>
+	// 			</section>
+
+	// 			<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border">
+	// 				<h1 className="text-5xl text-white">Details</h1>
+	// 				<div className="grid grid-cols-4 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
+	// 					<div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
+	// 						<h3 className="text-muted text-xl">Overview</h3>
+	// 						<h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
+	// 					</div>
+	// 					<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
+	// 						{project.secondParagraph}
+	// 					</div>
+	// 					<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
+	// 						<h1 className="text-xl font-medium text-muted">Stack</h1>
+	// 						<div className="flex items-center justify-center gap-5 flex-wrap">
+
+	// 							{
+	// 								project.stack.map((technology) => (
+	// 									<span className="text-3xl text-white">
+	// 										{technology.icon}
+	// 									</span>
+	// 								))
+	// 							}
+	// 						</div>
+	// 					</div>
+	// 					{
+	// 						project.codeLink ?
+	// 							<a
+	// 								href={project.codeLink}
+	// 								target="_blank"
+	// 								className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+	// 								<AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
+	// 							</a>
+	// 							:
+	// 							<div
+	// 								className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+	// 								<AiFillGithub className="text-muted text-5xl" />
+	// 							</div>
+	// 					}
+	// 					{
+	// 						project.websiteLink ?
+	// 							<a
+	// 								href={project.websiteLink}
+	// 								target="_blank"
+	// 								className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+	// 								<BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
+	// 							</a>
+	// 							:
+	// 							<div
+	// 								className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+	// 								<BiGlobe className="text-muted text-5xl " />
+	// 							</div>
+
+	// 					}
+	// 					<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
+	// 						<h1 className="text-xl font-medium text-muted">Full description</h1>
+	// 						<h3 className="text-white font-medium text-2xl">
+	// 							{project.mainParagraph}
+	// 						</h3>
+	// 					</div>
+	// 					<div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
+	// 						<h1 className="text-xl font-medium text-muted">Quote</h1>
+	// 						<h3 className="text-white font-medium text-2xl italic">
+	// 							{project.quote}
+	// 						</h3>
+	// 					</div>
 	// 				</div>
-	// 			</nav>
-	// 			<main className="h-screen flex items-center jcen">
-	// 				<div className="grid grid-cols-3 grid-rows-5 w-[95vw] md:w-[90vw] lg:w-[80vw] xl:w-[70vw] mx-auto h-[70vh] gap-3">
-	// 					<motion.div
-	// 						initial={{ translateX: "-10vh", opacity: 0 }}
-	// 						animate={{ translateX: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3 }}
-	// 						className="w-full h-full bg-secondary-dark rounded-2xl col-span-2 row-span-2 px-7 py-4 font-semibold text-sm md:text-lg text-muted flex items-start justify-center flex-col">
-	// 						<h1 className=" text-2xl md:text-4xl font-bold mb-2 text-primary">OM3X4</h1>
-	// 						I’m Omar Emad, 17(2008). A high schooler into chess, Rubik’s cubes, and building things. Self-taught, performance-driven, and fast on the keyboard.
-	// 					</motion.div>
-	// 					<motion.div
-	// 						initial={{ translateX: "10vh", opacity: 0 }}
-	// 						animate={{ translateX: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3.2 }}
-	// 						className="w-full h-full bg-secondary-dark rounded-2xl flex items-center justify-center gap-2 text-base md:text-2xl text-primary font-bold">
-	// 						Based In <GiEgyptianSphinx className="text-accent" />Egypt
-	// 					</motion.div>
-	// 					<motion.div
-	// 						initial={{ translateX: "10vh", opacity: 0 }}
-	// 						animate={{ translateX: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3.3 }}
-	// 						className="w-full h-full bg-secondary-dark rounded-2xl flex items-center justify-center gap-2 text-2xl text-primary font-bold">
-	// 						216+ WPM
-	// 						<a href="https://monkeytype.com/profile/om3x4e" target="_blank"><SiMonkeytype className="cursor-pointer hover:text-accent transition-all" /></a>
-	// 					</motion.div>
-	// 					<motion.div
-	// 						initial={{ translateX: "-10vh", opacity: 0 }}
-	// 						animate={{ translateX: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3.4 }}
-	// 						className="w-full h-full bg-secondary-dark col-span-2 rounded-xl flex flex-col items-center justify-center gap-2 text-2xl text-primary font-bold">
-	// 						Student and FullStack Dev
-	// 						<span className="text-xs text-muted">I will probably work in something real later</span>
-	// 					</motion.div>
-	// 					<motion.div
-	// 						initial={{ translateX: "10vh", opacity: 0 }}
-	// 						animate={{ translateX: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3.5 }}
-	// 						className="w-full h-full bg-secondary-dark rounded-xl flex items-center justify-center gap-2 text-2xl text-primary font-bold">
-	// 						238+ Proplem
-	// 						<a href="https://monkeytype.com/profile/om3x4e" target="_blank"><SiLeetcode className="cursor-pointer hover:text-accent transition-all" /></a>
-	// 					</motion.div>
-	// 					<motion.div
-	// 						initial={{ translateY: "10vh", opacity: 0 }}
-	// 						animate={{ translateY: "0vh", opacity: 1 }}
-	// 						transition={{ delay: 3.7 }}
-	// 						className="w-full h-full flex flex-wrap items-center justify-start gap-x-5 p-8 bg-secondary-dark rounded-2xl col-span-3 row-span-3">
-	// 						{
-	// 							skills.map((item) => {
-	// 								return (
-	// 									<div className="flex items-center justify-center gap-2 text-primary text-2xl flex-col"
-	// 										style={{ color: item.color }}>
-	// 										{item.icon}
-	// 										<span className="text-xs hidden md:inline-block">{item.name}</span>
-	// 									</div>
-	// 								)
-	// 							})
-	// 						}
-	// 					</motion.div>
-	// 				</div>
-	// 			</main>
-	// 			<footer className="absolute bottom-0 w-full p-4 flex items-center justify-end">
-	// 				<div className="flex items-center gap-3">
-	// 					<a href="" target="_blank" className="social-button"><AiFillGithub /></a>
-	// 					<a href="" target="_blank" className="social-button"><FaLinkedinIn /></a>
-	// 					<button
-	// 						onClick={e => {
-	// 							e.preventDefault()
-	// 							navigator.clipboard.writeText("om3x4e@gmail.com")
-	// 							toast.success("Copied to clipboard", { duration: 2000 })
-	// 						}}
-	// 						className="social-button">
-	// 						<CgMail />
-	// 					</button>
-	// 					<a href="" className="social-button"><FaXTwitter /></a>
-	// 					<a href="https://leetcode.com/u/om3x4/" target="_blank" className="social-button"><SiLeetcode /></a>
-	// 					<a href="https://dev.to/om3x4" target="_blank" className="social-button"><FaDev /></a>
-	// 				</div>
-	// 			</footer>
+	// 			</section>
 	// 		</div>
+
+	// 		{/* Main */}
+	// 		<main className="w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll md:snap-y md:snap-mandatory" style={{ display: isProject ? "none" : "block" }}>
+
+	// 			{/* Hero Desktop */}
+	// 			<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat" ref={homeRef}>
+
+	// 				{/* Based In Egypt */}
+	// 				<motion.div
+	// 					initial={{ x: "-100%" }}
+	// 					animate={{ x: "0%" }}
+	// 					transition={{ delay: isMounted ? 2 : 4.4, duration: 0.5, ease: CUBIC_BEIZER }}
+	// 					viewport={{ once: false, amount: 1 }}
+	// 					className="absolute hidden md:flex z-5 top-1/4 left-0 w-50 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3">
+	// 					<h3 className="text-muted text-wrap text-lg font-medium w-fit ">Based In Egypt</h3>
+	// 					<div
+	// 						className="h-[80%] aspect-square bg-white rounded-full flex items-center justify-center p-3">
+	// 						<GiEgyptianSphinx className="w-full h-full text-golden" />
+	// 					</div>
+	// 				</motion.div>
+
+	// 				<div className="h-full flex items-center justify-start md:justify-center z-5">
+	// 					<motion.div
+	// 						initial={{ scale: 0.9 }}
+	// 						animate={{ scale: 1 }}
+	// 						transition={{ delay: isMounted ? 1.8 : 3.2, duration: 1, ease: "easeInOut" }}
+	// 						className="w-fit flex flex-col items-start md:items-center justify-center gap-5">
+	// 						<h1 className="text-white text-5xl sm:text-8xl md:text-[130px] md:leading-[100px] lg:text-[180px] lg:leading-[130px] xl:text-[200px] xl:leading-[150px] font-medium tracking-widest overflow-hidden space-x-8">
+	// 							<motion.span
+	// 								initial={{ y: "100%" }}
+	// 								animate={{ y: "0%" }}
+	// 								transition={{ delay: isMounted ? 2 : 3.4, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								className="inline-block"
+	// 							>
+	// 								HI</motion.span>
+	// 							<motion.span
+	// 								initial={{ y: "100%" }}
+	// 								animate={{ y: "0%" }}
+	// 								transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								className="md:inline-block hidden"
+	// 							>
+	// 								THERE</motion.span>
+	// 						</h1>
+	// 						<motion.div
+	// 							initial={{ opacity: 0 }}
+	// 							animate={{ opacity: 1 }}
+	// 							transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							className="w-full flex items-center justify-between px-5">
+	// 							<h4 className="text-muted font-jersey text-sm sm:text-2xl">Omar Emad</h4>
+	// 							<h4 className="text-muted font-jersey text-sm sm:text-2xl">Software Engineer</h4>
+	// 						</motion.div>
+	// 						<h1 className="text-white text-5xl sm:text-8xl md:text-[130px] md:leading-[100px] lg:text-[180px] lg:leading-[130px] xl:text-[200px] xl:leading-[150px] font-medium tracking-tighter overflow-hidden space-x-8">
+	// 							<motion.span
+	// 								initial={{ y: "100%" }}
+	// 								animate={{ y: "0%" }}
+	// 								transition={{ delay: isMounted ? 2.4 : 3.8, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								className="inline-block"
+	// 							>
+	// 								I</motion.span>
+	// 							<motion.span
+	// 								initial={{ y: "100%" }}
+	// 								animate={{ y: "0%" }}
+	// 								transition={{ delay: isMounted ? 2.6 : 4, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								className="inline-block"
+	// 							>
+	// 								AM</motion.span>
+	// 							<motion.span
+	// 								initial={{ y: "100%" }}
+	// 								animate={{ y: "0%" }}
+	// 								transition={{ delay: isMounted ? 2.8 : 4.2, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								className="inline-block"
+	// 							>
+	// 								OM3X4
+	// 							</motion.span>
+	// 						</h1>
+	// 					</motion.div>
+	// 					<div
+
+	// 						className="text-white text-2xl absolute bottom-10 flex flex-col items-center justify-center"
+	// 					>
+	// 						<h1 className="text-xs font-thin">Scroll</h1>
+	// 						<BiChevronsDown className="animate-pulse " />
+	// 					</div>
+	// 				</div>
+
+	// 			</section>
+
+	// 			{/* Hero Mobile */}
+	// 			<section className="h-screen overflow-hidden relative md:hidden flex items-center justify-start px-5">
+	// 				<div className="py-20">
+	// 					<h1 className="text-7xl text-white">HI</h1>
+	// 					<h1 className="text-7xl text-white">IAM</h1>
+	// 					<h1 className="text-2xl text-muted">or Omar Emad</h1>
+	// 					<h1 className="text-7xl text-white">OM3X4</h1>
+	// 				</div>
+	// 			</section>
+
+
+
+	// 			<section className="h-screen space-y-5 overflow-hidden relative py-15 px-8 snap-start">
+	// 				<div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15">
+	// 					<div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl">
+	// 						<motion.h1
+	// 							initial={{ opacity: 0, y: 40, rotate: 12 }}
+	// 							whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+	// 							transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="text-muted origin-left overflow-hidden"
+	// 						>
+	// 							I’m <span className="text-white">Omar Emad</span>, <span className="text-white">17 (2008)</span>.
+	// 						</motion.h1>
+	// 						<motion.h1
+	// 							initial={{ opacity: 0, y: 40, rotate: 12 }}
+	// 							whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+	// 							transition={{ delay: 0.1, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="text-muted origin-left overflow-hidden"
+	// 						>
+	// 							A high schooler into <span className="text-white">chess</span>, Rubik’s cubes,
+	// 							and building things.
+	// 							<span className="text-white">Self-taught</span>, performance-driven,
+	// 							and <span className="text-white">fast</span> on the keyboard.
+	// 						</motion.h1>
+	// 					</div>
+	// 					<div className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit">
+	// 						{/* Egypt */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, x: -40 }}
+	// 							whileInView={{ opacity: 1, x: 0 }}
+	// 							transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl hidden lg:flex items-center justify-center p-3">
+	// 							<GiEgyptianWalk className="text-5xl text-golden" />
+	// 						</motion.div>
+
+	// 						{/* Leetcode */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, y: -40 }}
+	// 							whileInView={{ opacity: 1, y: 0 }}
+	// 							transition={{ delay: 0.5, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
+	// 							<span className="text-white text-4xl font-semibold">238+</span>
+	// 							<a href={links.leetcode} target="_blank"><SiLeetcode className="text-2xl text-golden" /></a>
+	// 						</motion.div>
+
+	// 						{/* Monkeytype */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, x: 40 }}
+	// 							whileInView={{ opacity: 1, x: 0 }}
+	// 							transition={{ delay: 0.7, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
+	// 							<span className="text-white text-4xl font-semibold">216+ <span className="text-muted text-base font-normal">WPM</span></span>
+	// 							<a href={links.monkeytype} target="_blank" rel="noopener noreferrer"><SiMonkeytype className="text-2xl text-golden" /></a>
+	// 						</motion.div>
+
+	// 						{/* Starting Date */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, x: -40 }}
+	// 							whileInView={{ opacity: 1, x: 0 }}
+	// 							transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3">
+	// 							<span className="text-muted text-3xl font-medium">Dev Since</span>
+	// 							<h1 className="text-white text-3xl font-semibold">2024</h1>
+	// 						</motion.div>
+
+	// 						{/* Availabilty */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, x: 40 }}
+	// 							whileInView={{ opacity: 1, x: 0 }}
+	// 							transition={{ delay: 0.9, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 lg:col-span-2">
+	// 							<h1 className="text-white text-3xl font-semibold">Open To Work</h1>
+	// 						</motion.div>
+
+	// 						{/* Scroll to see the work */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, y: 40 }}
+	// 							whileInView={{ opacity: 1, y: 0 }}
+	// 							transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl hidden lg:flex flex-col items-center justify-center p-3">
+	// 							<h1 className="text-white text-xl text-center">Scroll To See My Projects</h1>
+	// 							<div
+	// 								className="text-white text-2xl flex flex-col items-center justify-center"
+	// 							>
+	// 								<BiChevronsDown className="animate-pulse " />
+	// 							</div>
+	// 						</motion.div>
+
+	// 						{/* Full Stack */}
+	// 						<motion.div
+	// 							initial={{ opacity: 0, y: 40 }}
+	// 							whileInView={{ opacity: 1, y: 0 }}
+	// 							transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 col-span-2">
+	// 							<h1 className="text-white text-3xl font-semibold">Full Stack Developer <span className="text-muted text-base">Temporarily</span></h1>
+	// 						</motion.div>
+
+
+	// 					</div>
+	// 				</div>
+	// 				<div className="w-fit mx-auto">
+	// 					<div
+	// 						className="w-fit flex items-center justify-center"
+	// 					>
+	// 						<h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">MY</h1>
+	// 						<motion.div
+	// 							initial={{ marginLeft: 100, marginRight: 100 }}
+	// 							whileInView={{ marginLeft: 5, marginRight: 5 }}
+	// 							transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-4 h-4 sm:w-7 sm:h-7 bg-white rounded-full"></motion.div>
+	// 						<h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">WORK</h1>
+	// 					</div>
+	// 					<motion.div
+	// 						initial={{ opacity: 0 }}
+	// 						animate={{ opacity: 1 }}
+	// 						transition={{ delay: 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 						className="w-full flex items-center justify-between px-5">
+	// 						<h4 className="text-muted font-jersey sm:text-2xl">REAL WORLD PROVE</h4>
+	// 						<div
+	// 							className="text-white text-2xl flex flex-col items-center justify-center"
+	// 						>
+	// 							<BiChevronsDown className="animate-pulse " />
+	// 						</div>
+	// 						<h4 className="text-muted font-jersey sm:text-2xl">DEVELOPED BY ME</h4>
+	// 					</motion.div>
+	// 				</div>
+	// 			</section>
+
+	// 			<div className="relative" ref={projectsRef}>
+	// 				{
+	// 					projects.map((project, index) => (
+	// 						<section className="h-screen w-screen snap-start flex items-center justify-center relative overflow-hidden" style={{ backgroundColor: project.backgroundColor }}>
+	// 							<motion.button
+	// 								initial={{ y: 60, opacity: 0, rotate: 2 }}
+	// 								whileInView={{ y: 0, opacity: 1, rotate: 4 }}
+	// 								whileTap={{ scale: 0.5 }}
+	// 								transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								viewport={{ once: false, amount: 0.5 }}
+	// 								onClick={() => { handleProjectChoosing(index) }}
+	// 								className="absolute cursor-pointer brightness-40 rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] lg:w-[60%] lg:h-auto"
+	// 							>
+	// 								<img
+	// 									src={project.images[0]}
+	// 									alt=""
+	// 									className="w-full shadow-2xl shadow-black rounded-2xl cursor-pointer"
+	// 								/>
+	// 							</motion.button>
+	// 							<h6 className="font-jersey font-bold absolute right-10 bottom-10 text-white text-3xl">{index + 1} / {projects.length}</h6>
+	// 							<motion.h1
+	// 								initial={{ opacity: 0, y: scrollDirection === "down" ? -60 : 60 }}
+	// 								whileInView={{ opacity: 1, y: 0 }}
+	// 								transition={{ delay: 0.4, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 								viewport={{ once: false, amount: 1 }}
+	// 								className="text-6xl lg:text-7xl xl:text-9xl font-bold text-white z-10 overflow-hidden pointer-events-none">
+	// 								{project.name}
+	// 							</motion.h1>
+	// 						</section>
+	// 					))
+	// 				}
+	// 			</div>
+
+	// 			<section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0" ref={aboutRef}>
+	// 				<div className="w-fit mx-auto">
+	// 					<div
+	// 						className="w-fit flex items-center justify-center"
+	// 					>
+	// 						<h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ABOUT</h1>
+	// 						<motion.div
+	// 							initial={{ marginLeft: 100, marginRight: 100 }}
+	// 							whileInView={{ marginLeft: 5, marginRight: 5 }}
+	// 							transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
+	// 							viewport={{ once: false, amount: 0.5 }}
+	// 							className="w-4 h-4 lg:w-7 lg:h-7 bg-white rounded-full"></motion.div>
+	// 						<h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ME</h1>
+	// 					</div>
+	// 					<motion.div
+	// 						initial={{ opacity: 0 }}
+	// 						animate={{ opacity: 1 }}
+	// 						transition={{ delay: 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 						className="w-full flex items-center justify-between px-5">
+	// 						<h4 className="text-muted font-jersey text-2xl">Omar Emad</h4>
+	// 						<div
+	// 							className="text-white text-2xl flex flex-col items-center justify-center"
+	// 						>
+	// 							<BiChevronsDown className="animate-pulse " />
+	// 						</div>
+	// 						<h4 className="text-muted font-jersey text-2xl">The Real One</h4>
+	// 					</motion.div>
+	// 				</div>
+	// 				<div className="w-[90%] lg:w-[80%] mx-auto grid grid-cols-3 gap-5 mt-10">
+	// 					<motion.div
+	// 						initial={{ opacity: 0, x: -40 }}
+	// 						whileInView={{ opacity: 1, x: 0 }}
+	// 						transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 						viewport={{ once: false, amount: 0.5 }}
+	// 						className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 col-span-3 md:col-span-2 text-xl">
+	// 						Self-taught software engineer with strong experience in building full-stack digital products, passionate about clean code, performance, and creating tools that are both functional and impactful.
+	// 					</motion.div>
+	// 					<motion.div
+	// 						initial={{ opacity: 0, x: 40 }}
+	// 						whileInView={{ opacity: 1, x: 0 }}
+	// 						transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 						viewport={{ once: false, amount: 0.5 }}
+	// 						className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap col-span-3 md:col-span-1">
+	// 						Always Learning, {"\n"}
+	// 						Always Optimizing
+	// 					</motion.div>
+	// 					<motion.div
+	// 						initial={{ opacity: 0, y: 80 }}
+	// 						whileInView={{ opacity: 1, y: 0 }}
+	// 						transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 						viewport={{ once: false, amount: 0.5 }}
+	// 						className="w-full h-full bg-secondary-background rounded-2xl flex items-start justify-center px-10 py-8 text-3xl font-bold whitespace-pre-wrap col-span-3 flex-col gap-5">
+	// 						<h1>Stack</h1>
+	// 						<div className="flex items-center justify-start gap-5 flex-wrap">
+	// 							{
+	// 								skills.map((skill) => (
+	// 									<div style={{ color: skill.color }}>
+	// 										{skill.icon}
+	// 									</div>
+	// 								))
+	// 							}
+	// 						</div>
+	// 					</motion.div>
+	// 				</div>
+	// 			</section>
+
+	// 			<motion.footer
+	// 				initial={{ opacity: 0, y: 20 }}
+	// 				animate={{ opacity: 1, y: 0 }}
+	// 				transition={{ delay: 3, duration: 0.6, ease: CUBIC_BEIZER }}
+	// 				className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
+	// 				<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
+	// 				<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
+	// 				<button
+	// 					onClick={e => {
+	// 						e.preventDefault()
+	// 						navigator.clipboard.writeText(links.email)
+	// 						toast.success("Copied to clipboard", { duration: 2000 })
+	// 					}}
+	// 					className="social-button">
+	// 					<CgMail />
+	// 				</button>
+	// 				<a href={links.x} className="social-button"><FaXTwitter /></a>
+	// 				<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
+	// 				<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
+	// 			</motion.footer>
+	// 		</main>
 	// 	</div>
 	// )
 }
