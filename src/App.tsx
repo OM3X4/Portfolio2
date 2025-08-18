@@ -402,6 +402,9 @@ type OverlayTransitionProps = {
 function OverlayTransition({ show, direction, fill, text }: OverlayTransitionProps) {
 	const isUp = direction === "up";
 
+	const OLD_EASE = [0.76, 0, 0.24, 1];
+
+
 	return (
 		<AnimatePresence>
 			{show && (
@@ -414,7 +417,7 @@ function OverlayTransition({ show, direction, fill, text }: OverlayTransitionPro
 						initial={{ y: isUp ? "100%" : "-100%" }}
 						animate={{ y: 0 }}
 						exit={{ y: isUp ? "-100%" : "100%" }}
-						transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+						transition={{ duration: 0.5, ease: [0.4, 0, 0.34, 1.01] }}
 						preserveAspectRatio="none"
 					>
 						<motion.path
