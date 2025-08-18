@@ -46,7 +46,7 @@ import { cubicBezier } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import useScrollDirection from "./useScrollDirection";
-import InvertedCursor from "./Pointer";
+// import InvertedCursor from "./Pointer";
 
 const skills: { name: string; icon: JSX.Element; color: string }[] = [
 	{ name: 'React.js', icon: <DiReact />, color: '#61DAFB' },
