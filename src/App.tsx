@@ -982,7 +982,7 @@ function App() {
 								transition={{ delay: 0.5, duration: 0.6, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 0.5 }}
 								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
-								<span className="text-white text-4xl font-semibold">238+</span>
+								<span className="text-white text-2xl md:text-4xl font-semibold">238+</span>
 								<a href={links.leetcode} target="_blank"><SiLeetcode className="text-2xl text-golden" /></a>
 							</motion.div>
 
@@ -993,7 +993,7 @@ function App() {
 								transition={{ delay: 0.7, duration: 0.6, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 0.5 }}
 								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center gap-3 p-3">
-								<span className="text-white text-4xl font-semibold">216+ <span className="text-muted text-base font-normal">WPM</span></span>
+								<span className="text-white text-2xl text-center md:text-4xl font-semibold">216+ <span className="text-muted text-base font-normal">WPM</span></span>
 								<a href={links.monkeytype} target="_blank" rel="noopener noreferrer"><SiMonkeytype className="text-2xl text-golden" /></a>
 							</motion.div>
 
@@ -1004,8 +1004,8 @@ function App() {
 								transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 0.5 }}
 								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3">
-								<span className="text-muted text-3xl font-medium">Dev Since</span>
-								<h1 className="text-white text-3xl font-semibold">2024</h1>
+								<span className="text-muted text-base text-center md:text-3xl font-medium">Dev Since</span>
+								<h1 className="text-white text-center text-2xl md:text-3xl font-semibold">2024</h1>
 							</motion.div>
 
 							{/* Availabilty */}
@@ -1015,7 +1015,7 @@ function App() {
 								transition={{ delay: 0.9, duration: 0.6, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 0.5 }}
 								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 lg:col-span-2">
-								<h1 className="text-white text-3xl font-semibold">Open To Work</h1>
+								<h1 className="text-white text-center text-xl md:text-3xl font-semibold">Open To Work</h1>
 							</motion.div>
 
 							{/* Scroll to see the work */}
@@ -1040,7 +1040,7 @@ function App() {
 								transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 0.5 }}
 								className="w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 col-span-2">
-								<h1 className="text-white text-3xl font-semibold">Full Stack Developer <span className="text-muted text-base">Temporarily</span></h1>
+								<h1 className="text-white text-center text-2xl md:text-3xl font-semibold">Full Stack Developer <span className="text-muted text-base">Temporarily</span></h1>
 							</motion.div>
 
 
@@ -1100,7 +1100,7 @@ function App() {
 									whileInView={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.4, duration: 0.6, ease: CUBIC_BEIZER }}
 									viewport={{ once: false, amount: 1 }}
-									className="text-6xl lg:text-7xl xl:text-9xl font-bold text-white z-10 overflow-hidden pointer-events-none">
+									className="text-6xl lg:text-7xl xl:text-9xl px-5 text-center font-bold text-white z-10 overflow-hidden pointer-events-none">
 									{project.name}
 								</motion.h1>
 							</section>
