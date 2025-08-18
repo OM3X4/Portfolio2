@@ -1,4 +1,4 @@
-import { GiHamburgerMenu } from "react-icons/gi";
+// import { GiHamburgerMenu } from "react-icons/gi";
 import { GiEgyptianWalk } from "react-icons/gi";
 import { BiChevronsDown, BiGlobe } from "react-icons/bi";
 import type { JSX } from "react";
@@ -463,7 +463,7 @@ function App() {
 	const [showOverlay, setShowOverlay] = useState(false)
 	const [showReturnOverlay, setShowReturnOverlay] = useState(false)
 
-	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	// const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	const isMountedRef = useRef(false)
 	const isMounted = isMountedRef.current
@@ -545,7 +545,7 @@ function App() {
 
 			{/* Intro */}
 			{/* Responsive ✅ */}
-			<motion.div className="fixed top-0 w-screen bg-black origin-top overflow-hidden z-150"
+			{/* <motion.div className="fixed top-0 w-screen bg-black origin-top overflow-hidden z-150"
 				initial={{ height: "50vh" }}
 				animate={{ height: "0vh" }}
 				transition={{ delay: 2, duration: 0.8, ease: CUBIC_BEIZER }}
@@ -574,7 +574,7 @@ function App() {
 				>
 					OM3X4
 				</motion.h1>
-			</motion.div>
+			</motion.div> */}
 
 			<OverlayTransition show={showOverlay} direction="up" fill={project.backgroundColor} text={project.name} />
 			<OverlayTransition show={showReturnOverlay} direction="down" fill={"#1e1e1e"} text={"Home"} />
@@ -583,111 +583,112 @@ function App() {
 				<motion.a
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: CUBIC_BEIZER }}
+					transition={{ delay: 0.4, duration: 0.5, ease: CUBIC_BEIZER }}
 					href="/"
 					className="text-white text-4xl font-bold">
 					<img src="/Logos/2/SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
 				</motion.a>
+				{
+					// <div className="cursor-pointer flex items-center justify-center gap-5 hidden" onMouseEnter={() => setIsMenuOpen(true)}
+					// 	onMouseLeave={() => setIsMenuOpen(false)}>
+					// 	<AnimatePresence>
+					// 		{
+					// 			isMenuOpen &&
+					// 			<motion.div
+					// 				initial={{ scaleX: 0 }}
+					// 				animate={{ scaleX: 1 }}
+					// 				exit={{ scaleX: 0 }}
+					// 				transition={{ duration: 0.3, ease: CUBIC_BEIZER }}
+					// 				className="text-white origin-right bg-secondary-background py-3 px-5 rounded-2xl flex-col md:flex-row flex items-center justify-center gap-3">
+					// 				<AnimatePresence>
+					// 					{
+					// 						isMenuOpen &&
+					// 						<motion.button
+					// 							initial={{ opacity: 0, translateY: 20 }}
+					// 							animate={{ opacity: 1, translateY: 0 }}
+					// 							exit={{ opacity: 0, translateY: -20 }}
+					// 							transition={{ duration: 0.3, ease: "easeInOut" }}
+					// 							viewport={{ once: false, amount: 1 }}
+					// 							onClick={() => scrollToSection(homeRef)}
+					// 							className="flex items-center justify-center flex-col relative cursor-pointer group">
+					// 							<h3 className="text-xl">Home</h3>
+					// 							<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+					// 						</motion.button>
+					// 					}
+					// 				</AnimatePresence>
+					// 				<AnimatePresence>
+					// 					{/* Splitter */}
+					// 					{
+					// 						isMenuOpen &&
+					// 						<motion.div
+					// 							initial={{ opacity: 0, translateY: 20 }}
+					// 							animate={{ opacity: 1, translateY: 0 }}
+					// 							exit={{ opacity: 0, translateY: -20 }}
+					// 							transition={{ delay: 0.2, duration: 0.3, ease: "easeInOut" }}
+					// 							viewport={{ once: false, amount: 1 }}
+					// 							className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
+					// 					}
+					// 				</AnimatePresence>
+					// 				<AnimatePresence>
+					// 					{
+					// 						isMenuOpen &&
+					// 						<motion.button
+					// 							initial={{ opacity: 0, translateY: 20 }}
+					// 							animate={{ opacity: 1, translateY: 0 }}
+					// 							exit={{ opacity: 0, translateY: -20 }}
+					// 							transition={{ delay: 0.3, duration: 0.3, ease: "easeInOut" }}
+					// 							viewport={{ once: false, amount: 1 }}
 
-				<div className="cursor-pointer flex items-center justify-center gap-5" onMouseEnter={() => setIsMenuOpen(true)}
-					onMouseLeave={() => setIsMenuOpen(false)}>
-					<AnimatePresence>
-						{
-							isMenuOpen &&
-							<motion.div
-								initial={{ scaleX: 0 }}
-								animate={{ scaleX: 1 }}
-								exit={{ scaleX: 0 }}
-								transition={{ duration: 0.3, ease: CUBIC_BEIZER }}
-								className="text-white origin-right bg-secondary-background py-3 px-5 rounded-2xl flex-col md:flex-row flex items-center justify-center gap-3">
-								<AnimatePresence>
-									{
-										isMenuOpen &&
-										<motion.button
-											initial={{ opacity: 0, translateY: 20 }}
-											animate={{ opacity: 1, translateY: 0 }}
-											exit={{ opacity: 0, translateY: -20 }}
-											transition={{ duration: 0.3, ease: "easeInOut" }}
-											viewport={{ once: false, amount: 1 }}
-											onClick={() => scrollToSection(homeRef)}
-											className="flex items-center justify-center flex-col relative cursor-pointer group">
-											<h3 className="text-xl">Home</h3>
-											<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
-										</motion.button>
-									}
-								</AnimatePresence>
-								<AnimatePresence>
-									{/* Splitter */}
-									{
-										isMenuOpen &&
-										<motion.div
-											initial={{ opacity: 0, translateY: 20 }}
-											animate={{ opacity: 1, translateY: 0 }}
-											exit={{ opacity: 0, translateY: -20 }}
-											transition={{ delay: 0.2, duration: 0.3, ease: "easeInOut" }}
-											viewport={{ once: false, amount: 1 }}
-											className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
-									}
-								</AnimatePresence>
-								<AnimatePresence>
-									{
-										isMenuOpen &&
-										<motion.button
-											initial={{ opacity: 0, translateY: 20 }}
-											animate={{ opacity: 1, translateY: 0 }}
-											exit={{ opacity: 0, translateY: -20 }}
-											transition={{ delay: 0.3, duration: 0.3, ease: "easeInOut" }}
-											viewport={{ once: false, amount: 1 }}
+					// 							onClick={() => scrollToSection(projectsRef)}
+					// 							className="flex items-center justify-center flex-col relative cursor-pointer group">
+					// 							<h3 className="text-xl">Work</h3>
+					// 							<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+					// 						</motion.button>
+					// 					}
+					// 				</AnimatePresence>
+					// 				<AnimatePresence>
+					// 					{/* Splitter */}
+					// 					{
+					// 						isMenuOpen &&
+					// 						<motion.div
+					// 							initial={{ opacity: 0, translateY: 20 }}
+					// 							animate={{ opacity: 1, translateY: 0 }}
+					// 							exit={{ opacity: 0, translateY: -20 }}
+					// 							transition={{ delay: 0.4, duration: 0.3, ease: "easeInOut" }}
+					// 							viewport={{ once: false, amount: 1 }}
+					// 							className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
+					// 					}
+					// 				</AnimatePresence>
+					// 				<AnimatePresence>
+					// 					{
+					// 						isMenuOpen &&
+					// 						<motion.button
+					// 							initial={{ opacity: 0, translateY: 20 }}
+					// 							animate={{ opacity: 1, translateY: 0 }}
+					// 							exit={{ opacity: 0, translateY: -20 }}
+					// 							transition={{ delay: 0.5, duration: 0.3, ease: "easeInOut" }}
+					// 							viewport={{ once: false, amount: 1 }}
 
-											onClick={() => scrollToSection(projectsRef)}
-											className="flex items-center justify-center flex-col relative cursor-pointer group">
-											<h3 className="text-xl">Work</h3>
-											<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
-										</motion.button>
-									}
-								</AnimatePresence>
-								<AnimatePresence>
-									{/* Splitter */}
-									{
-										isMenuOpen &&
-										<motion.div
-											initial={{ opacity: 0, translateY: 20 }}
-											animate={{ opacity: 1, translateY: 0 }}
-											exit={{ opacity: 0, translateY: -20 }}
-											transition={{ delay: 0.4, duration: 0.3, ease: "easeInOut" }}
-											viewport={{ once: false, amount: 1 }}
-											className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
-									}
-								</AnimatePresence>
-								<AnimatePresence>
-									{
-										isMenuOpen &&
-										<motion.button
-											initial={{ opacity: 0, translateY: 20 }}
-											animate={{ opacity: 1, translateY: 0 }}
-											exit={{ opacity: 0, translateY: -20 }}
-											transition={{ delay: 0.5, duration: 0.3, ease: "easeInOut" }}
-											viewport={{ once: false, amount: 1 }}
+					// 							onClick={() => scrollToSection(aboutRef)}
+					// 							className="flex items-center justify-center flex-col relative cursor-pointer group">
+					// 							<h3 className="text-xl">About</h3>
+					// 							<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
+					// 						</motion.button>
+					// 					}
+					// 				</AnimatePresence>
+					// 			</motion.div>
+					// 		}
+					// 	</AnimatePresence>
 
-											onClick={() => scrollToSection(aboutRef)}
-											className="flex items-center justify-center flex-col relative cursor-pointer group">
-											<h3 className="text-xl">About</h3>
-											<div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
-										</motion.button>
-									}
-								</AnimatePresence>
-							</motion.div>
-						}
-					</AnimatePresence>
+					// 	<GiHamburgerMenu className="text-4xl bg-white p-2 rounded-xl " />
+					// </div>
+				}
 
-					<GiHamburgerMenu className="text-4xl bg-white p-2 rounded-xl " />
-				</div>
-
-				<div className="text-white flex-col md:flex-row group-hover:flex items-center justify-center gap-3 hidden">
+				<div className="text-white flex-row items-center justify-center gap-3 flex">
 					<motion.button
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ delay: isMounted ? 0.4 : 2.8, duration: 0.5, ease: "easeInOut" }}
+						transition={{ delay: 0.4, duration: 0.5, ease: "easeInOut" }}
 
 						onClick={() => scrollToSection(homeRef)}
 						className="flex items-center justify-center flex-col relative cursor-pointer group">
@@ -698,14 +699,14 @@ function App() {
 					<motion.div
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ delay: isMounted ? 0.5 : 2.9, duration: 0.5, ease: "easeInOut" }}
+						transition={{ delay: 0.5, duration: 0.5, ease: "easeInOut" }}
 
 
 						className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
 					<motion.button
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ delay: isMounted ? 0.6 : 3, duration: 0.5, ease: "easeInOut" }}
+						transition={{ delay: 0.6, duration: 0.5, ease: "easeInOut" }}
 
 						onClick={() => scrollToSection(projectsRef)}
 						className="flex items-center justify-center flex-col relative cursor-pointer group">
@@ -716,12 +717,12 @@ function App() {
 					<motion.div
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ delay: isMounted ? 0.7 : 3.1, duration: 0.5, ease: "easeInOut" }}
+						transition={{ delay: 0.7, duration: 0.5, ease: "easeInOut" }}
 						className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
 					<motion.button
 						initial={{ opacity: 0, translateY: 20 }}
 						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ delay: isMounted ? 0.8 : 3.2, duration: 0.5, ease: "easeInOut" }}
+						transition={{ delay: 0.8, duration: 0.5, ease: "easeInOut" }}
 
 						onClick={() => scrollToSection(aboutRef)}
 						className="flex items-center justify-center flex-col relative cursor-pointer group">
@@ -929,7 +930,7 @@ function App() {
 							<motion.div
 								initial={{ x: "-100%" }}
 								animate={{ x: "0%" }}
-								transition={{ delay: isMounted ? 2 : 4.4, duration: 0.5, ease: CUBIC_BEIZER }}
+								transition={{ delay: 1.2, duration: 0.5, ease: CUBIC_BEIZER }}
 								viewport={{ once: false, amount: 1 }}
 								className="absolute hidden md:flex z-5 top-1/4 left-0 w-50 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3">
 								<h3 className="text-muted text-wrap text-lg font-medium w-fit ">Based In Egypt</h3>
@@ -943,20 +944,20 @@ function App() {
 								<motion.div
 									initial={{ scale: 0.9 }}
 									animate={{ scale: 1 }}
-									transition={{ delay: isMounted ? 1.8 : 3.2, duration: 1, ease: "easeInOut" }}
+									transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
 									className="w-fit flex flex-col items-start md:items-center justify-center gap-5">
 									<h1 className="text-white text-5xl sm:text-8xl md:text-[130px] md:leading-[100px] lg:text-[180px] lg:leading-[130px] xl:text-[200px] xl:leading-[150px] font-medium tracking-widest overflow-hidden space-x-8">
 										<motion.span
 											initial={{ y: "100%" }}
 											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2 : 3.4, duration: 0.6, ease: CUBIC_BEIZER }}
+											transition={{ delay: 0.4, duration: 0.6, ease: CUBIC_BEIZER }}
 											className="inline-block"
 										>
 											HI</motion.span>
 										<motion.span
 											initial={{ y: "100%" }}
 											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+											transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
 											className="md:inline-block hidden"
 										>
 											THERE</motion.span>
@@ -964,7 +965,7 @@ function App() {
 									<motion.div
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
-										transition={{ delay: isMounted ? 2.2 : 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
+										transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
 										className="w-full flex items-center justify-between px-5">
 										<h4 className="text-muted font-jersey text-sm sm:text-2xl">Omar Emad</h4>
 										<h4 className="text-muted font-jersey text-sm sm:text-2xl">Software Engineer</h4>
@@ -973,21 +974,21 @@ function App() {
 										<motion.span
 											initial={{ y: "100%" }}
 											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.4 : 3.8, duration: 0.6, ease: CUBIC_BEIZER }}
+											transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
 											className="inline-block"
 										>
 											I</motion.span>
 										<motion.span
 											initial={{ y: "100%" }}
 											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.6 : 4, duration: 0.6, ease: CUBIC_BEIZER }}
+											transition={{ delay: 1.2, duration: 0.6, ease: CUBIC_BEIZER }}
 											className="inline-block"
 										>
 											AM</motion.span>
 										<motion.span
 											initial={{ y: "100%" }}
 											animate={{ y: "0%" }}
-											transition={{ delay: isMounted ? 2.8 : 4.2, duration: 0.6, ease: CUBIC_BEIZER }}
+											transition={{ delay: 1.4, duration: 0.6, ease: CUBIC_BEIZER }}
 											className="inline-block"
 										>
 											OM3X4
@@ -1164,7 +1165,16 @@ function App() {
 											onClick={() => { handleProjectChoosing(index) }}
 											className="absolute cursor-pointer  rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] lg:w-[60%] lg:h-auto"
 										>
-											<h1 className="text-white text-4xl absolute top-0 -translate-x-1/4 z-150 left-0 -rotate-24 font-jersey">Click For details</h1>
+											<motion.h1
+												style={{ transformOrigin: "50% 50%" }}
+												animate={{ rotate: [-5, 5, -5, 5, -5, 0] }}
+												transition={{
+													duration: 0.8,   // speed of shake
+													ease: "easeInOut",
+													repeat: Infinity,
+													repeatDelay: 2.8 // wait ~3s before the next quick shake
+												}}
+												className="text-white text-4xl absolute top-0 -translate-x-1/4 z-150 left-0 -rotate-24 font-jersey">Click For details</motion.h1>
 											<img
 												src={project.images[0]}
 												alt=""
@@ -1256,7 +1266,7 @@ function App() {
 			<motion.footer
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 3, duration: 0.6, ease: CUBIC_BEIZER }}
+				transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
 				className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
 				<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
 				<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
