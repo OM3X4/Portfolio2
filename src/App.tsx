@@ -539,7 +539,7 @@ function App() {
 	return (
 		<div className="w-screen min-h-screen">
 
-			<InvertedCursor />
+			{/* <InvertedCursor /> */}
 
 			{/* <div className="absolute top-10 right-10 z-1000 w-10 h-10 bg-red-500 sm:bg-orange-400 md:bg-yellow-400 lg:bg-green-500 xl:bg-white"></div> */}
 
@@ -1162,12 +1162,13 @@ function App() {
 											transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
 											viewport={{ once: false, amount: 0.5 }}
 											onClick={() => { handleProjectChoosing(index) }}
-											className="absolute cursor-pointer brightness-40 rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] lg:w-[60%] lg:h-auto"
+											className="absolute cursor-pointer  rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] lg:w-[60%] lg:h-auto"
 										>
+											<h1 className="text-white text-4xl absolute top-0 -translate-x-1/4 z-150 left-0 -rotate-24 font-jersey">Click For details</h1>
 											<img
 												src={project.images[0]}
 												alt=""
-												className="w-full shadow-2xl shadow-black rounded-2xl cursor-pointer"
+												className="w-full shadow-2xl brightness-40 shadow-black rounded-2xl cursor-pointer"
 											/>
 										</motion.button>
 										<h6 className="font-jersey font-bold absolute right-10 bottom-10 text-white text-3xl">{index + 1} / {projects.length}</h6>
