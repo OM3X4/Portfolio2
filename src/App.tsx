@@ -44,7 +44,7 @@ import { AnimatePresence } from "framer-motion";
 
 import { cubicBezier } from "framer-motion";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import useScrollDirection from "./useScrollDirection";
 // import InvertedCursor from "./Pointer";
 
@@ -468,16 +468,14 @@ function App() {
 
 	// const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-	const isMountedRef = useRef(false)
-	const isMounted = isMountedRef.current
 
 	const [projectIndex, setProjectIndex] = useState(0)
 	const [isProject, setIsProject] = useState(false)
 
 	const project = projects[projectIndex]
 
-	const TIME_TO_CHANGE = 400
-	const TIME_TO_REVEAL = 350
+	const TIME_TO_CHANGE = 200
+	const TIME_TO_REVEAL = 550
 
 	const CUBIC_BEIZER_MINE = cubicBezier(0.6, 0.05, 0, 0.9)
 
@@ -516,11 +514,6 @@ function App() {
 		}
 	};
 
-
-	useEffect(() => {
-		isMountedRef.current = true
-	}, [])
-
 	const scrollDirection = useScrollDirection();
 
 	const handleProjectChoosing = (index: number) => {
@@ -534,8 +527,6 @@ function App() {
 			}, TIME_TO_CHANGE)
 		}, TIME_TO_REVEAL); // must be >= exit animation duration
 	};
-
-	console.log(isMounted)
 
 	// return <div className="flex items-center justify-center w-screen h-screen bg-background"><MenuIcon /></div>
 
@@ -734,98 +725,6 @@ function App() {
 					</motion.button>
 				</div>
 			</nav>
-
-			{/* Project */}
-			{/* <div className="w-screen h-screen bg-background overflow-y-scroll" style={{ display: isProject ? "block" : "none" }}>
-				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border snap-start">
-
-					<motion.div
-						initial={{ opacity: 0, y: 160 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
-						className="flex items-end gap-5">
-						<h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
-							style={{ textShadow: `6px 6px 0 ${project.backgroundColor}` }}>{project.name}</h1>
-						<h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
-					</motion.div>
-
-					<motion.img
-						initial={{ opacity: 0, y: 160 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.45, duration: 0.8, ease: CUBIC_BEIZER }}
-						src={project.images[0]}
-						alt=""
-						className="object-cover object-center w-full h-[calc(100vh-160px)] mx-auto rounded-2xl mt-5"
-					/>
-				</section>
-
-				<section className="px-5 lg:px-10 xl:px-20 py-20 h-screen box-border">
-					<h1 className="text-5xl text-white">Details</h1>
-					<div className="grid grid-cols-4 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
-						<div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
-							<h3 className="text-muted text-xl">Overview</h3>
-							<h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
-						</div>
-						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
-							{project.secondParagraph}
-						</div>
-						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
-							<h1 className="text-xl font-medium text-muted">Stack</h1>
-							<div className="flex items-center justify-center gap-5 flex-wrap">
-
-								{
-									project.stack.map((technology) => (
-										<span className="text-3xl text-white">
-											{technology.icon}
-										</span>
-									))
-								}
-							</div>
-						</div>
-						{
-							project.codeLink ?
-								<a
-									href={project.codeLink}
-									target="_blank"
-									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
-									<AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
-								</a>
-								:
-								<div
-									className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
-									<AiFillGithub className="text-muted text-5xl" />
-								</div>
-						}
-						{
-							project.websiteLink ?
-								<a
-									href={project.websiteLink}
-									target="_blank"
-									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
-									<BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
-								</a>
-								:
-								<div
-									className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
-									<BiGlobe className="text-muted text-5xl " />
-								</div>
-
-						}
-						<div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
-							<h1 className="text-xl font-medium text-muted">Full description</h1>
-							<h3 className="text-white font-medium text-2xl">
-								{project.mainParagraph}
-							</h3>
-						</div>
-						<div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
-							<h1 className="text-xl font-medium text-muted">Quote</h1>
-							<h3 className="text-white font-medium text-2xl italic">
-								{project.quote}
-							</h3>
-						</div>
-					</div>
-				</section>
-			</div> */}
 
 			{/* Main */}
 			{
