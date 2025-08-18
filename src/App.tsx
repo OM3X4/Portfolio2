@@ -917,7 +917,7 @@ function App() {
 							</div>
 						</section>
 					</main>
-				:
+					:
 					<main className={clsx("w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll", {
 						"md:snap-y md:snap-mandatory": !isProject
 					})} >
@@ -1250,28 +1250,28 @@ function App() {
 							</div>
 						</section>
 
-						<motion.footer
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 3, duration: 0.6, ease: CUBIC_BEIZER }}
-							className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
-							<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
-							<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
-							<button
-								onClick={e => {
-									e.preventDefault()
-									navigator.clipboard.writeText(links.email)
-									toast.success("Copied to clipboard", { duration: 2000 })
-								}}
-								className="social-button">
-								<CgMail />
-							</button>
-							<a href={links.x} className="social-button"><FaXTwitter /></a>
-							<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
-							<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
-						</motion.footer>
 					</main>
 			}
+			<motion.footer
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 3, duration: 0.6, ease: CUBIC_BEIZER }}
+				className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background border border-muted">
+				<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
+				<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
+				<button
+					onClick={e => {
+						e.preventDefault()
+						navigator.clipboard.writeText(links.email)
+						toast.success("Copied to clipboard", { duration: 2000 })
+					}}
+					className="social-button">
+					<CgMail />
+				</button>
+				<a href={links.x} className="social-button"><FaXTwitter /></a>
+				<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
+				<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
+			</motion.footer>
 		</div>
 	)
 
