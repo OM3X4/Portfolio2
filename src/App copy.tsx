@@ -45,7 +45,7 @@ import { AnimatePresence } from "framer-motion";
 import { cubicBezier } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import useScrollDirection from "./useScrollDirection";
+import useScrollDirection from "./useScrollAttempt";
 // import InvertedCursor from "./Pointer";
 
 const skills: { name: string; icon: JSX.Element; color: string }[] = [

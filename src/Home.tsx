@@ -1,13 +1,13 @@
 import { useRef } from 'react'
 import type { JSX } from 'react'
 import { motion } from 'framer-motion'
-import { GiEgyptianSphinx , GiEgyptianWalk } from "react-icons/gi";
+import { GiEgyptianSphinx, GiEgyptianWalk } from "react-icons/gi";
 import { cubicBezier } from 'framer-motion';
 import { BiChevronsDown } from "react-icons/bi";
-import { SiLeetcode , SiMonkeytype } from 'react-icons/si';
+import { SiLeetcode, SiMonkeytype } from 'react-icons/si';
 
 
-function Home({ links , skills }: { links: { leetcode: string , monkeytype: string }, skills: { name: string; icon: JSX.Element; color: string }[] }) {
+function Home({ links, skills , changePath }: { links: { leetcode: string, monkeytype: string }, skills: { name: string; icon: JSX.Element; color: string }[] , changePath: (path: "/projects" | `/project/${string}` | "/") => void }) {
 
     const homeRef = useRef(null)
     const aboutRef = useRef(null)
@@ -112,7 +112,7 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                 </div>
             </section>
 
-            <section className="h-screen space-y-5 overflow-hidden relative py-20 px-8 snap-start">
+            <section className="h-screen space-y-5 overflow-hidden relative py-20 w-[90%] mx-auto snap-start">
                 <div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15">
                     <div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl self-end">
                         <motion.h1
@@ -197,13 +197,9 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
                             viewport={{ once: false, amount: 0.5 }}
-                            className="w-full h-full bg-secondary-background rounded-2xl hidden lg:flex flex-col items-center justify-center p-3">
-                            <h1 className="text-white text-xl text-center">Scroll To See My Projects</h1>
-                            <div
-                                className="text-white text-2xl flex flex-col items-center justify-center"
-                            >
-                                <BiChevronsDown className="animate-pulse " />
-                            </div>
+                            onClick={() => changePath("/projects")}
+                            className="w-full h-full glow-border text-white bg-secondary-background cursor-pointer rounded-2xl hidden lg:flex flex-col items-center justify-center p-3">
+                            <h1 className=" text-xl text-center">Click Here To See My Work</h1>
                         </motion.div>
 
                         {/* Full Stack */}
@@ -218,8 +214,25 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
 
 
                     </div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
+                        viewport={{ once: false, amount: 0.5 }}
+                        className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 col-span-3 md:col-span-1 text-xl text-white">
+                        Self-taught software engineer with strong experience in building full-stack digital products, passionate about clean code, performance, and creating tools that are both functional and impactful.
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
+                        viewport={{ once: false, amount: 0.5 }}
+                        className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap col-span-3 md:col-span-1 text-white">
+                        Always Learning, {"\n"}
+                        Always Optimizing
+                    </motion.div>
                 </div>
-                <div className="w-fit mx-auto">
+                {/* <div className="w-fit mx-auto">
                     <div
                         className="w-fit flex items-center justify-center"
                     >
@@ -245,7 +258,7 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                         </div>
                         <h4 className="text-muted font-jersey sm:text-2xl">DEVELOPED BY ME</h4>
                     </motion.div>
-                </div>
+                </div> */}
             </section>
 
             <section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0" ref={aboutRef} >
@@ -253,14 +266,14 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                     <div
                         className="w-fit flex items-center justify-center"
                     >
-                        <h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ABOUT</h1>
+                        <h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">MY</h1>
                         <motion.div
                             initial={{ marginLeft: 100, marginRight: 100 }}
                             whileInView={{ marginLeft: 5, marginRight: 5 }}
                             transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
                             viewport={{ once: false, amount: 0.5 }}
                             className="w-4 h-4 lg:w-7 lg:h-7 bg-white rounded-full"></motion.div>
-                        <h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">ME</h1>
+                        <h1 className="text-6xl md:text-8xl lg:text-[200px] lg:leading-[200px] text-white">STACK</h1>
                     </div>
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -277,7 +290,7 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                     </motion.div>
                 </div>
                 <div className="w-[90%] lg:w-[80%] mx-auto grid grid-cols-3 gap-5 mt-10">
-                    <motion.div
+                    {/* <motion.div
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
@@ -293,18 +306,19 @@ function Home({ links , skills }: { links: { leetcode: string , monkeytype: stri
                         className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap col-span-3 md:col-span-1">
                         Always Learning, {"\n"}
                         Always Optimizing
-                    </motion.div>
+                    </motion.div> */}
                     <motion.div
                         initial={{ opacity: 0, y: 80 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
+                        transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
                         viewport={{ once: false, amount: 0.5 }}
                         className="w-full h-full bg-secondary-background rounded-2xl flex items-start justify-center px-10 py-8 text-3xl font-bold whitespace-pre-wrap col-span-3 flex-col gap-5">
                         <h1>Stack</h1>
                         <div className="flex items-center justify-start gap-5 flex-wrap">
                             {
                                 skills.map((skill) => (
-                                    <div style={{ color: skill.color }} className="text-base">
+                                    <div className="text-xl text-muted flex items-center gap-3">
+                                        <span style={{ color: skill.color }} className='text-3xl'>{skill.icon}</span>
                                         {skill.name}
                                     </div>
                                 ))
