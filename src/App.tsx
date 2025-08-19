@@ -396,6 +396,9 @@ type OverlayTransitionProps = {
 function OverlayTransition({ show, direction, fill, text }: OverlayTransitionProps) {
 	const isUp = direction === "up";
 
+	// const OLD_EASE = [0.76, 0, 0.24, 1];
+
+
 	return (
 		<AnimatePresence>
 			{show && (
