@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 191.01 135.16">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #c49d2d;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        font-family: Figtree-Black, Figtree;
+        font-variation-settings: 'wght' 900;
+        font-weight: 800;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-4 {
+        font-size: 120px;
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 24px;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #c49d2d;
+      }
+    </style>
+  </defs>
+  <text class="cls-4" transform="translate(7.74 108.76)"><tspan x="0" y="0">O3</tspan></text>
+  <text class="cls-1" transform="translate(1.5 103.5)"><tspan x="0" y="0">O3</tspan></text>
+  <text class="cls-2" transform="translate(86.13 27.28)"><tspan x="0" y="0">m</tspan></text>
+  <text class="cls-3" transform="translate(83.7 25.84)"><tspan x="0" y="0">m</tspan></text>
+  <text class="cls-2" transform="translate(161.32 28.82)"><tspan x="0" y="0">x4</tspan></text>
+  <text class="cls-3" transform="translate(159.87 25.97)"><tspan x="0" y="0">x4</tspan></text>
+</svg>

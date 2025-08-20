@@ -587,7 +587,7 @@ function App() {
 					transition={{ delay: 0.4, duration: 0.5, ease: CUBIC_BEIZER }}
 					href="/"
 					className="text-white text-4xl font-bold">
-					<img src="/Logos/2/SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
+					<img src="/Logos/THICK_SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
 				</motion.a>
 
 				<div className="text-white flex-row items-center justify-center gap-3 flex">
@@ -830,7 +830,10 @@ function App() {
 					})} >
 
 						{/* Hero Desktop */}
-						<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat" ref={homeRef} style={{ display: isProject ? "none" : "" }}>
+						<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat"
+							ref={homeRef} style={{ display: isProject ? "none" : ""  }}>
+
+							<img src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1" />
 
 							{/* Based In Egypt */}
 							<motion.div
@@ -846,7 +849,7 @@ function App() {
 								</div>
 							</motion.div>
 
-							<div className="h-full flex items-center justify-start md:justify-center z-5">
+							<div className="h-full flex items-center justify-start md:justify-center z-5 bg-transparent">
 								<motion.div
 									initial={{ scale: 0.9 }}
 									animate={{ scale: 1 }}
