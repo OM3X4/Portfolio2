@@ -837,7 +837,7 @@ function App() {
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								transition={{ duration: 2, ease: CUBIC_BEIZER }}
-								src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1" />
+								src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1 pointer-events-none" />
 
 							{/* Based In Egypt */}
 							<motion.div
