@@ -833,7 +833,11 @@ function App() {
 						<section className="h-screen overflow-hidden relative snap-start hidden md:block bg-center bg-no-repeat"
 							ref={homeRef} style={{ display: isProject ? "none" : ""  }}>
 
-							<img src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1" />
+							<motion.img
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ duration: 2, ease: CUBIC_BEIZER }}
+								src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1" />
 
 							{/* Based In Egypt */}
 							<motion.div
