@@ -383,7 +383,7 @@ const links = {
 	leetcode: "https://leetcode.com/u/OM3X4/",
 	email: "om3x4e@gmail.com",
 	dev: "https://dev.to/om3x4",
-	monkeytype: "https://monkeytype.com/profile/om3x4e",
+	monkeytype: "https://monkeytype.com/profile/om3x4",
 }
 
 type OverlayTransitionProps = {
