@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { Toaster } from 'sonner'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -12,5 +13,6 @@ createRoot(document.getElementById('root')!).render(
 		<Router>
 			<App />
 		</Router>
+		<Analytics />
 	</StrictMode>,
 )
