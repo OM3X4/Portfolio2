@@ -1,23 +1,20 @@
-import { motion , cubicBezier } from 'framer-motion'
-import type { Project } from './types';
-import { AiFillGithub } from 'react-icons/ai';
-import { BiGlobe } from 'react-icons/bi';
-import { useParams } from 'react-router-dom';
+import { motion } from "framer-motion";
+import { CUBIC_BEIZER } from "../config";
+import { parseDate } from "../utils";
+import type { ProjectType } from "../types";
+import { AiFillGithub } from "react-icons/ai";
+import { BiGlobe } from "react-icons/bi";
+import { useParams } from "react-router-dom";
 
-function parseDate(input: string): Date {
-	// input format: dd-mm-yyyy
-	const [day, month, year] = input.split("-").map(Number);
-	// Months are 0-indexed in JS Date (0 = Jan, 11 = Dec)
-	return new Date(year, month - 1, day);
-}
+export default function Project({ projects }: { projects: ProjectType[] }) {
 
-export default function Project({ projects } : { projects: Project[] }) {
 
-    const { id } = useParams<{ id: string }>()
+    const { id } = useParams<{ id: string }>();
+    const project = projects[!isNaN(Number(id)) ? Number(id) : 0];
 
-    const project = projects[Number(id ?? 0)]
-
-    const CUBIC_BEIZER = cubicBezier(0.6, 0.05, 0, 0.9)
+    if (!project) {
+        return <div>Project not found</div>;
+    }
 
     return (
         <main className="w-screen min-h-screen overflow-hidden bg-background ">
@@ -47,14 +44,14 @@ export default function Project({ projects } : { projects: Project[] }) {
             <section className="px-5 lg:px-10 xl:px-20 py-20 min-h-screen">
                 <h1 className="text-5xl text-white">Details</h1>
                 <div className="grid grid-cols-4 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
-                    <div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2">
+                    <div className="bg-secondary-background p-5 w-full h-full rounded-2xl flex flex-col items-start justify-center col-span-2 grid-shadow">
                         <h3 className="text-muted text-xl">Overview</h3>
                         <h2 className="text-white text-2xl font-medium">{project.mainHeadline}</h2>
                     </div>
-                    <div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium">
+                    <div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col items-start justify-center col-span-2 text-muted text-lg font-medium grid-shadow">
                         {project.secondParagraph}
                     </div>
-                    <div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2">
+                    <div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col gap-3 items-start justify-center col-span-2 grid-shadow">
                         <h1 className="text-xl font-medium text-muted">Stack</h1>
                         <div className="flex items-center justify-center gap-5 flex-wrap">
 
@@ -72,12 +69,12 @@ export default function Project({ projects } : { projects: Project[] }) {
                             <a
                                 href={project.codeLink}
                                 target="_blank"
-                                className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+                                className="grid-shadow bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
                                 <AiFillGithub className="text-white text-5xl hover:text-golden cursor-pointer" />
                             </a>
                             :
                             <div
-                                className="bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
+                                className="grid-shadow bg-secondary-background self-stretch w-full p-5 rounded-2xl flex items-center justify-center">
                                 <AiFillGithub className="text-muted text-5xl" />
                             </div>
                     }
@@ -86,23 +83,23 @@ export default function Project({ projects } : { projects: Project[] }) {
                             <a
                                 href={project.websiteLink}
                                 target="_blank"
-                                className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+                                className="grid-shadow bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
                                 <BiGlobe className="text-white text-5xl hover:text-golden cursor-pointer" />
                             </a>
                             :
                             <div
-                                className="bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
+                                className="grid-shadow bg-secondary-background w-full self-stretch p-5 rounded-2xl flex items-center justify-center">
                                 <BiGlobe className="text-muted text-5xl " />
                             </div>
 
                     }
-                    <div className="bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
+                    <div className="grid-shadow bg-secondary-background w-full p-5 rounded-2xl flex flex-col col-span-2">
                         <h1 className="text-xl font-medium text-muted">Full description</h1>
                         <h3 className="text-white font-medium text-2xl">
                             {project.mainParagraph}
                         </h3>
                     </div>
-                    <div className="bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
+                    <div className="grid-shadow bg-secondary-background w-full h-full p-5 rounded-2xl flex flex-col col-span-2">
                         <h1 className="text-xl font-medium text-muted">Quote</h1>
                         <h3 className="text-white font-medium text-2xl italic">
                             {project.quote}

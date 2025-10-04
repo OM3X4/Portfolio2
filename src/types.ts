@@ -1,8 +1,9 @@
 import type { JSX } from "react";
 
-export type Project = {
+export type ProjectType = {
     name: string;
     images: string[];
+    logo: string;
     backgroundColor: string;
     date: string;
     mainHeadline: string;

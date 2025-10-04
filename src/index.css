@@ -21,3 +21,13 @@ body {
     @apply text-muted hover:text-white transition-all text-3xl cursor-pointer
 }
 
+@utility grid-shadow {
+  box-shadow:
+    inset 0 1px 2px #2E2E2E,
+    0 4px 6px #171717,
+    0 6px 10px #0A0A0A;
+}
+
+@utility grid-inner-block {
+  @apply w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 grid-shadow
+}
