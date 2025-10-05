@@ -37,7 +37,7 @@ export default function Projects({ projects, changePath }: { projects: ProjectTy
                     <h4 className="text-muted font-jersey sm:text-2xl">DEVELOPED BY ME</h4>
                 </motion.div>
             </div>
-            <div className="w-[90%] lg:w-[80%] mx-auto grid grid-cols-6 gap-5 mt-10 mb-20">
+            <div className="responsive-container grid grid-cols-6 gap-5 mt-10 mb-20">
                 {
                     projects.map((project: ProjectType, index) => (
                         <motion.div

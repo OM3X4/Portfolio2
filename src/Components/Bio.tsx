@@ -9,8 +9,8 @@ import { motion } from 'framer-motion'
 export default function Bio({ links }: { links: { leetcode: string, monkeytype: string } }) {
     return (
         <section className="space-y-5 overflow-hidden relative py-20 px-8 snap-start">
-            <div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15">
-                <div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl self-end">
+            {/* <div className="grid lg:grid-cols-2 w-full h-fit overflow-hidden gap-15"> */}
+                {/* <div className="text-muted text-3xl sm:text-3xl md:text-4xl lg:text-5xl self-end">
                     <motion.h1
                         initial={{ opacity: 0, y: 40, rotate: 12 }}
                         whileInView={{ opacity: 1, y: 0, rotate: 0 }}
@@ -32,8 +32,8 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
                         <span className="text-white">Self-taught</span>, performance-driven,
                         and <span className="text-white">fast</span> on the keyboard.
                     </motion.h1>
-                </div>
-                <div className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit">
+                </div> */}
+                <div className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit responsive-container">
                     {/* Egypt */}
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
@@ -62,7 +62,7 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
                         transition={{ delay: 0.7, duration: 0.6, ease: CUBIC_BEIZER }}
                         viewport={{ once: true, amount: 0.1 }}
                         className="grid-inner-block gap-3">
-                        <span className="text-white text-2xl text-center md:text-4xl font-semibold">225+ <span className="text-muted text-base font-normal">WPM</span></span>
+                        <span className="text-white text-2xl text-center md:text-4xl font-semibold">232+ <span className="text-muted text-base font-normal">WPM</span></span>
                         <a href={links.monkeytype} target="_blank" rel="noopener noreferrer"><SiMonkeytype className="text-2xl text-golden" /></a>
                     </motion.div>
 
@@ -120,7 +120,7 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
 
                 </div>
-            </div>
+            {/* </div> */}
 
         </section>
     )

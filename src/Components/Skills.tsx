@@ -36,7 +36,7 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                     <h4 className="text-muted font-jersey text-2xl">The Real One</h4>
                 </motion.div>
             </div>
-            <div className="w-[90%] lg:w-[80%] mx-auto grid grid-cols-3 gap-5 mt-10">
+            <div className="grid grid-cols-3 gap-5 mt-10 responsive-container">
                 <motion.div
                     initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -50,11 +50,11 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: false, amount: 0.5 }}
-                    className="w-full h-full bg-secondary-background rounded-2xl flex items-center justify-center px-10 py-3 text-3xl font-bold whitespace-pre-wrap col-span-3 md:col-span-1 grid-shadow">
+                    className="grid-inner-block col-span-3 md:col-span-1 text-xl md:text-2xl lg:text-3xl text-white font-semibold">
                     Always Learning, {"\n"}
                     Always Optimizing
                 </motion.div>
-                <div className="grid grid-cols-10 col-span-3 gap-5">
+                <div className="grid grid-cols-8 col-span-3 gap-5">
                     {
                         skills.map((skill, index) => (
                             <motion.div

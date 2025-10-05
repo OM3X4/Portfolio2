@@ -31,3 +31,7 @@ body {
 @utility grid-inner-block {
   @apply w-full h-full bg-secondary-background rounded-2xl flex flex-col items-center justify-center p-3 grid-shadow
 }
+
+@utility responsive-container {
+  @apply w-[90vw] lg:w-[80vw] xl:w-[70vw] 2xl:w-[60vw] mx-auto;
+}
