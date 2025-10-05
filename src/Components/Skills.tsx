@@ -54,23 +54,6 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                     Always Learning, {"\n"}
                     Always Optimizing
                 </motion.div>
-                {/* <motion.div
-                    initial={{ opacity: 0, y: 80 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
-                    viewport={{ once: false, amount: 0.5 }}
-                    className="w-full h-full bg-secondary-background rounded-2xl flex items-start justify-center px-10 py-8 text-3xl font-bold whitespace-pre-wrap col-span-3 flex-col gap-5">
-                    <h1>Stack</h1>
-                    <div className="flex items-center justify-start gap-5 flex-wrap">
-                        {
-                            skills.map((skill) => (
-                                <div style={{ color: skill.color }} className="text-base">
-                                    {skill.name}
-                                </div>
-                            ))
-                        }
-                    </div>
-                </motion.div> */}
                 <div className="grid grid-cols-10 col-span-3 gap-5">
                     {
                         skills.map((skill, index) => (
@@ -78,7 +61,7 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                                 key={index}
                                 initial={{ opacity: 0, y: 80 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 1, duration: 0.6, ease: CUBIC_BEIZER }}
+                                transition={{ delay: 1 + index * 0.05, duration: 0.6, ease: CUBIC_BEIZER }}
                                 viewport={{ once: true, amount: 0.1 }}
                                 style={{ color: skill.color }}
                                 whileHover="hover"
@@ -89,7 +72,7 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                                     variants={{
                                         hover: { opacity: 1, y: -30 , transition: { duration: 0.3, ease: CUBIC_BEIZER } }
                                     }}
-                                    className="absolute top-0 text-base text-nowrap bg-secondary-background px-2 py-1 rounded-md hidden group-hover:block text-white font-medium">{skill.name}</motion.h5>
+                                    className="absolute top-0 text-base text-nowrap bg-secondary-background px-2 py-1 rounded-md text-white font-medium">{skill.name}</motion.h5>
                             </motion.div>
                         ))
                     }
