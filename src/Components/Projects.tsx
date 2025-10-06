@@ -111,7 +111,7 @@ export default function Projects({ projects, changePath }: { projects: ProjectTy
 
                                 <motion.div
                                     animate={show ? { y: '0%' } : { y: '110%' }}
-                                    transition={{ duration: 0.7, ease: CUBIC_BEIZER }}
+                                    transition={{ delay: index * 0.05, duration: 0.7, ease: CUBIC_BEIZER }}
                                     className="w-full h-full grid-inner-block"
                                 >
                                 {
