@@ -98,6 +98,7 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.6, ease: CUBIC_BEIZER }}
                         >
+                            <img src="/avatar.jpg" className="w-15 h-15 object-cover object-center rounded-lg" alt="" />
                             Omar Emad <span className='text-xl font-medium'>OM3X4</span>
                         </motion.div>
                 </motion.h1>

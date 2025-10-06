@@ -22,7 +22,7 @@ export default function Projects({ projects, changePath }: { projects: ProjectTy
         const interval = setInterval(() => {
             if (!hoverDateRef.current) return;
             const diff = performance.now() - hoverDateRef.current;
-            setShow(diff >= 1000); // after 1s of hover
+            setShow(diff >= 400); // after 1s of hover
         }, 100);
 
         return () => clearInterval(interval);

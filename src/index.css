@@ -14,7 +14,7 @@
 
 
 body {
-  @apply font-figtree selection:bg-golden selection:text-black
+  @apply font-figtree selection:bg-golden selection:text-black overflow-x-hidden
 }
 
 @utility social-button {
@@ -34,4 +34,24 @@ body {
 
 @utility responsive-container {
   @apply w-[90vw] lg:w-[80vw] xl:w-[70vw] 2xl:w-[60vw] mx-auto;
+}
+@layer base {
+  /* Works on Chrome, Edge, and Safari */
+  ::-webkit-scrollbar {
+    width: 6px; /* decrease this number to make it thinner */
+    height: 6px; /* for horizontal scrollbars */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; /* or any subtle background */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #555; /* color of the scrollbar handle */
+    border-radius: 9999px; /* makes it rounded */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888; /* slightly lighter on hover */
+  }
 }

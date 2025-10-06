@@ -82,6 +82,7 @@ const projects: ProjectType[] = [
 			"/temdb2.png",
 		],
 		logo: "ProjectsLogos/temdb.png",
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/temdb.webm",
 		backgroundColor: "#7c101a",
 		date: "23-6-2025",
 		mainHeadline: "TEMDB is the Definitive Egyptian Movies & TV Database",
@@ -133,6 +134,7 @@ const projects: ProjectType[] = [
 			"/oAI1.png",
 			"/oAI2.png",
 		],
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/oai.webm",
 		logo: "ProjectsLogos/oai.png",
 		backgroundColor: "#10a37f",
 		date: "15-7-2025",
@@ -193,6 +195,7 @@ const projects: ProjectType[] = [
 			"/brainsmath2.01.png",
 			"/brainsmath2.02.png",
 		],
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/brainsmath2.webm",
 		logo: "ProjectsLogos/brainsmath2.png",
 		backgroundColor: "#4e65ea",
 		date: "16-4-2025",
@@ -242,6 +245,7 @@ const projects: ProjectType[] = [
 			"/chezzy1.png",
 			"/chezzy2.png",
 		],
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/chezzy.webm",
 		logo: "ProjectsLogos/queenfish.png",
 		backgroundColor: "#41cad9",
 		date: "19-10-2024",
@@ -266,6 +270,7 @@ const projects: ProjectType[] = [
 			"/egyptprojects1.png",
 			"/egyptprojects2.png",
 		],
+		video: null,
 		logo: "ProjectsLogos/egyptprojects.webp",
 		backgroundColor: "#c59d18",
 		date: "23-4-2025",
@@ -290,6 +295,7 @@ const projects: ProjectType[] = [
 			"/chezzy1.png",
 			"/chezzy2.png",
 		],
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/chezzy.webm",
 		logo: "ProjectsLogos/queenfish.png",
 		date: "1-11-2024",
 		backgroundColor: "#0e0e0e",
@@ -314,6 +320,7 @@ const projects: ProjectType[] = [
 			"/omartype1.png",
 			"/omartype2.png",
 		],
+		video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/omartype.webm",
 		logo: "ProjectsLogos/omartype.png",
 		backgroundColor: "#ff9900",
 		date: "13-12-2024",
@@ -338,6 +345,7 @@ const projects: ProjectType[] = [
 			"/brainsmath1.01.png",
 			"/brainsmath1.02.png",
 		],
+		video: null,
 		logo: "ProjectsLogos/brainsmath1.png",
 		date: "1-2-2025",
 		backgroundColor: "#122454",
@@ -514,7 +522,7 @@ function App() {
 	};
 
 	return (
-		<div className="w-screen min-h-screen">
+		<div className="w-screen overflow-hidden min-h-screen bg-background">
 
 			<OverlayTransition show={showOverlay} direction="up" fill={overlayColor} text={overlayText} />
 			<OverlayTransition show={showReturnOverlay} direction="down" fill={"#1e1e1e"} text={"Home"} />
@@ -528,7 +536,6 @@ function App() {
 			</AnimatePresence>
 
 			{/* Main */}
-			{/* <Home links={links} skills={skills} /> */}
 			<motion.footer
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}

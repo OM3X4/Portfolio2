@@ -3,6 +3,7 @@ import type { JSX } from "react";
 export type ProjectType = {
     name: string;
     images: string[];
+    video: string | null;
     logo: string;
     backgroundColor: string;
     date: string;
