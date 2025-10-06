@@ -121,7 +121,6 @@ export default function Projects({ projects, changePath }: { projects: ProjectTy
                                     </div>
                                 }
                                 </motion.div>
-
                             </div>
                         </motion.div>
                     ))

@@ -8,7 +8,7 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
 
 
     return (
-        <section className="h-screen w-screen text-9xl text-amber-50 snap-start py-10 md:py-0">
+        <section className="h-screen w-screen text-9xl text-amber-50 snap-start md:py-0">
             <div className="w-fit mx-auto">
                 <div
                     className="w-fit flex items-center justify-center"
@@ -50,11 +50,11 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: false, amount: 0.5 }}
-                    className="grid-inner-block col-span-3 md:col-span-1 text-xl md:text-2xl lg:text-3xl text-white font-semibold">
+                    className="grid-inner-block col-span-3 md:col-span-1 text-xl md:text-2xl lg:text-3xl text-white font-semibold px-5">
                     Always Learning, {"\n"}
                     Always Optimizing
                 </motion.div>
-                <div className="grid grid-cols-8 col-span-3 gap-5">
+                <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 col-span-3 gap-5">
                     {
                         skills.map((skill, index) => (
                             <motion.div
