@@ -11,11 +11,17 @@ import { motion } from 'framer-motion'
 export default function Bio({ links }: { links: { leetcode: string, monkeytype: string } }) {
     return (
         <section className="space-y-5 overflow-hidden relative py-10 snap-start">
-            <div className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit responsive-container">
+            <motion.div
+                initial="initial"
+                whileInView="view"
+                viewport={{ once: true, amount: 0.1 }}
+                className="grid grid-cols-3 grid-rows-2 lg:grid-rows-3 gap-5 h-fit responsive-container">
                 {/* Egypt */}
                 <motion.div
-                    initial={{ opacity: 0, x: -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    variants={{
+                        initial: { opacity: 0, x: -40 },
+                        view: { opacity: 1, x: 0 },
+                    }}
                     transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block">
@@ -24,8 +30,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Leetcode */}
                 <motion.div
-                    initial={{ opacity: 0, y: -40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    variants={{
+                        initial: { opacity: 0, y: -40 },
+                        view: { opacity: 1, y: 0 },
+                    }}
                     transition={{ delay: 0.5, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block gap-3">
@@ -35,8 +43,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Monkeytype */}
                 <motion.div
-                    initial={{ opacity: 0, x: 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    variants={{
+                        initial: { opacity: 0, x: 40 },
+                        view: { opacity: 1, x: 0 },
+                    }}
                     transition={{ delay: 0.7, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block gap-3">
@@ -46,8 +56,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Starting Date */}
                 <motion.div
-                    initial={{ opacity: 0, x: -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    variants={{
+                        initial: { opacity: 0, x: -40 },
+                        view: { opacity: 1, x: 0 },
+                    }}
                     transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block">
@@ -57,8 +69,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Full Stack */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    variants={{
+                        initial: { opacity: 0, y: 40 },
+                        view: { opacity: 1, y: 0 },
+                    }}
                     transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block col-span-2">
@@ -67,8 +81,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Availabilty */}
                 <motion.div
-                    initial={{ opacity: 0, x: -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    variants={{
+                        initial: { opacity: 0, x: -40 },
+                        view: { opacity: 1, x: 0 },
+                    }}
                     transition={{ delay: 0.9, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block">
@@ -78,8 +94,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Age */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    variants={{
+                        initial: { opacity: 0, y: 40 },
+                        view: { opacity: 1, y: 0 },
+                    }}
                     transition={{ delay: 0.9, duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
                     className="grid-inner-block">
@@ -89,12 +107,10 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
 
                 {/* Scroll to see the work */}
                 <motion.div
-                    initial="initial"
-                    whileInView="whileInView"
                     whileHover="hover"
                     variants={{
                         initial: { opacity: 0, y: 40, transition: { duration: 0.6, ease: CUBIC_BEIZER } },
-                        whileInView: { opacity: 1, y: 0, transition: { delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER } },
+                        view: { opacity: 1, y: 0, transition: { delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER } },
                         hover: { scale: 1.05, backgroundColor: "var(--color-golden)", transition: { delay: 0, duration: 0.3, ease: CUBIC_BEIZER } }
                     }}
                     transition={{ ease: CUBIC_BEIZER }}
@@ -108,10 +124,7 @@ export default function Bio({ links }: { links: { leetcode: string, monkeytype: 
                     </div>
                 </motion.div>
 
-
-
-
-            </div>
+            </motion.div>
         </section>
     )
 }

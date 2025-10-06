@@ -5,17 +5,19 @@ import { CgMail } from "react-icons/cg";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { RiNextjsFill } from "react-icons/ri";
 import { AiFillGithub } from "react-icons/ai";
-import { DiPostgresql, DiReact, DiJava } from "react-icons/di";
+import { DiPostgresql, DiReact } from "react-icons/di";
 import { FaNodeJs, FaAws, FaLinkedinIn, FaDev } from "react-icons/fa";
 import { PiVectorThreeBold } from "react-icons/pi";
 import {
+	SiNamecheap,
+	SiFfmpeg,
 	SiJavascript,
 	SiSupabase,
 	SiVitest,
 	SiDjango,
 	SiJsonwebtokens,
 	SiLeetcode,
-	// SiNetlify,
+	SiNetlify,
 	SiOpenai,
 	SiReactquery,
 	SiReactrouter,
@@ -23,9 +25,12 @@ import {
 	SiShadcnui,
 	SiTailwindcss,
 	SiTypescript,
-	// SiPostgresql,
+	SiPostgresql,
 	SiPrisma,
 	SiExpress,
+	SiVercel,
+	SiCloudflare,
+	SiRedis
 } from "react-icons/si";
 import {
 	TbBrandFramerMotion,
@@ -33,6 +38,7 @@ import {
 	TbSql,
 	TbBrandVercel
 } from "react-icons/tb";
+import { BsGit } from "react-icons/bs";
 import { CUBIC_BEIZER } from "./config";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
@@ -54,23 +60,27 @@ const skills: { name: string; icon: JSX.Element; color: string }[] = [
 	{ name: 'Node.js', icon: <FaNodeJs />, color: '#43853d' },
 	{ name: 'Express.js', icon: <SiExpress />, color: '#FFFFFF' },
 	{ name: 'Prisma', icon: <SiPrisma />, color: '#FFFFFF' },
-	{ name: 'Java', icon: <DiJava />, color: '#007396' },
+	// { name: 'Java', icon: <DiJava />, color: '#007396' },
 	{ name: 'vercel', icon: <TbBrandVercel />, color: '#FFFFFF' },
 	{ name: 'Vector Embedding', icon: <PiVectorThreeBold />, color: '#FFFFFF' },
 	{ name: 'AWS(Basics)', icon: <FaAws />, color: '#FF9900' },
-	// { name: 'Neon.tech', icon: <SiPostgresql />, color: '#336791' },
-	{ name: 'PostgreSQL', icon: <DiPostgresql />, color: '#336791' },
-	// { name: 'Supabase', icon: <SiSupabase />, color: '#246e4d' },
+	{ name: 'Neon.tech', icon: <SiPostgresql />, color: '#336791' },
+	// { name: 'PostgreSQL', icon: <DiPostgresql />, color: '#336791' },
+	{ name: 'Supabase', icon: <SiSupabase />, color: '#246e4d' },
 	{ name: 'React Query', icon: <SiReactquery />, color: '#61DAFB' },
 	{ name: 'JWT', icon: <SiJsonwebtokens />, color: '#a82143' },
 	{ name: 'DSA', icon: <SiLeetcode />, color: '#f69e1a' },
 	{ name: 'OpenAI API', icon: <SiOpenai />, color: '#FFFFFF' },
-	// { name: 'Git', icon: <BsGit />, color: '#F05032' },
+	{ name: 'Git', icon: <BsGit />, color: '#F05032' },
 	{ name: 'GitHub', icon: <AiFillGithub />, color: '#FFFFFF' },
 	{ name: 'Railway', icon: <SiRailway />, color: '#FFFFFF' },
-	// { name: 'Netlify', icon: <SiNetlify />, color: '#00C7B7' },
+	{ name: 'Netlify', icon: <SiNetlify />, color: '#00C7B7' },
 	{ name: 'C++', icon: <TbBrandCpp />, color: '#f34b7d' },
 	{ name: 'SQL', icon: <TbSql />, color: '#FFFFFF' },
+	{ name: 'FFmpeg', icon: <SiFfmpeg />, color: '#349237' },
+	{ name: 'Cloudflare', icon: <SiCloudflare />, color: '#f78100' },
+	{ name: 'Redis', icon: <SiRedis />, color: '#c83632' },
+	{ name: "Domain Management", icon: <SiNamecheap />, color: '#fc5d0b' },
 ];
 
 
@@ -87,7 +97,7 @@ const projects: ProjectType[] = [
 		date: "23-6-2025",
 		mainHeadline: "TEMDB is the Definitive Egyptian Movies & TV Database",
 		secondParagraph: "Built as a modern cultural archive, TEMDB brings the richness of Egyptian cinema and television into a sleek, fast, and community-driven platform — finally giving Egyptian media the modern experience it deserves.",
-		mainParagraph: "TEMDB is a public resource designed for film lovers, researchers, and fans of Egyptian culture. With complete catalogs of movies and series, cast and crew details, reviews, trailers, streaming providers, and smart search with vector embeddings, TEMDB is the most comprehensive and modern platform dedicated solely to Egyptian content. Powered by Next.js, Prisma, PostgreSQL, and AWS, it delivers the speed and polish of a global-scale product while staying deeply rooted in Egypt’s cultural identity.",
+		mainParagraph: "TEMDB is a public resource designed for film lovers, researchers, and fans of Egyptian culture. With complete catalogs (5k titles , 10k people) of movies and series, cast and crew details, reviews, trailers, streaming providers, and smart search with vector embeddings, TEMDB is the most comprehensive and modern platform dedicated solely to Egyptian content. Powered by Next.js, Prisma, PostgreSQL, Cloudflare R2, Vercel and AWS, it delivers the speed and polish of a global-scale product while staying deeply rooted in Egypt’s cultural identity.",
 		thirdParagraph: "Unlike fragmented legacy sites, TEMDB isn’t just a database — it’s a cultural project and a startup in the making, designed to preserve, celebrate, and connect generations through Egyptian film and television.",
 		quote: '"I built TEMDB because Egyptian cinema deserves better than outdated archives. My vision is to give it a modern home — one that rivals IMDb in quality, but stays true to our culture. This is more than code; it’s a step toward preserving and celebrating Egypt’s storytelling legacy." — Omar Emad',
 		websiteLink: "https://temdb.com/",
@@ -126,6 +136,18 @@ const projects: ProjectType[] = [
 				name: "ShadCN UI",
 				icon: <SiShadcnui />
 			},
+			{
+				name: "Vercel",
+				icon: <SiVercel />
+			},
+			{
+				name: "Redis",
+				icon: <SiRedis />
+			},
+			{
+				name: "Cloudflare",
+				icon: <SiCloudflare />
+			}
 		]
 	},
 	{
