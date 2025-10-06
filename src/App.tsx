@@ -40,6 +40,7 @@ import Project from "./Components/Project";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import type { ProjectType } from "./types";
 
+
 const skills: { name: string; icon: JSX.Element; color: string }[] = [
 	{ name: 'React.js', icon: <DiReact />, color: '#61DAFB' },
 	{ name: 'Next.js', icon: <RiNextjsFill />, color: '#FFFFFF' },
@@ -380,80 +381,91 @@ type OverlayTransitionProps = {
 function OverlayTransition({ show, direction, fill, text }: OverlayTransitionProps) {
     const isUp = direction === "up";
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {show && (
-                <>
-                    <motion.div
-                        key="overlay"
-                        className="fixed inset-0 z-150 w-full h-full"
-                        initial={{ y: isUp ? "100%" : "-100%" }}
-                        animate={{ y: 0 }}
-                        exit={{ y: isUp ? "-100%" : "100%" }}
-                        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                <motion.div
+                    key="overlay-container"
+                    className="fixed w-full"
+                    style={{
+                        zIndex: 9999,
+                        top: 0,
+                        left: 0,
+                        height: 'calc(100vh + 20vh)', // Extra height for bulges
+                        marginTop: '-10vh', // Offset to center the main part
+                    }}
+                    initial={{ y: isUp ? "100%" : "-100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: isUp ? "-100%" : "100%" }}
+                    transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                >
+                    {/* Top rounded bulge (curves outward) */}
+                    <div
+                        className="absolute w-full overflow-hidden"
+                        style={{
+                            height: '10vh',
+                            top: 0,
+                        }}
                     >
-                        {/* Main overlay background */}
                         <div
-                            className="absolute inset-0"
-                            style={{ backgroundColor: fill }}
+                            style={{
+                                position: 'absolute',
+                                width: '150%',
+                                height: '750%',
+                                left: '50%',
+                                bottom: 0,
+                                borderRadius: '50%',
+                                transform: 'translate(-50%, 86.666%)',
+                                backgroundColor: fill
+                            }}
                         />
+                    </div>
 
-                        {/* Top rounded bulge (curves outward) */}
+                    {/* Main overlay background */}
+                    <div
+                        className="absolute w-full"
+                        style={{
+                            backgroundColor: fill,
+                            top: '10vh',
+                            height: '100vh'
+                        }}
+                    />
+
+                    {/* Bottom rounded bulge (curves outward) */}
+                    <div
+                        className="absolute w-full overflow-hidden"
+                        style={{
+                            height: '10vh',
+                            bottom: 0,
+                        }}
+                    >
                         <div
-                            className="absolute w-full overflow-hidden"
                             style={{
-                                height: '10vh',
-                                top: '-10vh',
-                                zIndex: 2
+                                position: 'absolute',
+                                width: '150%',
+                                height: '750%',
+                                left: '50%',
+                                top: 0,
+                                borderRadius: '50%',
+                                transform: 'translate(-50%, -86.666%)',
+                                backgroundColor: fill
                             }}
-                        >
-                            <div
-                                className="absolute"
-                                style={{
-                                    width: '150%',
-                                    height: '750%',
-                                    left: '50%',
-                                    bottom: 0,
-                                    borderRadius: '50%',
-                                    transform: 'translate(-50%, 86.666%)',
-                                    backgroundColor: fill
-                                }}
-                            />
-                        </div>
+                        />
+                    </div>
 
-                        {/* Bottom rounded bulge (curves outward) */}
-                        <div
-                            className="absolute w-full overflow-hidden"
-                            style={{
-                                height: '10vh',
-                                bottom: '-10vh',
-                                zIndex: 2
-                            }}
-                        >
-                            <div
-                                className="absolute"
-                                style={{
-                                    width: '150%',
-                                    height: '750%',
-                                    left: '50%',
-                                    top: 0,
-                                    borderRadius: '50%',
-                                    transform: 'translate(-50%, -86.666%)',
-                                    backgroundColor: fill
-                                }}
-                            />
-                        </div>
-                    </motion.div>
-
+                    {/* Text - positioned relative to the actual viewport center */}
                     <motion.h1
                         initial={{ opacity: 0, y: isUp ? 40 : -40 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: isUp ? -40 : 40 }}
                         transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-                        className="text-white text-7xl md:text-9xl font-bold absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-151"
+                        className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-nowrap font-bold fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                        style={{
+                            zIndex: 10000
+                        }}
                     >
                         {text}
                     </motion.h1>
-                </>
+                </motion.div>
             )}
         </AnimatePresence>
     );
@@ -470,7 +482,7 @@ function App() {
 	const [showReturnOverlay, setShowReturnOverlay] = useState(false)
 
 	const TIME_TO_CHANGE = 400
-	const TIME_TO_REVEAL = 700
+	const TIME_TO_REVEAL = 500
 
 	// const CUBIC_BEIZER = cubicBezier(0.6, 0.05, 0, 0.9)
 
