@@ -70,13 +70,7 @@ export default function Hero() {
 
 
     return (
-        <section className=" pt-20 overflow-hidden relative">
-
-            {/* <motion.img
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 2, ease: CUBIC_BEIZER }}
-                    src="/Banner/OpacityGraind.png" className="absolute inset-0 z-1 pointer-events-none" /> */}
+        <section className="pt-25 md:pt-20 overflow-hidden relative">
 
             {/* Based In Egypt */}
             <motion.div
@@ -84,7 +78,7 @@ export default function Hero() {
                 animate={{ x: "0%" }}
                 transition={{ delay: 1.6, duration: 0.5, ease: CUBIC_BEIZER }}
                 viewport={{ once: false, amount: 1 }}
-                className="absolute hidden md:flex z-5 top-1/4 left-0 w-50 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3">
+                className="absolute hidden lg:flex z-5 top-1/4 left-0 w-45 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3">
                 <h3 className="text-muted text-wrap text-lg font-medium w-fit ">Based In Egypt</h3>
                 <div
                     className="h-[80%] aspect-square bg-white rounded-full flex items-center justify-center p-3">
@@ -98,7 +92,7 @@ export default function Hero() {
                     animate="animate"
                     transition={{ duration: 0.6, ease: CUBIC_BEIZER }}
                     viewport={{ once: true, amount: 0.1 }}
-                    className='text-7xl text-white font-bold overflow-hidden'>
+                    className='text-5xl md:text-6xl lg:text-7xl text-white font-bold overflow-hidden leading-none text-nowrap'>
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +110,7 @@ export default function Hero() {
                                     key={i}
                                     initial="initial"
                                     whileInView="view"
-                                    className="inline-block w-fit h-fit overflow-hidden text-lg text-muted font-medium">
+                                    className="inline-block w-fit h-fit overflow-hidden md:text-lg text-muted font-medium">
                                     <motion.div
                                         viewport={{ once: true }}
                                         variants={{
@@ -134,8 +128,8 @@ export default function Hero() {
                 }
             </div>
 
-            <div className='responsive-container my-10'>
-                <ul className='space-y-3 pl-5'>
+            <div className='responsive-container my-5 md:my-10'>
+                <ul className='space-y-3 pl-3 md:pl-5'>
                     {points.map(({ icon, text } , index) => (
                         <motion.li
                             initial={{ opacity: 0, x: -40 }}
