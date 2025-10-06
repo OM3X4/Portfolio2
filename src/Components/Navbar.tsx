@@ -37,14 +37,14 @@ export default function Navbar({ returnHome }: { returnHome: () => void }) {
                     <div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
                 </motion.div>
                 {/* Splitter */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, translateY: 20 }}
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{ delay: 0.5, duration: 0.5, ease: "easeInOut" }}
 
 
-                    className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
-                <motion.button
+                    className="w-1.5 h-1.5 rounded-full bg-white"></motion.div> */}
+                {/* <motion.button
                     initial={{ opacity: 0, translateY: 20 }}
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{ delay: 0.6, duration: 0.5, ease: "easeInOut" }}
@@ -52,14 +52,14 @@ export default function Navbar({ returnHome }: { returnHome: () => void }) {
                     className="flex items-center justify-center flex-col relative cursor-pointer group">
                     <h3 className="text-xl">Work</h3>
                     <div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
-                </motion.button>
+                </motion.button> */}
                 {/* Splitter */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, translateY: 20 }}
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{ delay: 0.7, duration: 0.5, ease: "easeInOut" }}
-                    className="w-1.5 h-1.5 rounded-full bg-white"></motion.div>
-                <motion.button
+                    className="w-1.5 h-1.5 rounded-full bg-white"></motion.div> */}
+                {/* <motion.button
                     initial={{ opacity: 0, translateY: 20 }}
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{ delay: 0.8, duration: 0.5, ease: "easeInOut" }}
@@ -67,7 +67,7 @@ export default function Navbar({ returnHome }: { returnHome: () => void }) {
                     className="flex items-center justify-center flex-col relative cursor-pointer group">
                     <h3 className="text-xl">About</h3>
                     <div className="w-2 h-2 rounded-full bg-white absolute -bottom-4 scale-0 group-hover:scale-100 transition-all duration-500 ease-out"></div>
-                </motion.button>
+                </motion.button> */}
             </div>
         </nav>
     )

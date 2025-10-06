@@ -8,7 +8,7 @@ export default function Skills({ skills }: { skills: { name: string, color: stri
 
 
     return (
-        <section className="h-screen w-screen text-9xl text-amber-50 snap-start md:py-0">
+        <section className="text-9xl text-white pb-10">
             <div className="w-fit mx-auto">
                 <div
                     className="w-fit flex items-center justify-center"
