@@ -21,7 +21,7 @@ export default function Navbar({ returnHome }: { returnHome: () => void }) {
                 }}
 
                 className="text-white text-4xl font-bold">
-                <img src="/Logos/THICK_SVG.svg" alt="" className="w-20 h-20 hover:scale-120 transition-all" />
+                <img src="/Logos/2.svg" alt="" className="w-15 h-15 m-3 hover:scale-120 transition-all" />
             </motion.a>
 
             <div className="text-white flex-row items-center justify-center gap-3 flex">

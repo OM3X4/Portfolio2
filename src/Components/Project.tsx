@@ -31,8 +31,7 @@ export default function Project() {
                     transition={{ delay: 0.45, duration: 0.5, ease: CUBIC_BEIZER }}
                     className="flex justify-between items-end">
                         <div className="flex md:items-end flex-col-reverse md:flex-row md:gap-5">
-                            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
-                                style={{ textShadow: `6px 6px 0 ${project.backgroundColor}` }}>{project.name}</h1>
+                            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white">{project.name}</h1>
                             <h3 className="text-muted text-xl lg:text-2xl xl:text-3xl">{parseDate(project.date).toDateString()}</h3>
                         </div>
                         {
