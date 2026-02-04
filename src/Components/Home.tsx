@@ -14,7 +14,7 @@ export default function Home({ skills, projects, changePath }:
 
 
     return (
-        <main className="w-screen h-screen overflow-x-hidden bg-background overflow-y-scroll" >
+        <main className="w-screen overflow-x-hidden bg-background overflow-y-hidden" >
             <Hero />
             {/* <Bio links={links} /> */}
             <Projects projects={projects} changePath={changePath} />
