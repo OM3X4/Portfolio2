@@ -3,12 +3,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { CUBIC_BEIZER } from "../config";
 import { parseDate } from "../utils";
-import type { ProjectType } from "../types";
 import { AiFillGithub } from "react-icons/ai";
 import { BiGlobe } from "react-icons/bi";
 import { useParams } from "react-router-dom";
+import { projects } from "../data";
 
-export default function Project({ projects }: { projects: ProjectType[] }) {
+
+export default function Project() {
 
 
     const [isPlayVideo, setIsPlayVideo] = useState(false);

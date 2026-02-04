@@ -1,10 +1,11 @@
 import { BiChevronRight } from "react-icons/bi";
 import { motion } from "framer-motion"
-import type { ProjectType } from "../types"
 import { cn } from "../lib/utils";
+import type { ProjectType } from "../types";
+import { projects } from "../data";
 
 
-export default function Projects({ projects, changePath }: { projects: ProjectType[], changePath: ({ name, id, color }: { name: string, id: string, color: string }) => void }) {
+export default function Projects({ changePath }: { changePath: ({ name, id, color }: { name: string, id: string, color: string }) => void }) {
 
 
     return (
