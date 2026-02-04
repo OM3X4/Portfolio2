@@ -597,7 +597,7 @@ function App() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
-				className="flex items-center justify-center fixed bottom-10 left-10 gap-2 px-3 py-2 rounded-full bg-secondary-background  grid-shadow">
+				className="flex items-center justify-center fixed left-1/2 -translate-x-1/2 bottom-5  gap-2 px-3 py-2 rounded-full bg-secondary-background  grid-shadow">
 				<a href={links.github} target="_blank" className="social-button"><AiFillGithub /></a>
 				<a href={links.linkedin} target="_blank" className="social-button"><FaLinkedinIn /></a>
 				<button
