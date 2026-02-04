@@ -587,7 +587,7 @@ function App() {
 			<Navbar returnHome={handleReturnHome} />
 			<AnimatePresence>
 				<Routes>
-					<Route path="/" element={<Home links={links} skills={skills} projects={projects} changePath={handleGoToProject} />} />
+					<Route path="/" element={<Home skills={skills} projects={projects} changePath={handleGoToProject} />} />
 					<Route path="/project/:id" element={<div><Project projects={projects} /></div>} />
 				</Routes>
 			</AnimatePresence>
