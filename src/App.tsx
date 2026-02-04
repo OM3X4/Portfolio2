@@ -30,7 +30,8 @@ import {
 	SiExpress,
 	SiVercel,
 	SiCloudflare,
-	SiRedis
+	SiRedis,
+	SiRust
 } from "react-icons/si";
 import {
 	TbBrandFramerMotion,
@@ -85,6 +86,40 @@ const skills: { name: string; icon: JSX.Element; color: string }[] = [
 
 
 const projects: ProjectType[] = [
+	{
+		name: "QueenFish 2.0",
+		images: [
+			"/queenfish2.png"
+		],
+		logo: "/ProjectsLogos/queenfish.png",
+		video: null,
+		backgroundColor: "#41cad9",
+		date: "12-12-2025",
+
+		mainHeadline: "QueenFish 2.0 — A Solo, Low-Level Rebuild in Rust",
+
+		mainParagraph:
+			"QueenFish 2.0 is a complete ground-up rewrite of the original QueenFish chess engine, built entirely from scratch in Rust. Unlike the first version—which relied on high-level libraries for core mechanics—this iteration replaces every dependency with custom low-level implementations, serving as a learning milestone and a serious showcase of engine design fundamentals.",
+
+		secondParagraph: "Engineered for Discipline and Performance",
+
+		thirdParagraph:
+			"The engine is developed solo with a strong emphasis on bitboard-based move generation, search efficiency, and aggressive performance optimizations. Rust was chosen as both a performance tool and a mastery challenge, enabling precise control over memory, determinism, and execution speed. The result is a cleaner architecture, stronger pruning, and a significantly deeper and more stable search, culminating in a playing strength of approximately 1700–1800 Elo.",
+
+		quote:
+			"QueenFish is an exercise in discipline — writing the engine I wish I had when I first started, and rebuilding it properly once I understood what actually matters.",
+
+		websiteLink: "https://lichess.org/@/Queenfish2",
+		codeLink: "https://github.com/OM3X4/QueenFish",
+		engineer: "Omar Emad (Solo)",
+
+		stack: [
+			{
+				name: "Rust",
+				icon: <SiRust />
+			}
+		]
+	},
 	{
 		name: "TEMDB",
 		images: [
@@ -409,96 +444,96 @@ type OverlayTransitionProps = {
 };
 
 function OverlayTransition({ show, direction, fill, text }: OverlayTransitionProps) {
-    const isUp = direction === "up";
-    return (
-        <AnimatePresence mode="wait">
-            {show && (
-                <motion.div
-                    key="overlay-container"
-                    className="fixed w-full"
-                    style={{
-                        zIndex: 9999,
-                        top: 0,
-                        left: 0,
-                        height: 'calc(100vh + 20vh)', // Extra height for bulges
-                        marginTop: '-10vh', // Offset to center the main part
-                    }}
-                    initial={{ y: isUp ? "100%" : "-100%" }}
-                    animate={{ y: 0 }}
-                    exit={{ y: isUp ? "-100%" : "100%" }}
-                    transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-                >
-                    {/* Top rounded bulge (curves outward) */}
-                    <div
-                        className="absolute w-full overflow-hidden"
-                        style={{
-                            height: '10vh',
-                            top: 0,
-                        }}
-                    >
-                        <div
-                            style={{
-                                position: 'absolute',
-                                width: '150%',
-                                height: '750%',
-                                left: '50%',
-                                bottom: 0,
-                                borderRadius: '50%',
-                                transform: 'translate(-50%, 86.666%)',
-                                backgroundColor: fill
-                            }}
-                        />
-                    </div>
+	const isUp = direction === "up";
+	return (
+		<AnimatePresence mode="wait">
+			{show && (
+				<motion.div
+					key="overlay-container"
+					className="fixed w-full"
+					style={{
+						zIndex: 9999,
+						top: 0,
+						left: 0,
+						height: 'calc(100vh + 20vh)', // Extra height for bulges
+						marginTop: '-10vh', // Offset to center the main part
+					}}
+					initial={{ y: isUp ? "100%" : "-100%" }}
+					animate={{ y: 0 }}
+					exit={{ y: isUp ? "-100%" : "100%" }}
+					transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+				>
+					{/* Top rounded bulge (curves outward) */}
+					<div
+						className="absolute w-full overflow-hidden"
+						style={{
+							height: '10vh',
+							top: 0,
+						}}
+					>
+						<div
+							style={{
+								position: 'absolute',
+								width: '150%',
+								height: '750%',
+								left: '50%',
+								bottom: 0,
+								borderRadius: '50%',
+								transform: 'translate(-50%, 86.666%)',
+								backgroundColor: fill
+							}}
+						/>
+					</div>
 
-                    {/* Main overlay background */}
-                    <div
-                        className="absolute w-full"
-                        style={{
-                            backgroundColor: fill,
-                            top: '10vh',
-                            height: '100vh'
-                        }}
-                    />
+					{/* Main overlay background */}
+					<div
+						className="absolute w-full"
+						style={{
+							backgroundColor: fill,
+							top: '10vh',
+							height: '100vh'
+						}}
+					/>
 
-                    {/* Bottom rounded bulge (curves outward) */}
-                    <div
-                        className="absolute w-full overflow-hidden"
-                        style={{
-                            height: '10vh',
-                            bottom: 0,
-                        }}
-                    >
-                        <div
-                            style={{
-                                position: 'absolute',
-                                width: '150%',
-                                height: '750%',
-                                left: '50%',
-                                top: 0,
-                                borderRadius: '50%',
-                                transform: 'translate(-50%, -86.666%)',
-                                backgroundColor: fill
-                            }}
-                        />
-                    </div>
+					{/* Bottom rounded bulge (curves outward) */}
+					<div
+						className="absolute w-full overflow-hidden"
+						style={{
+							height: '10vh',
+							bottom: 0,
+						}}
+					>
+						<div
+							style={{
+								position: 'absolute',
+								width: '150%',
+								height: '750%',
+								left: '50%',
+								top: 0,
+								borderRadius: '50%',
+								transform: 'translate(-50%, -86.666%)',
+								backgroundColor: fill
+							}}
+						/>
+					</div>
 
-                    {/* Text - positioned relative to the actual viewport center */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: isUp ? 40 : -40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: isUp ? -40 : 40 }}
-                        transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
-                        className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-nowrap font-bold fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                        style={{
-                            zIndex: 10000
-                        }}
-                    >
-                        {text}
-                    </motion.h1>
-                </motion.div>
-            )}
-        </AnimatePresence>
-    );
+					{/* Text - positioned relative to the actual viewport center */}
+					<motion.h1
+						initial={{ opacity: 0, y: isUp ? 40 : -40 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: isUp ? -40 : 40 }}
+						transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+						className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-nowrap font-bold fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+						style={{
+							zIndex: 10000
+						}}
+					>
+						{text}
+					</motion.h1>
+				</motion.div>
+			)}
+		</AnimatePresence>
+	);
 }
 
 function App() {
