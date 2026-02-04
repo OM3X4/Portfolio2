@@ -57,7 +57,7 @@ export const skills: {
             title: "BACK-END & SYSTEMS",
             items: [
                 { label: "EXPRESS", icon: SiExpress },
-                { label: "APIs", icon: MdApi },
+                { label: "HTTP APIs", icon: MdApi },
                 { label: "REDIS", icon: SiRedis },
             ],
         },
@@ -65,16 +65,16 @@ export const skills: {
             title: "INFRA",
             items: [
                 { label: "VERCEL", icon: SiVercel },
-                { label: "AWS", icon: SiAmazon },
                 { label: "RAILWAY", icon: SiRailway },
                 { label: "CLOUDFLARE", icon: SiCloudflare },
+                { label: "AWS", icon: SiAmazon },
             ],
         },
         {
             title: "CS",
             items: [
-                { label: "DSA", icon: FaCode },
-                { label: "238+ LEETCODE PROBLEMS", icon: FaServer },
+                { label: "Algorithms & Data Structures", icon: FaCode },
+                { label: "238+ PROBLEMS SOLVED", icon: FaServer },
             ],
         },
     ];

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Jersey+25&family=Noto+Kufi+Arabic:wght@100..900&display=swap');
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @theme {
   --color-background: #121212;
