@@ -331,7 +331,7 @@ const projects: ProjectType[] = [
 		logo: "ProjectsLogos/egyptprojects.webp",
 		backgroundColor: "#c59d18",
 		date: "23-4-2025",
-		mainHeadline: "Egyptian Nation Projects: Visualizing Egypt’s Achievements Under President El-Sisi",
+		mainHeadline: "Visualizing Egypt’s Achievements Under President El-Sisi",
 		secondParagraph: "This website showcases Egypt’s national projects in a clean, organized, and visual format.",
 		mainParagraph: "Built with React, this site highlights government achievements under President El-Sisi. It organizes major projects into categories, presenting the data in a way that’s accessible and visually engaging for everyone.",
 		thirdParagraph: " The hardest part was collecting accurate data — especially when the official site’s UI felt underwhelming.",
@@ -356,7 +356,7 @@ const projects: ProjectType[] = [
 		logo: "ProjectsLogos/queenfish.png",
 		date: "1-11-2024",
 		backgroundColor: "#0e0e0e",
-		mainHeadline: "Chezzy: A Simple Chess Platform Powered by QueenFish Engine",
+		mainHeadline: "A Simple Chess Platform Powered by QueenFish Engine",
 		secondParagraph: "Chezzy is a web-based chess platform that lets users play against QueenFish or pass-and-play.",
 		mainParagraph: "Built with React, Chezzy is a chess platform designed for learning and casual play. It lets users play against the QueenFish engine or engage in pass-and-play games with friends.",
 		thirdParagraph: "Chezzy was a learning project for me, focused on mastering game theory and game state representation.",
@@ -381,7 +381,7 @@ const projects: ProjectType[] = [
 		logo: "ProjectsLogos/omartype.png",
 		backgroundColor: "#ff9900",
 		date: "13-12-2024",
-		mainHeadline: "OmarType: A Monkeytype Clone for Typing Practice and Learning",
+		mainHeadline: "A Monkeytype Clone for Typing Practice and Learning",
 		secondParagraph: "OmarType is a typing practice tool built to closely mimic the functionality of Monkeytype.",
 		mainParagraph: "OmarType is a personal project aimed at learning how to build a typing practice app. It closely resembles Monkeytype in functionality, offering a simple, smooth typing experience for users to improve their speed and accuracy.",
 		thirdParagraph: "OmarType is essentially a clone of Monkeytype, designed to provide a familiar typing practice experience.",
@@ -546,7 +546,7 @@ function App() {
 	const [showOverlay, setShowOverlay] = useState(false)
 	const [showReturnOverlay, setShowReturnOverlay] = useState(false)
 
-	const TIME_TO_CHANGE = 400
+	const TIME_TO_CHANGE = 500
 	const TIME_TO_REVEAL = 500
 
 	// const CUBIC_BEIZER = cubicBezier(0.6, 0.05, 0, 0.9)
@@ -562,6 +562,7 @@ function App() {
 		}, TIME_TO_CHANGE);
 
 		setTimeout(() => {
+			window.scrollTo(0, 0);
 			setShowOverlay(false);
 		}, TIME_TO_CHANGE + TIME_TO_REVEAL);
 	};

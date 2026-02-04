@@ -1,131 +1,87 @@
+import { BiChevronRight } from "react-icons/bi";
 import { motion } from "framer-motion"
-import { useEffect, useState, useRef } from "react"
-import { CUBIC_BEIZER } from "../config"
-import { BiChevronsDown } from "react-icons/bi"
 import type { ProjectType } from "../types"
-import { parseDate } from "../utils"
+import { cn } from "../lib/utils";
 
 
 export default function Projects({ projects, changePath }: { projects: ProjectType[], changePath: ({ name, id, color }: { name: string, id: string, color: string }) => void }) {
 
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-    const hoverDateRef = useRef<number | null>(null);
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        if (hoveredIndex === null) {
-            setShow(false);
-            return;
-        }
-
-        const interval = setInterval(() => {
-            if (!hoverDateRef.current) return;
-            const diff = performance.now() - hoverDateRef.current;
-            setShow(diff >= 400); // after 1s of hover
-        }, 100);
-
-        return () => clearInterval(interval);
-    }, [hoveredIndex]);
-
-    const project = projects[hoveredIndex ?? 0]
-    const data = hoveredIndex !== null ? [
-        <span className="text-xl font-bold">{project.name}</span>,
-        <span>{parseDate(project.date).toLocaleDateString()}</span>,
-        project.mainHeadline.split(" ").slice(0, 6).join(" "),
-        project.mainParagraph.split(" ").slice(0, 6).join(" "),
-        project.quote.split(" ").slice(0, 6).join(" "),
-        project.secondParagraph.split(" ").slice(0, 6).join(" "),
-        <span className="text-8xl">{project.stack[0].icon}</span>,
-        <img src={project.images[0]} alt="" className="absolute inset-0 h-full object-cover object-center"/>
-    ] : null
-
 
     return (
-        <div className="my-10">
-            <div className="w-fit mx-auto mb-10">
-                <div
-                    className="w-fit flex items-center justify-center"
-                >
-                    <h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">MY</h1>
-                    <motion.div
-                        initial={{ marginLeft: 100, marginRight: 100 }}
-                        whileInView={{ marginLeft: 5, marginRight: 5 }}
-                        transition={{ duration: 0.8, ease: CUBIC_BEIZER }}
-                        viewport={{ once: false, amount: 0.5 }}
-                        className="w-4 h-4 sm:w-7 sm:h-7 bg-white rounded-full"></motion.div>
-                    <h1 className="text-7xl sm:text-8xl xl:text-[200px] xl:leading-[200px] text-white">WORK</h1>
-                </div>
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 3.6, duration: 0.6, ease: CUBIC_BEIZER }}
-                    className="w-full flex items-center justify-between px-5">
-                    <h4 className="text-muted font-jersey sm:text-2xl">REAL WORLD PROVE</h4>
-                    <div
-                        className="text-white text-2xl flex flex-col items-center justify-center"
-                    >
-                        <BiChevronsDown className="animate-pulse " />
-                    </div>
-                    <h4 className="text-muted font-jersey sm:text-2xl">DEVELOPED BY ME</h4>
-                </motion.div>
+        <div className="">
+            <div className="responsive-container my-3">
+                <h5 className="text-muted text-xl font-medium font-jersey">BUILT BY ME</h5>
+                <h2 className="text-5xl text-white font-black">PROJECTS</h2>
             </div>
-            <div className="responsive-container grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-5 mt-10 mb-20">
+            <div className="responsive-container grid grid-cols-3 mb-20 gap-2">
                 {
                     projects.map((project: ProjectType, index) => (
-                        <motion.div
-                            onMouseEnter={() => { setHoveredIndex(index); hoverDateRef.current = performance.now() }}
-                            onMouseLeave={() => { setHoveredIndex(null); hoverDateRef.current = null }}
-                            key={index}
-                            initial={{ opacity: 0, y: 160 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover="hover"
-                            variants={{
-                                hover: { scale: 1.05, backgroundColor: project.backgroundColor }
-                            }}
-                            transition={{ duration: 0.3, ease: CUBIC_BEIZER }}
-                            viewport={{ once: true, amount: 0.1 }}
-                            className="grid-inner-block aspect-square cursor-pointer group relative"
-                            onClick={() => { changePath({ name: project.name, id: String(index), color: project.backgroundColor }) }}
-                        >
-                            <motion.img
-                                initial={{ filter: "grayscale(1)" }}
-                                variants={{
-                                    hover: { scale: 1.1, filter: "grayscale(0)", y: -5 }
-                                }}
-                                transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
+                        // <motion.div
+                        //     key={index}
+                        //     initial={{ opacity: 0, y: 160 }}
+                        //     whileInView={{ opacity: 1, y: 0 }}
+                        //     whileHover="hover"
+                        //     variants={{
+                        //         hover: { scale: 1.05, backgroundColor: project.backgroundColor }
+                        //     }}
+                        //     transition={{ duration: 0.3, ease: CUBIC_BEIZER }}
+                        //     viewport={{ once: true, amount: 0.1 }}
+                        //     className="grid-inner-block aspect-square cursor-pointer group relative"
+                        //     onClick={() => { changePath({ name: project.name, id: String(index), color: project.backgroundColor }) }}
+                        // >
+                        //     <motion.img
+                        //         initial={{ filter: "grayscale(1)" }}
+                        //         variants={{
+                        //             hover: { scale: 1.1, filter: "grayscale(0)", y: -5 }
+                        //         }}
+                        //         transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
 
-                                src={project.logo} alt="" className="grayscale-0 object-cover object-center w-1/2" />
-                            <motion.h1
-                                variants={{
-                                    hover: { opacity: 1, y: -15 }
-                                }}
-                                transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
-                                className="text-2xl sm:text-3xl text-center text-nowrap font-semibold opacity-0 text-white absolute top-0 left-1/2 -translate-x-1/2 z-150">
-                                {project.name}
-                            </motion.h1>
-
-                            <div
-                                className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden rounded-2xl"
-                            >
-
-                                <motion.div
-                                    animate={show ? { y: '0%' } : { y: '110%' }}
-                                    transition={{ delay: index * 0.05, duration: 0.7, ease: CUBIC_BEIZER }}
-                                    className="w-full h-full grid-inner-block"
-                                >
-                                {
-                                    data && (data.length > index) &&
-                                    <div className="text-white text-center text-large">
-                                        {data[index]}
-                                    </div>
-                                }
-                                </motion.div>
-                            </div>
-                        </motion.div>
+                        //         src={project.logo} alt="" className="grayscale-0 object-cover object-center w-1/2" />
+                        //     <motion.h1
+                        //         variants={{
+                        //             hover: { opacity: 1, y: -15 }
+                        //         }}
+                        //         transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
+                        //         className="text-2xl sm:text-3xl text-center text-nowrap font-semibold opacity-0 text-white absolute top-0 left-1/2 -translate-x-1/2 z-150">
+                        //         {project.name}
+                        //     </motion.h1>
+                        // </motion.div>
+                        <Project key={index} index={index} project={project} changePath={changePath} />
                     ))
                 }
             </div>
         </div>
     )
 }
+
+function Project({ index, project, changePath }: { index: number, project: ProjectType, changePath: ({ name, id, color }: { name: string, id: string, color: string }) => void }) {
+    return (
+        <motion.div
+            onClick={() => { changePath({ name: project.name, id: String(index), color: project.backgroundColor }) }}
+            className="grid-inner-block transition-all duration-100 cursor-pointer hover:brightness-125 gap-3 group"
+        >
+            <img src={project.logo} alt="" className="w-1/5 rounded-lg" />
+            <div className="flex-3">
+                <h4 className="text-text text font-medium">{project.name}</h4>
+                <p className="text-muted text-sm">{project.mainHeadline}</p>
+            </div>
+            <ArrowIcon className="w-fit justify-self-start text-2xl text-white" />
+        </motion.div>
+    )
+}
+
+const ArrowIcon = ({ className }: { className?: string }) => {
+    return (
+        <div
+            className={cn(
+                "group flex size-full cursor-pointer items-center justify-center",
+                className ?? "",
+            )}
+        >
+            <div className="relative grid cursor-pointer items-center justify-center">
+                <BiChevronRight className="transition-all duration-500 ease-out group-hover:translate-x-0.5" />
+                <div className="absolute right-[9px] h-[2px] w-3 origin-right scale-x-0 rounded-[1px] bg-current transition-all duration-300 ease-out group-hover:right-[7px] group-hover:scale-x-100"></div>
+            </div>
+        </div>
+    );
+};
