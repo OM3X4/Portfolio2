@@ -4,7 +4,7 @@ export default function Skills() {
 
 
     return (
-        <section className="pb-10">
+        <section className="pb-20">
             <div className="responsive-container my-1">
                 <h5 className="text-muted text-xl font-medium font-jersey">WHO IS</h5>
                 <h2 className="text-5xl text-white font-black">OMAR EMAD?</h2>
@@ -16,7 +16,7 @@ export default function Skills() {
                 </p>
             </div>
             <div className="responsive-container my-1 mt-20">
-                <h5 className="text-muted text-xl font-medium font-jersey">YOU WANT TO TALK</h5>
+                {/* <h5 className="text-muted text-xl font-medium font-jersey">YOU WANT TO TALK</h5> */}
                 <h2 className="text-5xl text-white font-black">TECHNICAL?</h2>
             </div>
             <div className="responsive-container h-[1px] bg-muted">

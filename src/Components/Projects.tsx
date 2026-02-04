@@ -14,39 +14,9 @@ export default function Projects({ changePath }: { changePath: ({ name, id, colo
                 <h5 className="text-muted text-xl font-medium font-jersey">BUILT BY ME</h5>
                 <h2 className="text-5xl text-white font-black">PROJECTS</h2>
             </div>
-            <div className="responsive-container grid grid-cols-3 mb-20 gap-2">
+            <div className="responsive-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-20 gap-2">
                 {
                     projects.map((project: ProjectType, index) => (
-                        // <motion.div
-                        //     key={index}
-                        //     initial={{ opacity: 0, y: 160 }}
-                        //     whileInView={{ opacity: 1, y: 0 }}
-                        //     whileHover="hover"
-                        //     variants={{
-                        //         hover: { scale: 1.05, backgroundColor: project.backgroundColor }
-                        //     }}
-                        //     transition={{ duration: 0.3, ease: CUBIC_BEIZER }}
-                        //     viewport={{ once: true, amount: 0.1 }}
-                        //     className="grid-inner-block aspect-square cursor-pointer group relative"
-                        //     onClick={() => { changePath({ name: project.name, id: String(index), color: project.backgroundColor }) }}
-                        // >
-                        //     <motion.img
-                        //         initial={{ filter: "grayscale(1)" }}
-                        //         variants={{
-                        //             hover: { scale: 1.1, filter: "grayscale(0)", y: -5 }
-                        //         }}
-                        //         transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
-
-                        //         src={project.logo} alt="" className="grayscale-0 object-cover object-center w-1/2" />
-                        //     <motion.h1
-                        //         variants={{
-                        //             hover: { opacity: 1, y: -15 }
-                        //         }}
-                        //         transition={{ duration: 0.5, ease: CUBIC_BEIZER }}
-                        //         className="text-2xl sm:text-3xl text-center text-nowrap font-semibold opacity-0 text-white absolute top-0 left-1/2 -translate-x-1/2 z-150">
-                        //         {project.name}
-                        //     </motion.h1>
-                        // </motion.div>
                         <Project key={index} index={index} project={project} changePath={changePath} />
                     ))
                 }

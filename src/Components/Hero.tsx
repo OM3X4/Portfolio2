@@ -23,12 +23,12 @@ export default function Hero() {
                 </div>
             </motion.div>
 
-            <div className="w-[50vw] mx-auto flex flex-col gap-1 items-center justify-center h-full">
+            <div className="responsive-container mx-auto flex flex-col gap-1 items-center justify-center h-full">
                 <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6, ease: CUBIC_BEIZER }}
-                    className="text-7xl text-white font-black ">OMAR EMAD</motion.h1>
+                    className="text-5xl md:text-7xl text-white font-black text-center ">OMAR EMAD</motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
