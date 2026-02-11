@@ -104,7 +104,7 @@ export const projects: ProjectType[] = [
             "QueenFish is an exercise in discipline — writing the engine I wish I had when I first started, and rebuilding it properly once I understood what actually matters.",
 
         websiteLink: "https://lichess.org/@/Queenfish2",
-        codeLink: "https://github.com/OM3X4/QueenFish",
+        codeLink: "https://github.com/omaremadcc/QueenFish",
         engineer: "Omar Emad (Solo)",
 
         stack: [
@@ -195,7 +195,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "If you know what an API key is, you’ll feel right at home. oAI isn’t just a clone — it’s a clean base for hacking, learning, and customizing your own AI chat playground.",
         quote: '"I built oAI as my entry for the t3.chat cloneathon — not just to copy, but to really learn what makes apps like this tick. It’s open, simple, and designed for devs who want full control." — Omar Emad',
         websiteLink: "https://oaichat.netlify.app",
-        codeLink: "https://github.com/OM3X4/oAI",
+        codeLink: "https://github.com/omaremadcc/oAI",
         engineer: "Omar Emad (Me)",
         stack: [
             {
@@ -256,7 +256,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "BrainsMath 2.0 replaces traditional drills with a dynamic, fidget-like interface built for typists.",
         quote: '"With BrainsMath 2.0, I wanted to rebuild everything — not just the code, but the vibe. It’s fast, competitive, and fun. More than practice, it’s a fidget for your brain — built to attract the same crowd that loves typing tests and leaderboard challenges." — Omar Emad',
         websiteLink: "https://brainsmath.org/",
-        codeLink: "https://github.com/OM3X4/Brainsmath-2.0",
+        codeLink: "https://github.com/omaremadcc/Brainsmath-2.0",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -306,7 +306,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "QueenFish stands out because I built it without relying on tutorials or pre-existing engines. Its toughest challenge was endgame optimization, which pushed my problem-solving and algorithmic thinking to the limit.",
         quote: "I built QueenFish from scratch in JavaScript, not because it was easy, but because I wanted to prove what I could do without relying on external engines. Every line of code reflects my determination to understand the game deeply, both in logic and strategy.",
         websiteLink: "https://om3x4.github.io/Chezzy/",
-        codeLink: "https://github.com/OM3X4/Engine.js",
+        codeLink: "https://github.com/omaremadcc/Engine.js",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -331,7 +331,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: " The hardest part was collecting accurate data — especially when the official site’s UI felt underwhelming.",
         quote: '"I built this to help people — especially Egyptians — actually see the scale of development happening. It’s not political; it’s about clear, visual access to national progress, which I felt the official platforms lacked. I wanted to do it right, even if it was just a school project." — Omar Emad',
         websiteLink: "https://egyptomar.netlify.app/",
-        codeLink: "https://github.com/OM3X4/EgyptProjectsHost",
+        codeLink: "https://github.com/omaremadcc/EgyptProjectsHost",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -356,7 +356,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "Chezzy was a learning project for me, focused on mastering game theory and game state representation.",
         quote: '"Building Chezzy gave me deep insights into game theory and web development. It wasn’t just about making a chess game; it was about understanding how game states interact and ensuring the logic was clean and precise. It was a great challenge and an amazing learning experience for me." — Omar Emad',
         websiteLink: "https://om3x4.github.io/Chezzy/",
-        codeLink: "https://github.com/OM3X4/Chezzy",
+        codeLink: "https://github.com/omaremadcc/Chezzy",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -381,7 +381,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "OmarType is essentially a clone of Monkeytype, designed to provide a familiar typing practice experience.",
         quote: '"OmarType was mainly a learning project for me — an opportunity to replicate Monkeytype and improve my React skills. The animation and smooth user experience were my key focus. While it’s a clone, the journey taught me a lot about building interactive web applications and smooth UX design." — Omar Emad',
         websiteLink: "https://om3x4.github.io/Omartype/",
-        codeLink: "https://github.com/OM3X4/Omartype",
+        codeLink: "https://github.com/omaremadcc/Omartype",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -406,7 +406,7 @@ export const projects: ProjectType[] = [
         thirdParagraph: "BrainsMath teaches tricks that make mental math faster, smarter, and more intuitive to learn.",
         quote: '"BrainsMath 1.0 is my take on making math training as addictive as typing practice. I wanted to build something that teaches, tracks, and motivates — all in one experience. It’s not about speed alone, but how smartly and confidently you can calculate in your head." — Omar Emad',
         websiteLink: null,
-        codeLink: "https://github.com/OM3X4/BrainsMath_Next",
+        codeLink: "https://github.com/omaremadcc/BrainsMath_Next",
         engineer: "Omar Emad(Me)",
         stack: [
             {
@@ -418,12 +418,12 @@ export const projects: ProjectType[] = [
 ]
 
 export const links = {
-    github: "https://github.com/OM3X4",
-    instagram: "https://www.instagram.com/om3x4e/",
-    linkedin: "https://www.linkedin.com/in/om3x4e/",
-    x: "https://twitter.com/om3x4e",
+    github: "https://github.com/omaremadcc",
+    instagram: "https://www.instagram.com/omaremadcc/",
+    linkedin: "https://www.linkedin.com/in/omaremadcc/",
+    x: "https://twitter.com/omaremadcc",
     leetcode: "https://leetcode.com/u/OM3X4/",
     email: "om3x4e@gmail.com",
-    dev: "https://dev.to/om3x4",
+    dev: "https://dev.to/omaremadcc",
     monkeytype: "https://monkeytype.com/profile/om3x4",
 }
