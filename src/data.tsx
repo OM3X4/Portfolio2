@@ -424,6 +424,6 @@ export const links = {
     x: "https://twitter.com/omaremadcc",
     leetcode: "https://leetcode.com/u/OM3X4/",
     email: "om3x4e@gmail.com",
-    dev: "https://dev.to/omaremadcc",
-    monkeytype: "https://monkeytype.com/profile/om3x4",
+    dev: "https://dev.to/omaremad",
+    monkeytype: "https://monkeytype.com/profile/omaremadcc",
 }
