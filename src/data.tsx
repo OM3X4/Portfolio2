@@ -1,4 +1,4 @@
-import { FaAws, FaCode, FaServer } from "react-icons/fa";
+import { FaAws, FaCode, FaPaintBrush, FaServer } from "react-icons/fa";
 import { MdApi } from "react-icons/md";
 import type { IconType } from "react-icons";
 import {
@@ -24,9 +24,10 @@ import {
 } from "react-icons/si";
 import type { ProjectType } from "./types";
 
-import { RiNextjsFill } from "react-icons/ri";
+import { RiNextjsFill, RiUserCommunityFill } from "react-icons/ri";
 import { DiPostgresql, DiReact } from "react-icons/di";
-import { TbBrandFramerMotion } from "react-icons/tb";
+import { TbBrandFramerMotion, TbWorldWww } from "react-icons/tb";
+import { GrSystem } from "react-icons/gr";
 type SkillItem = {
   label: string;
   icon: IconType;
@@ -87,7 +88,7 @@ export const projects: ProjectType[] = [
     backgroundColor: "#41cad9",
     date: "12-12-2025",
 
-    mainHeadline: "QueenFish 2.0 — A Solo, Low-Level Rebuild in Rust",
+    mainHeadline: "Rust chess engine (~1800 Elo), bitboards, alpha-beta",
 
     mainParagraph:
       "QueenFish 2.0 is a complete ground-up rewrite of the original QueenFish chess engine, built entirely from scratch in Rust. Unlike the first version—which relied on high-level libraries for core mechanics—this iteration replaces every dependency with custom low-level implementations, serving as a learning milestone and a serious showcase of engine design fundamentals.",
@@ -103,7 +104,16 @@ export const projects: ProjectType[] = [
     websiteLink: "https://lichess.org/@/Queenfish2",
     codeLink: "https://github.com/omaremadcc/QueenFish",
     engineer: "Omar Emad (Solo)",
-
+    tags: [
+      {
+        name: "Systems",
+        icon: GrSystem,
+      },
+      {
+        name: "Rust",
+        icon: SiRust
+      }
+    ],
     stack: [
       {
         name: "Rust",
@@ -118,7 +128,7 @@ export const projects: ProjectType[] = [
     video: "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/temdb.webm",
     backgroundColor: "#7c101a",
     date: "23-6-2025",
-    mainHeadline: "TEMDB is the Definitive Egyptian Movies & TV Database",
+    mainHeadline: "Movies Database, AI Admin Panel, caching, community features, oauth, r2 storage and a blog.",
     secondParagraph:
       "Built as a modern cultural archive, TEMDB brings the richness of Egyptian cinema and television into a sleek, fast, and community-driven platform — finally giving Egyptian media the modern experience it deserves.",
     mainParagraph:
@@ -176,6 +186,16 @@ export const projects: ProjectType[] = [
         icon: <SiCloudflare />,
       },
     ],
+    tags: [
+      {
+        name: "Web",
+        icon: TbWorldWww,
+      },
+      {
+        name: "social",
+        icon: RiUserCommunityFill,
+      },
+    ]
   },
   {
     name: "ACUD",
@@ -205,6 +225,16 @@ export const projects: ProjectType[] = [
         name: "Framer",
         icon: <TbBrandFramerMotion />,
       },
+    ],
+    tags: [
+      {
+        name: "Web",
+        icon: TbWorldWww,
+      },
+      {
+        name: "Designing",
+        icon: FaPaintBrush,
+      }
     ],
   },
   {
@@ -323,7 +353,7 @@ export const projects: ProjectType[] = [
     ],
   },
   {
-    name: "QUEENFISH",
+    name: "QUEENFISH V1",
     images: ["/chezzy1.png", "/chezzy2.png"],
     video:
       "https://ruwxyzljuh4kflth.public.blob.vercel-storage.com/chezzy.webm",

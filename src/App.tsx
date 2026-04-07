@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"
-import { toast } from "sonner";
-import { CgMail } from "react-icons/cg";
-import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { AiFillGithub } from "react-icons/ai";
-import { CUBIC_BEIZER } from "./config";
+// import { toast } from "sonner";
+// import { CgMail } from "react-icons/cg";
+// import { FaInstagram, FaXTwitter } from "react-icons/fa6";
+// import { AiFillGithub } from "react-icons/ai";
+// import { CUBIC_BEIZER } from "./config";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import Project from "./Components/Project";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { links } from "./data";
-import { FaLinkedinIn, FaDev } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
+// import { links } from "./data";
+// import { FaLinkedinIn, FaDev } from "react-icons/fa";
+// import { SiLeetcode } from "react-icons/si";
 
 type OverlayTransitionProps = {
 	show: boolean;
@@ -157,7 +157,8 @@ function App() {
 	};
 
 	return (
-		<div className="w-screen overflow-hidden min-h-screen bg-background">
+		<div className="w-screen overflow-hidden min-h-screen relative">
+
 
 			<OverlayTransition show={showOverlay} direction="up" fill={overlayColor} text={overlayText} />
 			<OverlayTransition show={showReturnOverlay} direction="down" fill={"#1e1e1e"} text={"Home"} />
@@ -171,7 +172,7 @@ function App() {
 			</AnimatePresence>
 
 			{/* Main */}
-			<motion.footer
+			{/*<motion.footer
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.8, duration: 0.6, ease: CUBIC_BEIZER }}
@@ -191,7 +192,7 @@ function App() {
 				<a href={links.instagram} target="_blank" className="social-button"><FaInstagram /></a>
 				<a href={links.leetcode} target="_blank" className="social-button"><SiLeetcode /></a>
 				<a href={links.dev} target="_blank" className="social-button"><FaDev /></a>
-			</motion.footer>
+			</motion.footer>*/}
 		</div>
 	)
 }

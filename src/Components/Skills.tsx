@@ -7,17 +7,19 @@ export default function Skills() {
         <section className="pb-20">
             <div className="responsive-container my-1">
                 <h5 className="text-muted text-xl font-medium font-jersey">WHO IS</h5>
-                <h2 className="text-5xl text-white font-black">OMAR EMAD?</h2>
+                <h2 className="text-5xl text-white font-black font-instrument-serif">OMAR EMAD?</h2>
             </div>
             <div className="grid gap-5 responsive-container px-5 my-5">
-                <p className="text-muted text-2xl font-semibold indent-10">
+                <p className="text-muted text-xl font-semibold indent-10 italic">
                     Independent software engineer, 18.
                     I work primarily on systems and performance-oriented software, and build full-stack web applications end to end. I care about correctness, clear design decisions, and understanding systems from first principles rather than relying on abstractions I don’t control.
                 </p>
             </div>
+
+
             <div className="responsive-container my-1 mt-20">
                 {/* <h5 className="text-muted text-xl font-medium font-jersey">YOU WANT TO TALK</h5> */}
-                <h2 className="text-5xl text-white font-black">TECHNICAL?</h2>
+                <h2 className="text-5xl text-white font-black font-instrument-serif">TECHNICAL?</h2>
             </div>
             <div className="responsive-container h-[1px] bg-muted">
 
@@ -35,7 +37,7 @@ export default function Skills() {
                                     key={label}
                                     className="flex items-center gap-3"
                                 >
-                                    <Icon className="text-lg opacity-80" />
+                                    <Icon className="text-lg opacity-80 text-golden" />
                                     <span>{label}</span>
                                 </li>
                             ))}

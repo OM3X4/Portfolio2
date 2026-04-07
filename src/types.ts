@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import type { IconType } from "react-icons";
 
 export type ProjectType = {
     name: string;
@@ -19,4 +20,8 @@ export type ProjectType = {
         name: string;
         icon: JSX.Element;
     }[];
-};
+    tags?: {
+        name: string;
+        icon: IconType;
+    }[];
+}

@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-import Skills from "./Skills";
+// import Skills from "./Skills";
 import Projects from "./Projects";
 
 
@@ -14,7 +14,7 @@ export default function Home({ changePath }:
             <Hero />
             {/* <Bio links={links} /> */}
             <Projects changePath={changePath} />
-            <Skills />
+            {/*<Skills />*/}
         </main>
     )
 }
