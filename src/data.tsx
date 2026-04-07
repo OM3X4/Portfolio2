@@ -495,6 +495,7 @@ export const links = {
   linkedin: "https://www.linkedin.com/in/omaremadcc/",
   x: "https://twitter.com/omaremadcc",
   leetcode: "https://leetcode.com/u/OM3X4/",
+  medium: "https://medium.com/@omaremadcc",
   email: "om3x4e@gmail.com",
   dev: "https://dev.to/omaremad",
   monkeytype: "https://monkeytype.com/profile/omaremadcc",

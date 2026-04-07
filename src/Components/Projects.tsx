@@ -19,7 +19,7 @@ export default function Projects({
 }) {
   return (
     <div className="pt-10" id="projects">
-      <div className="responsive-container my-3">
+      <div className="responsive-container my-3 text-center">
         <h5 className="text-muted text-xl font-medium font-jersey">
           BUILT BY ME
         </h5>
@@ -67,7 +67,7 @@ function Project({
           color: project.backgroundColor,
         });
       }}
-      className="grid-inner-block transition-all duration-100 cursor-pointer hover:brightness-125 gap-3 group"
+      className="grid-inner-block transition-all duration-100 cursor-pointer hover:brightness-125 gap-3 group px-6 py-3 h-full grid-shadow"
     >
       <img src={project.logo} alt="" className="w-1/5 rounded-lg" />
       <div className="flex-3">

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { CUBIC_BEIZER } from "../config";
 import { FaLinkedinIn, FaInstagram, FaDev } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaMedium, FaXTwitter } from "react-icons/fa6";
 import { AiFillGithub } from "react-icons/ai";
 import { SiLeetcode } from "react-icons/si";
 import { toast } from "sonner";
@@ -17,7 +17,7 @@ export default function Hero() {
       <motion.div
         initial={{ x: "-100%" }}
         animate={{ x: "0%" }}
-        transition={{ delay: 1.6, duration: 0.5, ease: CUBIC_BEIZER }}
+        transition={{ delay: 1.8, duration: 0.5, ease: CUBIC_BEIZER }}
         viewport={{ once: false, amount: 1 }}
         className="absolute hidden lg:flex z-5 top-1/4 left-0 w-45 h-20 bg-secondary-background rounded-r-full items-center justify-end px-3"
       >
@@ -47,36 +47,43 @@ export default function Hero() {
           Systems-focused engineer. Built a Rust chess engine (~1800 Elo),
           full-stack apps and a rust async runtime.
         </motion.p>
-        <div className="flex gap-2 items-center justify-center mt-3">
-          <a href={links.github} target="_blank" className="social-button">
-            <AiFillGithub />
-          </a>
-          <a href={links.linkedin} target="_blank" className="social-button">
-            <FaLinkedinIn />
-          </a>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              navigator.clipboard.writeText(links.email);
-              toast.success("Copied to clipboard", { duration: 2000 });
-            }}
-            className="social-button"
-          >
-            <CgMail />
-          </button>
-          <a href={links.x} className="social-button">
-            <FaXTwitter />
-          </a>
-          <a href={links.instagram} target="_blank" className="social-button">
-            <FaInstagram />
-          </a>
-          <a href={links.leetcode} target="_blank" className="social-button">
-            <SiLeetcode />
-          </a>
-          <a href={links.dev} target="_blank" className="social-button">
-            <FaDev />
-          </a>
-        </div>
+        <motion.div
+          className="flex gap-2 items-center justify-center mt-3"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6, ease: CUBIC_BEIZER }}
+        >
+          {[
+            { href: links.github, icon: <AiFillGithub />, target: "_blank" },
+            { href: links.linkedin, icon: <FaLinkedinIn />, target: "_blank" },
+            {
+              onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(links.email);
+                toast.success("Copied to clipboard", { duration: 2000 });
+              },
+              icon: <CgMail />,
+            },
+            { href: links.x, icon: <FaXTwitter /> },
+            { href: links.instagram, icon: <FaInstagram />, target: "_blank" },
+            { href: links.leetcode, icon: <SiLeetcode />, target: "_blank" },
+            { href: links.dev, icon: <FaDev />, target: "_blank" },
+            { href: links.medium, icon: <FaMedium />, target: "_blank" },
+          ].map((item, index) => (
+            <motion.a
+              key={index}
+              href={item.href}
+              target={item.target}
+              onClick={item.onClick}
+              className="social-button"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + index * 0.08, duration: 0.6, ease: CUBIC_BEIZER }}
+            >
+              {item.icon}
+            </motion.a>
+          ))}
+        </motion.div>
         {/*<div className="mt-5">
           <motion.a
             initial={{ opacity: 0, y: 40 }}
