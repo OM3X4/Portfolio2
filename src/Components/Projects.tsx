@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import type { ProjectType } from "../types";
 import { projects } from "../data";
+import Reveal from "./Reveal";
 
 export default function Projects({
   changePath,
@@ -19,22 +20,26 @@ export default function Projects({
 }) {
   return (
     <div className="pt-10" id="projects">
-      <div className="responsive-container my-3 text-center">
-        <h5 className="text-muted text-xl font-medium font-jersey">
-          BUILT BY ME
-        </h5>
-        <h2 className="text-5xl text-white font-black font-instrument-serif">
-          PROJECTS
-        </h2>
-      </div>
+      <Reveal delay={1.3}>
+        <div className="responsive-container mb-8 text-center">
+          <h5 className="text-muted text-xl font-medium font-jersey">
+            BUILT BY ME
+          </h5>
+          <h2 className="text-5xl text-white font-black font-instrument-serif">
+            PROJECTS
+          </h2>
+        </div>
+      </Reveal>
       <div className="responsive-container grid grid-cols-1 sm:grid-cols-2 mb-20 gap-2">
         {projects.slice(0, 6).map((project: ProjectType, index) => (
-          <Project
-            key={index}
-            index={index}
-            project={project}
-            changePath={changePath}
-          />
+          <Reveal delay={1.6 + index * 0.1}>
+            <Project
+              key={index}
+              index={index}
+              project={project}
+              changePath={changePath}
+            />
+          </Reveal>
         ))}
       </div>
     </div>
@@ -76,9 +81,16 @@ function Project({
           {project.mainHeadline}
         </p>
         <div className="flex gap-2 mt-2">
-          {project.tags && project.tags.map((tag, index) => (
-            <span key={index} className="text-secondary-background px-1 py-0.5 rounded-sm text-xs bg-muted flex items-center gap-1"><tag.icon />{tag.name}</span>
-          ))}
+          {project.tags &&
+            project.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="text-secondary-background px-1 py-0.5 rounded-sm text-xs bg-muted flex items-center gap-1"
+              >
+                <tag.icon />
+                {tag.name}
+              </span>
+            ))}
         </div>
       </div>
       <ArrowIcon className="w-fit justify-self-start text-2xl text-white" />
