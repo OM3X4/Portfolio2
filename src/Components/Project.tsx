@@ -37,7 +37,7 @@ export default function Project() {
         </motion.div>
       </section>
 
-      <section className="w-[90vw] mx-auto mt-5 overflow-hidden">
+      <section className="w-[90vw] mx-auto overflow-hidden">
         {/*<h1 className="text-5xl text-white">Details</h1>*/}
         <div className="grid grid-cols-6 grid-rows-3 w-[95%] md:w-[90%] mx-auto gap-5 mt-5">
           {/* Stack */}
