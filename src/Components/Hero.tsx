@@ -1,4 +1,3 @@
-// import { BiChevronDown } from "react-icons/bi";
 import { GiEgyptianSphinx } from "react-icons/gi";
 import { motion } from "framer-motion";
 import { CUBIC_BEIZER } from "../config";
@@ -32,7 +31,10 @@ export default function Hero() {
 
       <div className="responsive-container mx-auto flex flex-col gap-1 items-center justify-center h-full">
         <Reveal>
-          <h1 className="text-6xl md:text-7xl text-white font-black text-center font-instrument-serif">
+          <h1
+            data-nosnippet
+            className="text-6xl md:text-7xl text-white font-black text-center font-instrument-serif"
+          >
             OMAR EMAD
           </h1>
         </Reveal>
