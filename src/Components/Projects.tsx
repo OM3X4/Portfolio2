@@ -19,9 +19,9 @@ export default function Projects({
   }) => void;
 }) {
   return (
-    <div className="pt-10" id="projects">
+    <div className="pt-10" id="projects" data-nosnippet>
       <Reveal delay={1.3}>
-        <div className="responsive-container mb-8 text-center">
+        <div className="responsive-container mb-8 text-center" data-nosnippet>
           <h5 className="text-muted text-xl font-medium font-jersey">
             BUILT BY ME
           </h5>
