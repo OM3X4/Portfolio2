@@ -1,11 +1,16 @@
 import { motion } from "framer-motion"
 import { CUBIC_BEIZER } from "../config"
-import {  useNavigate } from "react-router-dom"
+import {  useLocation, useNavigate } from "react-router-dom"
 
 
 export default function Navbar({ returnHome }: { returnHome: () => void }) {
 
     const navigate = useNavigate();
+    const location = useLocation()
+
+    if (location.pathname === "/") {
+        return null;
+    }
 
     return (
         <nav className="fixed z-50 top-0 w-full pl-5 pr-15 flex items-center justify-between">
